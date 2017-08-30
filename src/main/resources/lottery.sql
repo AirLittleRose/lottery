@@ -34,19 +34,25 @@ insert into users(username,password,tel,email,idcard) values
 	--userid
 	--单号	orderid		20170406006293714  --》设想 ：date年4月2日2时2分2秒2毫秒4 + 5位随机数
 	--投注时间
+	--开奖状态		0 未开奖      1 已开奖
 create table userSsq(
 	usid int primary key auto_increment,
 	userid int not null,
 	orderid varchar(30) not null,
 	ordertime datetime not null,	
 	ssq_issue varchar(20) not null,
-	temp1 varchar(50),
+	status int,
     temp2 varchar(50),
     temp3 varchar(50)
 )
+select * from userSsq;
+update userSsq set status = 1;
+alter table userSsq alter column status set default 0;
 select distinct ssq_issue from userSsq order by ssq_issue desc;
 delete from userSsq;
 delete from betSsq;
+
+alter table userSsq change column temp1 status int;
 
 insert into userSsq(userid,orderid,ordertime) values(2,now()+'23456', now() )
 ---------------------------------------------------

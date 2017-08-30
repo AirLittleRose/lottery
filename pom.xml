@@ -29,6 +29,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.yc</groupId>
+			<artifactId>smartupload</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
