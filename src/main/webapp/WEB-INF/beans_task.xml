@@ -31,18 +31,18 @@
 	<!-- 定时任务配置 <task:scheduled ref="countTask" method="test1" cron="0/10 * 
 		* * * ?"/> </task:scheduled-tasks> -->
 
-	<!-- 定时任务 id="类名" class="包路径" -->
+	<!-- 定时任务 id="类名" class="包路径"	-->
 	<bean id="SoccerTask" class="com.yc.tasks.SoccerTask"></bean>
 
-	<!-- 定时任务执行规律 -->
+	<!-- 定时任务执行规律 	 -->
 	<task:scheduled-tasks>
-		<!-- 这里表示的是每隔一天执行一次 -->
+		<!-- 这里表示的是每隔一天执行一次  -->
 		<task:scheduled ref="SoccerTask" method="addInfo" cron="0 0 0 1/1 * ? "/>
 		<task:scheduled ref="SoccerTask" method="saveLeague" cron="0 0 0 1/1 * ? "/>
 		<task:scheduled ref="SoccerTask" method="saveTeam" cron="0 0 0 1/1 * ? "/>
-		<task:scheduled ref="SoccerTask" method="savaGame" cron="0 0 0 1/1 * ? "/> 
-		<!-- 0 0 0 1/1 * ? -->
-	</task:scheduled-tasks>
+		<task:scheduled ref="SoccerTask" method="savaGame" cron="0 0 0 1/1 * ? "/>
+		<!-- 0 0 0 1/1 * ?-->
+	</task:scheduled-tasks> 
 
 
 

@@ -3,8 +3,6 @@ package com.yc.tasks;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
