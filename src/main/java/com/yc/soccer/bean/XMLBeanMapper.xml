@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.soccer.bean.XMLBeanMapper">
+
+	<!-- 添加比赛信息 -->
+	<insert id="addInfo" parameterType="XMLBean">
+		insert into info(
+			xid, oddsmid,oh, od,
+			oa, lid, ln, sid, htid, hn,
+			gtid, gn, mtime, cl, add_date
+		)
+		values
+		<foreach collection="list" open="" close="" separator="," item="item">
+			(#{item.xid},#{item.oddsmid},#{item.oh},#{item.od},
+			#{item.oa},#{item.lid},#{item.ln},#{item.sid},#{item.htid},#{item.hn},
+			#{item.gtid},#{item.gn},#{item.mtime},#{item.cl},now())
+		</foreach>
+	</insert>
+
+
+
+
+</mapper>

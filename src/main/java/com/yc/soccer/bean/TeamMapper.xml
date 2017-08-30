@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.soccer.bean.TeamMapper">
+
+	<!-- 添加球队(后台) -->
+	<insert id="saveTeam">
+		insert into team(team_id, team_name, league_id)
+		select * from (
+		select distinct(htid) as team_id,hn as team_name, lid as league_id from info
+		where hn not in (select team_name from team)
+		union all
+		select distinct(gtid) as team_id, gn as team_name, lid as league_id from
+		info where gtid not in (select team_id from team)
+		and gtid not in(select htid from info) ) a where team_id not in (select
+		team_id from team)
+	</insert>
+
+
+</mapper>

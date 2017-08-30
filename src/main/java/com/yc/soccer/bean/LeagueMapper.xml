@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.soccer.bean.LeagueMapper">
+
+	<!-- 添加联盟(后台) -->
+	<insert id="saveLeague">
+		insert into league(league_id,league_name,color)
+		(select distinct(lid) as league_id ,ln as league_name,cl as color from info
+		where lid not in (select league_id from league))
+	</insert>
+
+	<!-- 修改联盟信息 -->
+	<update id="updateLeague" parameterType="League">
+		update league set
+		<if test="league_name != null and '' != league_name">
+			league_name = #{league_name}
+		</if>
+		<if test="new_id != null and '' != new_id">
+			league_id = #{new_id}
+		</if>
+		where league_id = #{league_id}
+	</update>
+
+	<!-- 查询联赛 -->
+	<select id="findAllLeague" resultType="League"
+		parameterType="League">
+		select distinct(lid) as league_id, ln as league_name 
+			from info 
+				where add_date = (select max(add_date) from info)
+	</select>
+
+
+</mapper>

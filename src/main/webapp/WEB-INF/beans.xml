@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/mvc 
+           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<import resource="beans_email.xml" />
+	<import resource="beans_redis.xml" />
+	<import resource="beans_task.xml" />
+
+	<!-- 混合配置: 1. 开启包扫描，即读取包下带有注解的类，并托管 -->
+	<context:component-scan base-package="com.yc" />
+
+	<!-- 开启spring mvc的注解解析 -->
+	<mvc:annotation-driven />
+
+	<!-- 开启aspectj的自动代理机制 -->
+	<aop:aspectj-autoproxy />
+
+	<!-- 读取属性配置文件 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath*:db.properties" />
+	</bean>
+
+	<!-- 获取数据源 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- 定时器开关 -->
+	<task:annotation-driven />
+
+	<!-- 定时任务 id="类名" class="包路径" -->
+	<bean id="SoccerTask" class="com.yc.tasks.SoccerTask"></bean>
+
+	<!-- 定时任务执行规律 -->
+	<task:scheduled-tasks>
+		<!-- 这里表示的是每隔一天执行一次 -->
+		<task:scheduled ref="SoccerTask" method="addInfo" cron="0 0 0 1/1 * ? "/>
+		<task:scheduled ref="SoccerTask" method="saveLeague" cron="0 0 0 1/1 * ? "/>
+		<task:scheduled ref="SoccerTask" method="saveTeam" cron="0 0 0 1/1 * ? "/>
+		<task:scheduled ref="SoccerTask" method="savaGame" cron="0 0 0 1/1 * ? "/> 
+		<!-- 0 0 0 1/1 * ? -->
+	</task:scheduled-tasks>
+
+	<!-- 配置数据源 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
+		<property name="driverClass" value="${jdbc.driverClassName}" /> <property 
+		name="jdbcUrl" value="${jdbc.url}" /> <property name="user" value="${jdbc.username}" 
+		/> <property name="password" value="${jdbc.password}" /> </bean> -->
+
+
+
+	<!-- mybatis的会话工厂,主要完成读取mybatis的配置文件的工作 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 包别名,设置了这个在映射文件mapper中的对应的类名就不需要写全称了 -->
+		<property name="typeAliasesPackage" value="com/yc/soccer/bean;com/yc/ssq/bean" />
+		<!-- 映射文件的路径 -->
+		<!-- <property name="mapperLocations" value="classpath*:com/yc/*/bean/*.xml" 
+			/> -->
+		<property name="mapperLocations">
+			<array>
+				<value>classpath*:com/yc/soccer/bean/*.xml</value>
+				<value>classpath*:com/yc/ssq/bean/*.xml</value>
+			</array>
+		</property>
+		<!-- 主要用来配置mybatis中的 configuration中的settings配置 -->
+		<property name="configurationProperties">
+			<props>
+				<prop key="logImpl">LOG4J</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 如果不读取 mybatis-config.xml文件，那 typealiases, mapper的配置都要单独配 -->
+	<!-- 配置 configLocation :mybatis的配置文件路径 , 空上sqlSessionFactory会完成读取 这个配置文件 
+		<property name="configLocation" value="classpath:mybatisConfiguration.xml"/> -->
+
+	<!-- 通过工厂创建 session -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<!-- 使用构造方法进行di -->
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+
+	<!-- 事务管理器, mybatis采用了jdbc事务管理器... 其它框架不同的事务管理器 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 如果使用了 @Transactional注解，则必须启用事务的注解 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+
+
+	<!-- spring mvc 视图解析器 , 访问的页面都在 /page/xxx.jsp -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+</beans>

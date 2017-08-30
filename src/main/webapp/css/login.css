@@ -1,0 +1,152 @@
+
+*{
+	padding: 0px;
+	margin: 0px auto;
+}
+body {
+	padding: 0px;
+	margin: 0px auto;		
+}
+/*登录框的css*/
+.loginbottom {
+	z-index: 9998;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	display:none
+}
+
+#first{
+	float:left;
+	margin:30px 0px 0px 110px;	
+}
+
+.login {
+	z-index:9999;
+	position: fixed;
+	top:50%;
+	left:50%;
+	width:420px;
+	height:420px;
+	margin:-180px 0 0 -200px;
+	border-radius:10px;
+	border:solid 0.5px #999;
+	background-color:#FFF;
+	display:none;
+	box-shadow: 0 0 5px #999;
+}
+
+/*关闭按钮*/
+.login span {
+	position: absolute;
+	font-size: 14px;
+	right:25px;
+	background: #ffffff;
+	border: 0px;
+	width: 25px;
+	height: 25px;	
+}
+.login span a {
+	margin:10px 0 0 15px;
+	display: block;
+	font-size: 16px;
+	color:#000;
+	text-decoration: none;
+}
+
+/*用户名css*/
+#user{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	98px 0 0 50px;
+	
+}
+
+#userpassword{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	20px 0 0 50px;	
+}
+#userid{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+#userpwd{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+/*验证码*/
+#zccode{
+	height:30px;
+	width:320px;
+	border:solid 1px #999;
+	border-radius:20px;
+	margin:	30px 0 0 50px;
+	background-color:#F4F4F4;
+}
+
+#zccodein{
+	padding:5px 100px 5px 100px;
+	position:absolute;
+	left:70px;
+	bottom:160px;
+	font-size:12px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+/*登录按钮*/
+#dosubmit{
+	height:40px;
+	width:320px;
+	margin:20px 0 0 50px;
+}
+
+#dologin{
+	font-size:18px;	
+	color:#FFF;
+	height:40px;
+	width:320px;
+	cursor:pointer;
+	border:0px;
+	background-color:#F08080;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+	
+/*忘记密码和注册*/
+#toother{
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:12px;	
+	margin:12px 0 0 50px;
+}
+
+#toother a{
+	color: #666;
+	cursor:pointer;
+	text-decoration:none;
+}
+		
+#toother a:visited {color: #999}	/* 已访问的链接 */
+#toother a:hover {color: #333}
+
+
+
+
+
+
+

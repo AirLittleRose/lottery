@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.soccer.bean.GameMapper">
+
+	<!-- 添加比赛信息 -->
+	<insert id="savaGame">
+		insert into game(game_id, oh, od, oa,
+		league_id,
+		home_id, away_id, game_time)
+		select distinct(xid) as
+		game_id, oh,
+		od, oa,
+		lid as league_id, htid as home_id,
+		gtid as away_id, mtime as game_time
+		from
+		info where add_date = (select max(add_date) from info)
+		and xid not
+		in (select game_id from game)
+	</insert>
+
+
+	<!-- 查询比赛 -->
+	<select id="findGames" resultType="Game" parameterType="Game">
+		select game_id, league_id, league_name, home_id, home_name, i.away_id, away_name, oh, od, oa, game_time, color from 
+			(
+				select x.*,y.home_name from
+					(
+						select a.*, b.league_name, color 
+							from
+								(
+									select * from game where unix_timestamp(game_time) >= unix_timestamp(now()-5*60)
+								)a
+							join
+								(
+									select * from league 
+								)b
+							on 
+								a.league_id = b.league_id
+					)x
+				join
+					(
+						select a.home_id, b.team_name as home_name 
+							from 
+								(select home_id from game)a
+							join
+								(select team_id as home_id ,team_name from team)b
+							on 
+								a.home_id = b.home_id
+					)y
+				on x.home_id = y.home_id
+			)i
+		join
+			(
+				select a.away_id,b.team_name as away_name 
+					from 
+						(select away_id from game)a
+					join
+						(select team_id as away_id ,team_name from team)b
+					on 
+						a.away_id = b.away_id
+			)j
+		on i.away_id = j.away_id 
+		<if test="start != null">
+			and unix_timestamp(game_time) >= unix_timestamp(#{start}) 
+		</if>
+		<if test="end != null">
+			and unix_timestamp(game_time)  &lt; unix_timestamp(#{end})  
+		</if>
+		<if test="leaguesList != null">
+			and league_id in
+			<foreach collection="leaguesList" open="(" separator="," item="item" close=")">
+				#{item}
+			</foreach>
+		</if>
+		order by game_id asc
+	</select>
+
+	<!-- 查出比赛数量 -->
+	<select id="getGamesCount" resultType="double" parameterType="Game">
+		select count(*) from game where unix_timestamp(game_time) >=
+		unix_timestamp(now()-5*60)
+		<if test="leaguesList != null">
+			and league_id in
+			<foreach collection="leaguesList" open="(" separator=","
+				item="item" close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="start != null ">
+			and unix_timestamp(game_time) between
+			unix_timestamp(#{start}) and unix_timestamp(#{end})
+		</if>
+
+
+	</select>
+
+
+
+
+
+
+
+
+</mapper>

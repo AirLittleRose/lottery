@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.soccer.bean.SoccerMapper">
+
+	<!-- 添加足彩投注信息 -->
+	<insert id="saveSoccer" parameterType="Soccer" useGeneratedKeys="true" keyProperty="sid">
+		insert into soccer(gameid,predictresult,status) values
+		<foreach collection="list" open="" close="" separator="," index="item">
+			(#{item.game_id},#{item.predictresult},#{status})
+		</foreach>
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
