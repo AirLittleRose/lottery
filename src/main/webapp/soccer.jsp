@@ -6,18 +6,9 @@
 <link rel="stylesheet" href="css/core.css">
 <link rel="stylesheet" href="css/analyTab.css">
 <link rel="stylesheet" href="css/jczqGray_V1.css">
-<script src="js/jquery-1.js"></script>
-<script src="js/easyCore.js"></script>
-<script src="js/game.js"></script>
-<script src="js/pt.js"></script>
-<script src="js/jselect.js"></script>
-<script src="js/dialog.js"></script>
-<script src="js/core-1.js"></script>
-<script src="js/common.js"></script>
-<script src="js/spfDgp.js"></script>
-<script src="js/jscrollpane.js"></script>
-<script src="js/mousewheel.js"></script>
-<script type="text/javascript" src="js/ntes.js"></script>
+
+
+<script type="text/javascript" src="js/soccer.js"></script>
 <div class="wrapper">
 
 	<script>
@@ -43,13 +34,6 @@
 		
 		<section class="main spfDcjs onlySpf clearfix onlyOdds">
 			<nav class="betNav">
-				<div class="huntou_SelectBox">
-					<span class="text">选择玩法</span>
-					<div class="mcSelectBox" id="changeGame">
-						<span class="optionList"><a href="#">猜一场</a></span>
-						<a href="#" class="imitateSelect" currentgame="spfdgp">猜一场</a><em class="fgx"></em><em class="arrow"></em>
-					</div>
-				</div>
 				<div class="moreLinks">
 					<a target="_blank" href="#">最新开奖</a>
 					<a target="_blank" href="#">资料库</a> 
@@ -60,19 +44,10 @@
 			
 			<aside class="asideBox">
 
-				<div class="eventTips">
-					<em class="arrow"></em>
-					<ul>
-						<li class=""><a href="#" target="_blank">暴力鸟离队恒大能否7连冠?</a></li>
-						<li><a href="#" target="_blank">法甲:摩纳哥主力流失仍可信</a></li>
-						<li><a href="#" target="_blank">周日推荐:费雷拉主场抢分</a></li>
-						<li><a href="#" target="_blank">西超杯推荐:梅西苏神不可挡</a></li>
-						<li><a href="#" target="_blank">英超推荐:热刺后防有隐忧</a></li>
-					</ul>
-				</div>
+				
 				
 				<div style="position: relative; z-index: 3;" class="floatBox">
-					<div id="poolStep1" class="select">
+					<div id="poolStep1" class="select_1">
 						<h2>
 							<i>1</i>
 							选号明细
@@ -122,7 +97,7 @@
 						<div class="unSeleTips">请在左侧列表选择投注比赛</div>
 					</div>
 					
-					<div class="select" id="poolStep2">
+					<div class="select_1" id="poolStep2">
 						<h2><i>2</i>过关方式</h2>
 						<div class="methodContent">
 							 
@@ -134,7 +109,7 @@
 						<div class="unSeleTips" id="poolErrorTips">请在左侧列表选择投注比赛</div>
 						</div>
 					</div>
-					<div class="select" id="poolStep3">
+					<div class="select_1" id="poolStep3">
 						<h2><i>3</i>确认投注</h2>
 						
 						<div class="qrtzBlock">
@@ -175,91 +150,39 @@
 				</div>
 
 			</aside>
-			
+				
 			<section class="bettingBox">
 				<div class="selectBox">
-					<div class="mcSelectBox" id="changeDate">
-						<span style="display: none;" class="optionList">
-								<a href="#">当前日期</a>
-								<a href="#">2017-08-12</a>
-								<a href="#">2017-08-11</a>
-								<a href="#">2017-08-10</a>
-								<a href="#">2017-08-09</a>
-								<a href="#">2017-08-08</a>
-								<a href="#">2017-08-07</a>
-								<a href="#">2017-08-06</a>
-								<a href="#">2017-08-05</a>
-								<a href="#">2017-08-04</a>
-						</span>
-						<a class="imitateSelect" href="#">当前日期</a><em class="fgx"></em><em class="arrow"></em>
-
-					</div>
-					
-					<label id="hotGame"><i class="icoFx"></i>热门赛事</label>
 					<label id="stopGame"><i class="icoFx "></i>已截止(1)</label>
-					<i class="fgx">|</i> <label id="chooseGame"><i class="icoFx"></i>已选择比赛</label>
-
 				</div>
 				
 				<dl style="position: relative; z-index: 3; top: auto;" class="dataHead">
 					<dd class="co1">场次</dd>
-					<dd class="co2 attentionMenu">赛事<em class="arrow"></em>
+					<dd class="co2 attentionMenu" onclick="show_leagues()">赛事
+						<em class="arrow"></em>
 						<div class="gameSeleList">
-							<ul class="clearfix">
-								<li leagueid="138" title="关注赛事将置顶显示"><i></i>J1联赛</li>
-								<li leagueid="154" title="关注赛事将置顶显示"><i></i>韩K联</li>
-								<li leagueid="16" title="关注赛事将置顶显示"><i></i>德国杯</li>
-								<li leagueid="162" title="关注赛事将置顶显示"><i></i>墨联秋</li>
-								<li leagueid="19" title="关注赛事将置顶显示"><i></i>意超级杯</li>
-								<li leagueid="21" title="关注赛事将置顶显示"><i></i>英冠</li>
-								<li leagueid="22" title="关注赛事将置顶显示"><i></i>英甲</li>
-								<li leagueid="29" title="关注赛事将置顶显示"><i></i>西超级杯</li>
-								<li leagueid="30" title="关注赛事将置顶显示"><i></i>葡超</li>
-								<li leagueid="33" title="关注赛事将置顶显示"><i></i>比甲</li>
-								<li leagueid="34" title="关注赛事将置顶显示"><i></i>瑞典超</li>
-								<li leagueid="35" title="关注赛事将置顶显示"><i></i>挪超</li>
-								<li leagueid="4" title="关注赛事将置顶显示"><i></i>英超</li>
-								<li leagueid="5" title="关注赛事将置顶显示"><i></i>法甲</li>
-								<li leagueid="5434" title="关注赛事将置顶显示"><i></i>智利甲</li>
-								<li leagueid="55" title="关注赛事将置顶显示"><i></i>俄超</li>
-								<li leagueid="56" title="关注赛事将置顶显示"><i></i>巴甲</li>
-								<li leagueid="6" title="关注赛事将置顶显示"><i></i>荷甲</li>
-								<li leagueid="70" title="关注赛事将置顶显示"><i></i>法乙</li>
+							<ul class="clearfix" id="leagueUl">
+								
 							</ul>
 							<i class="fuzhu"></i>
 							<div class="btnBox">
-								<label><i class="isSave icoFx icoFx_active"></i>记住我关注的赛事</label>
-								<a href="javascript:;" class="makeSure">确定</a>
+								<a href="javascript:;" onclick=doChose()>确定</a>
 							</div>
 						</div>
 					</dd>
 					
 					<dd class="co3" id="changeTime">
-						<a href="#" class="imitateSelect">代购截止</a><em class="arrow"></em>
-						<div class="optionList">
-							<a href="#1">开赛时间</a> <a href="#2">代购截止</a>
-						</div>
+						<a href="javascript:void(0)" class="imitateSelect">代购截止</a>
 					</dd>
 					
-					<dd class="co4">[排名]主队 　 　 客队[排名]</dd>
+					<dd class="co4">主队 　    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　 客队</dd>
 					
 					<dd class="co6">
 						<span>投注区</span>
 						<span class="btnBox1"><em>主胜</em><em>平</em><em class="lastOne">主负</em></span>
 					</dd>
 					
-					<dd class="co7" id="betAn">
-						<span>
-							<a class="imitateSelect" href="#">指数分析</a>
-							<em class="arrow"></em>
-							<div style="display: none;" class="optionList"> 
-								<a class="iSelectHover" href="#3">指数分析</a> 
-							</div>
-						</span>
-						<span class="line2"><em>主胜</em><em>平</em><em class="lastOne">主负</em></span>
-					</dd>
-					
-					<dd class="co8">分析</dd>
+
 				</dl>
 
 				<div style="height: 60px; width: 750px; display: none;"></div>
@@ -272,160 +195,9 @@
 					</div>
 					
 					<div class="dataBody  unAttention">
-						<dl gamedate="20170813">
-							<dt>2017-08-13　周日12:00 -- 周一12:00　
-								<span class="matchSize">56</span> 场比赛可投注
-								<span class="cuspText">隐藏<i class="cusp"></i></span>
-							</dt>
-
-							<dd isstop="0" matchcode="201708137025" matchnumcn="周日025" starttime="1502636400000" endtime="1502636280000"
-								isattention="0" isdg="0,1,1,1,0" hostname="曼联" guestname="西汉姆联" leagueid="4"
-								hostteamid="52" visitteamid="98" matchid="1306228" leaguename="英超"
-								class="league_4  even" ishot="1" score="-2">
-								
-								<span class="co1"><i class="jtip" inf="周日025">025</i></span>
-								<span class="co2" style="background:#FF1717">
-									<a href="#league/4.html?mid=1306228" target="_blank">英超</a>
-								</span>
-								<span class="co3 gameTime">
-									<i class="jtip" inf="截止时间：2017-08-13 22:58&lt;br/&gt;开赛时间：2017-08-13 23:00">22:58</i>
-								</span>
-
-								<span class="co4">
-									<a href="#match.html?mId=1306228&amp;hId=52&amp;vId=98" target="_blank" class="c_ffca6e">
-										<em class="hostTeam" title="曼联"><i class="c_939393">[13]</i><b>曼联</b></em>
-										
-										<em class="guestTeam" title="西汉姆联"><b>西汉姆联</b><i class="c_939393">[19]</i></em>
-									</a>
-								</span>
-
-								<span class="co6 btnBox ">
-									<div class="line1">
-										<em index="0" gametype="spf" sp="1.17">1.17<i class="c_090">↓</i></em>
-										<em index="1" gametype="spf" sp="5.25">5.25<i class="c_e24949">↑</i></em>
-										<em index="2" gametype="spf" sp="12.00" class="lastOne">12.00<i class="c_e24949">↑</i></em>
-									</div>
-								</span>
-								
-								<span class="co7 towLine">
-									
-									<div class="line1 odds">
-										<em aa="0" gametype="spf" index="0" sp="1.17"><a href="javascript:;" class="maxNum">0.00</a></em>
-										<em aa="0" gametype="spf" index="1" sp="5.25"><a href="javascript:;" class="maxNum">0.00</a></em>
-										<em aa="0" gametype="spf" index="2" sp="12.00"><a href="javascript:;" class="maxNum">0.00</a></em> 
-									</div>
-									
-								</span>
-								<span class="co8">
-									<a href="javascript:;" class="ico_square moreData">简</a>
-									<a href="#" target="_blank" class="ico_square">析</a>
-								</span>
-					
-							</dd>
-
-
-							<dd isstop="0" matchcode="201708137057" matchnumcn="周日057" starttime="1502643600000" endtime="1502643420000"
-								isattention="0" isdg="0,1,1,1,0" hostname="泽尼特" guestname="格罗兹尼" leagueid="55"
-								hostteamid="11065" visitteamid="13506" matchid="1309208" leaguename="俄超"
-								class="league_55  even" ishot="0" score="-1">
+						<dl id="gamesInfo">
 							
-								<span class="co1">
-									<i class="jtip" inf="周日057">057</i>
-								</span>
-								
-								<span class="co2" style="background:#9773e5">
-									<a href="#" target="_blank">俄超</a>
-								</span>
-								
-								<span class="co3 gameTime">
-									<i class="jtip" inf="截止时间：2017-08-14 00:57&lt;br/&gt;开赛时间：2017-08-14 01:00">00:57</i>
-								</span>
-
-								<span class="co4">
-									<a href="#13506" target="_blank">
-										<em class="hostTeam" title="泽尼特"><i class="c_939393">[1]</i><b>泽尼特</b></em>
-										
-										<em class="guestTeam" title="格罗兹尼"><b>格罗兹尼</b><i class="c_939393">[6]</i></em>
-									</a>
-								</span>
-
-								<span class="co6 btnBox ">
-									<div class="line1">
-										<em index="0" gametype="spf" sp="1.34">1.34<i class="c_e24949">↑</i></em>
-										<em class="" index="1" gametype="spf" sp="4.20">4.20</em>
-										<em index="2" gametype="spf" sp="6.90" class="lastOne">6.90<i class="c_090">↓</i></em>
-									</div>
-								</span>
-								
-								<span class="co7 towLine">
-									
-									<div class="line1 odds">
-										<em aa="7.2" gametype="spf" index="0" sp="1.34"><a href="javascript:;">1.441</a></em>
-										<em class="" aa="7.2" gametype="spf" index="1" sp="4.20"><a href="javascript:;">4.068</a></em>
-										<em aa="7.2" gametype="spf" index="2" sp="6.90"><a href="javascript:;">7.2</a></em>
-									</div>
-									
-								</span>
-								
-								<span class="co8">
-									<a href="javascript:;" class="ico_square moreData">简</a>
-									<a href="#" target="_blank" class="ico_square">析</a>
-								</span>
-							</dd>
 						</dl>
-						
-						<dl gamedate="20170814">
-							<dt>2017-08-14　周一12:00 -- 周二12:00　
-								<span class="matchSize">11</span> 场比赛可投注
-								<span class="cuspText">隐藏<i class="cusp"></i></span>
-							</dt>
-
-							<dd isstop="0" matchcode="201708141002" matchnumcn="周一002" starttime="1502729100000" endtime="1502726220000"
-								isattention="0" isdg="0,1,1,1,0" hostname="洛里昂" guestname="沙托鲁" leagueid="70"
-								hostteamid="1385" visitteamid="3625" matchid="1307406" leaguename="法乙"
-								class="league_70  even" ishot="1" score="-1">    
-								
-								<span class="co1">
-									<i class="jtip" inf="周一002">002</i>
-								</span>
-								<span class="co2" style="background:#ACA96C">
-									<a href="#307406" target="_blank">法乙</a>
-								</span>
-								<span class="co3 gameTime">
-									<i class="jtip" inf="截止时间：2017-08-14 23:57&lt;br/&gt;开赛时间：2017-08-15 00:45">23:57</i>
-								</span>
-
-								<span class="co4">
-									<a href="#" target="_blank" class="c_ffca6e">
-									<em class="hostTeam" title="洛里昂"><i class="c_939393">[12]</i><b>洛里昂</b></em>
-									
-									<em class="guestTeam" title="沙托鲁"><b>沙托鲁</b><i class="c_939393">[8]</i></em>
-									</a>
-								</span>
-
-								<span class="co6 btnBox ">
-									<div class="line1">
-										<em index="0" gametype="spf" sp="1.57">1.57</em>
-										<em index="1" gametype="spf" sp="3.25">3.25</em>
-										<em index="2" gametype="spf" sp="5.45" class="lastOne">5.45</em>
-									</div>
-								</span>
-								
-								<span class="co7 towLine">
-									<div class="line1 odds">
-										<em aa="5.091" gametype="spf" index="0" sp="1.57"><a href="javascript:;">1.663</a></em>
-										<em aa="5.091" gametype="spf" index="1" sp="3.25"><a href="javascript:;">3.48</a></em>
-										<em aa="5.091" gametype="spf" index="2" sp="5.45"><a href="javascript:;">5.091</a></em> 
-									</div>
-								</span>
-								
-								<span class="co8"><a href="javascript:;" class="ico_square moreData">简</a>
-									<a href="#" target="_blank" class="ico_square">析</a>
-								</span>
-							</dd>
-
-						</dl>
-			
 					</div>
 				</div>
 				

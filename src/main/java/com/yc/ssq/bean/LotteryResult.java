@@ -9,7 +9,7 @@ public class LotteryResult implements Serializable {
 	--双色球开奖结果	lotteryResult
 	--lrid
 	--期号	ssq_issue
-	--开奖日期时间
+	--开奖日期
 	--红球号码
 	--蓝球号码
 	--兑奖截止日期 

@@ -6,7 +6,6 @@
 
 <%
 	//配合ckeditor的文件上传
-
 	FileUpload fu=new FileUpload();
    	Map<String,String> map= fu.uploadFiles(pageContext, request);   // 完成上传文件的保存，请求实体的参数的读取,  返回了所有的参数及上传文件的信息( url, destination,oldfilename)
 

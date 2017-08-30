@@ -525,7 +525,7 @@ a, a:hover, a:active {
 }
 
 .headerBox h1 {
-	font: 700 20px/24px '微软雅黑', Simsun;
+	font: 700 20px/24px '寰蒋闆呴粦', Simsun;
 	float: left;
 	padding: 10px 12px 0 10px;
 	vertical-align: baseline;
@@ -741,7 +741,7 @@ a, a:hover, a:active {
 
 .gameTypeTips p {
 	padding: 132px 0 0 240px;
-	font: 18px/30px "微软雅黑"
+	font: 18px/30px "寰蒋闆呴粦"
 }
 
 .gameTypeTips p a, .gameTypeTips p a:visited {
@@ -1032,35 +1032,32 @@ a, a:hover, a:active {
 }
 
 .co1 {
-	width: 32px;
+	width: 5%;
 	overflow: hidden
 }
 
 .co2 {
-	width: 61px;
+	width: 15%;
 	cursor: pointer
 }
 
 .co3 {
-	width: 64px
+	width: 12%
 }
 
 .co4 {
-	width: 175px
+	width: 28%
 }
 
-.co5 {
-	width: 33px
-}
 
 .co6 {
-	width: 361px;
+	width: 40%;
 	overflow: hidden;
 	white-space: nowrap
 }
 
 .dataHead .co6 {
-	width: 359px
+	width: 40%
 }
 
 .dataHead .co6 em {
@@ -1157,7 +1154,7 @@ a, a:hover, a:active {
 	-moz-transition: none;
 	transition: none;
 	overflow: auto;
-	content: "★";
+	content: "鈽�;
 	text-indent: 0;
 	display: block
 }
@@ -1408,7 +1405,7 @@ keyframes dropDown {
 }
 
 .dataBody dd .hostTeam, .dataBody dd .guestTeam {
-	width: 46%;
+	width: 47%;
 	float: left;
 	text-align: right;
 	white-space: nowrap;
@@ -1416,7 +1413,7 @@ keyframes dropDown {
 }
 
 .dataBody dd .hostTeam b, .dataBody dd .guestTeam b {
-	font-size: 14px
+	font-size: 12px
 }
 
 .dataBody dd .finalScore {
@@ -2106,7 +2103,7 @@ dd span .closeBtn .arrow {
 }
 
 .spfDcjs .dataHead .co6, .spfDcjs .dataBody .co6 {
-	width: 226px
+	width: 290px
 }
 
 .spfDcjs .dataBody .co6 {
@@ -2114,7 +2111,7 @@ dd span .closeBtn .arrow {
 }
 
 .spfDcjs .co6 em {
-	width: 74px
+	width: 98px
 }
 
 .spfDcjs .co7 {
@@ -2160,7 +2157,7 @@ dd span .closeBtn .arrow {
 	border-bottom: 1px solid #ccc;
 	height: 33px;
 	padding-left: 40px;
-	font: 16px/33px '微软雅黑';
+	font: 16px/33px '寰蒋闆呴粦';
 	background: #fff;
 	position: relative
 }
@@ -3024,7 +3021,7 @@ transform
 		url(http://pimg1.126.net/caipiao/img/lotteryBet/jczqNew/gray/gray_repeat_8b17178.png)
 		0 -173px repeat-x;
 	padding-left: 40px;
-	font: 16px/33px '微软雅黑';
+	font: 16px/33px '寰蒋闆呴粦';
 	position: relative
 }
 
@@ -3114,7 +3111,7 @@ transform
 }
 
 .uploadList .buyInfo {
-	font: 16px/33px '微软雅黑';
+	font: 16px/33px '寰蒋闆呴粦';
 	margin-left: 20px
 }
 
@@ -3283,7 +3280,7 @@ transform
 .fqyt .amountTip {
 	display: inline-block;
 	vertical-align: middle;
-	font: 16px/42px "微软雅黑"
+	font: 16px/42px "寰蒋闆呴粦"
 }
 
 .groupBox .hmDescBox {
@@ -3306,7 +3303,7 @@ transform
 .fqyt .result {
 	margin: 0 0 5px 29px;
 	height: 32px;
-	font: 14px/32px "微软雅黑";
+	font: 14px/32px "寰蒋闆呴粦";
 	position: static
 }
 

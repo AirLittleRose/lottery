@@ -12,7 +12,7 @@
 				<div class="lotteryListWraps">
 					<ul>
 						<li class="zyGame">
-							<a gid="jczq" href="soccer.jsp">
+							<a gid="jczq" href="toSoccer.action">
 								<em class="cz_logo35 logo35_jczq"></em>
 								<strong>竞彩足球</strong>
 								<span class="grayWords">比你想的容易中</span>

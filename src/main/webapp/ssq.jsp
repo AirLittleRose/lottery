@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="header.jsp" %>
-
 <script type="text/javascript">
 
 function bet(){

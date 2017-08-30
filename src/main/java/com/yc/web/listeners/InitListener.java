@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebListener;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-
 import com.yc.ssq.bean.UserSsq;
 import com.yc.ssq.biz.UserSsqBiz;
 
