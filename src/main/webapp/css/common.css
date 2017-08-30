@@ -4,7 +4,7 @@
 }
 
 .docBody a {
-	color: #333 
+	color: #333
 }
 
 .docBody a:link, .docBody a:visited {
@@ -214,7 +214,550 @@
 	float: left;
 	border-right: 1px solid #dedede
 }
+.redBtn25 {
+	display: inline-block;
+	height: 25px;
+	width: 75px;
+	background: url(http://pimg1.126.net/caipiao/img/userCenter/btn_repeat_2a94560.png?2f62c8fb62afd223df247879110df114) 0 -23px repeat-x;
+	font: 700 12px/25px simsun;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	cursor: pointer
+}
+.grayBorder {
+	border: 1px solid #ddd
+}
+.tit {
+	position: relative;
+	height: 36px;
+	font: 700 14px/36px simsun;
+	background: url(http://pimg1.126.net/caipiao/img/userCenter/btn_repeat_2a94560.png?2f62c8fb62afd223df247879110df114) 0 -159px repeat-x;
+	padding-left: 15px;
+	border-bottom: 1px solid #ddd
+}
+.tit a {
+	position: absolute;
+	right: 15px;
+	top: 0;
+	font-size: 12px;
+	font-weight: 400
+}
+.orderDataBox {
+	border-top: 0
+}
 
+.tableData {
+	width: 100%;
+	margin-bottom: -1px;
+	border-bottom: 1px solid #ddd
+}
+.tableData th {
+	height: 30px;
+	background: #f3f2f2;
+	text-align: center;
+	color: #717171;
+	border-bottom: 1px solid #ebedec
+}
+.tableData td {
+	border-bottom: 1px dotted #ddd;
+	line-height: 20px;
+	padding: 10px 0;
+	text-align: center;
+	vertical-align: top;
+	height: 40px
+}
+table tr .tl {
+	text-align: left
+}
+table tr .tr {
+	text-align: right
+}
+.tableArow {
+	width: 100%;
+	table-layout: fixed;
+	background: #fff
+}
+.tableArow th {
+	height: 30px;
+	background: #f3f2f2;
+	text-align: center;
+	color: #717171;
+	border-bottom: 1px solid #ebedec
+}
+.tableArow td {
+	line-height: 36px;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis
+}
+.redTab {
+	border: 1px solid #ddd;
+	border-bottom: 3px solid #ba2636;
+	height: 33px;
+	line-height: 33px
+}
+.redTab li {
+	float: left;
+	width: 120px;
+	text-align: center;
+	font-size: 14px;
+	border-right: 1px solid #ddd
+}
+.redTab li a {
+	display: block
+}
+.redTab li.active {
+	background: #ba2636;
+	font-weight: 700
+}
+.redTab li.active a, .redTab li.active a:visited, .redTab li.active a:hover {
+	color: #fff
+}
+.redTab li a, .redTab li a:visited {
+	color: #333
+}
+.redTab li a:hover {
+	color: #ba2636
+}
+.mt10 {
+	margin-top: 10px
+}
+.mr5 {
+	margin-right: 5px
+}
+.mlr5 {
+	margin: 0 5px
+}
+.mlr10 {
+	margin: 0 10px
+}
+.pdl86 {
+	padding-left: 86px
+}
+.pdl15 {
+	padding-left: 15px
+}
+.pdr15 {
+	padding-right: 15px
+}
+.sider {
+	width: 230px;
+	float: left
+}
+.sider_con {
+	_height: 400px;
+	min-height: 450px;
+	border: 1px solid #ddd;
+	background: #fff;
+	margin-bottom: 10px
+}
+.sider ul a:link, .sider ul a:visited {
+	color: #333
+}
+.sider ul a:hover {
+	color: #ba2636
+}
+.sider .popuImg {
+	height: 230px;
+	height: 90px
+}
+.sider .popuImg a, .sider .popuImg img {
+	display: block;
+	width: 230px;
+	height: 90px
+}
+.wybInfor {
+	padding-left: 30px;
+	border-bottom: 1px solid #ddd;
+	position: relative
+}
+.wybInfor .userName {
+	line-height: 36px;
+	position: relative
+}
+.wybInfor .userName .fs14 {
+	height: 36px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 4px
+}
+.wybInfor .flash {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 10
+}
+.wybInfor .flash img {
+	width: 110px
+}
+.wybInfor p {
+	line-height: 12px
+}
+
+.wybInfor .completeEpayTip {
+	background: #fffde6;
+	border-top: 1px solid #ffeacb;
+	color: #5d5d5d;
+	font-size: 12px;
+	text-align: center;
+	height: 26px;
+	line-height: 26px;
+	margin-left: -30px
+}
+.leftManu {
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #ddd;
+	padding: 0;
+	font-size: 14px
+}
+.leftManu li {
+	height: 34px;
+	line-height: 34px;
+	vertical-align: top;
+	zoom: 1;
+	position: relative
+}
+.leftManu li a {
+	display: block;
+	padding-left: 30px
+}
+.leftManu li i {
+	font: 700 16px/34px simsun;
+	position: absolute;
+	right: 10px;
+	top: 0;
+	color: #d73a4f;
+	display: none
+}
+.leftManu .active {
+	background: #fff;
+	border-bottom: 1px solid #f1f1f1;
+	border-top: 1px solid #f1f1f1
+}
+.leftManu .active i {
+	display: block
+}
+.leftManu .active a:link, .leftManu .active a:visited {
+	color: #333;
+	font-weight: 700
+}
+.leftManu .add_tips {
+	background-color: #d7394e;
+	border-radius: 2px;
+	color: #fff;
+	display: inline-block;
+	height: 12px;
+	line-height: 12px;
+	padding: 1px 1px 1px 2px;
+	position: relative;
+	vertical-align: middle;
+	z-index: 10;
+	font-size: 12px;
+	top: -9px
+}
+
+.rightModule {
+	width: 750px;
+	float: right
+}
+.rightModule.grayBorder, .rightModule.messageBox {
+	width: 748px
+}
+
+.mcSelectBox, .mcSelectBox span, .mcSelectBox .imitateSelect {
+	display: inline-block;
+	border-width: 1px;
+	border-style: solid;
+	vertical-align: middle
+}
+.mcSelectBox {
+	border-color: #949494 #cacaca #cacaca #949494;
+	line-height: 20px;
+	_line-height: 18px;
+	height: 24px;
+	position: relative;
+	z-index: 100
+}
+.mcSelectBox span {
+	border-color: #e6e6e6;
+	border-width: 1px 0 0 1px;
+	position: relative;
+	z-index: 10
+}
+.mcSelectBox .imitateSelect {
+	border-color: #efefef;
+	border-width: 1px 0 0 1px;
+	margin: 0;
+	padding: 3px 5px 5px;
+	outline: 0;
+	line-height: 1;
+	float: left;
+	font-size: 12px
+}
+.imitateSelect {
+	width: 228px
+}
+.mcSelectBox i {
+	display: inline-block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	border-width: 5px 5px 0 5px;
+	border-style: solid;
+	_border-style: solid dashed;
+	border-color: #333 transparent;
+	right: 5px;
+	top: 9px
+}
+.mcSelectBox .optionList {
+	display: none;
+	max-height: 110px;
+	white-space: nowrap;
+	overflow-x: hidden;
+	overflow-y: auto;
+	line-height: 18px;
+	border: 1px solid #949494;
+	border-top-color: #cacaca;
+	position: absolute;
+	top: 24px;
+	width: 240px;
+	left: -1px;
+	background-color: #fff;
+	font-size: 12px;
+	z-index: 101
+}
+.mcSelectBox .optionList a {
+	display: block;
+	padding: 2px 5px;
+	color: #000
+}
+.mcSelectBox .optionList a:link, .mcSelectBox .optionList a:visited {
+	color: #333;
+	background-color: #fff
+}
+.mcSelectBox .optionList .exprie:link, .mcSelectBox .optionList .exprie:visited {
+	color: #ba2636;
+	background-color: #fff
+}
+.mcSelectBox .optionList a:hover {
+	background-color: #fef9d4;
+	color: #333;
+	text-decoration: none
+}
+.selectBox .btnAuto .grayBtn25 {
+    padding: 0 13px 0 11px;
+}
+.selectBox .btnAuto, .selectBox .btnAuto .grayBtn25 {
+    padding: 0;
+    width: auto;
+}
+.selectBox .mcSelectBox .grayBtn25 {
+    float: none;
+    margin: 0;
+}
+.selectBox .mcSelectBox .grayBtn25 {
+    display: block;
+    padding-right: 8px;
+    width: auto;
+}
+.selectBox .grayBtn25 {
+    float: left;
+    font-weight: 400;
+    margin-right: 10px;
+}
+.grayBtn25:link, .grayBtn25:visited, .grayBtn22:link, .grayBtn22:visited, .grayBtn22:hover, .grayBtn25:hover, .grayBtn30:link, .grayBtn30:visited, .grayBtn30:hover {
+    color: #333;
+    text-decoration: none;
+}
+a:link, a:visited {
+    color: #1e50a2;
+}
+.grayBtn25, .grayBtn22 {
+    background: rgba(0, 0, 0, 0) url("http://pimg1.126.net/caipiao/img/userCenter/btn_repeat_2a94560.png?2f62c8fb62afd223df247879110df114") repeat-x scroll 0 -103px;
+    border: 1px solid #c3c3c3;
+    border-radius: 2px;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font: 700 12px/23px simsun;
+    height: 23px;
+    text-align: center;
+    width: 73px;
+}
+.selectBox {
+	line-height: 25px;
+	height: 25px;
+	padding: 17px 0 18px 15px
+}
+.selectBox .grayBtn25 {
+	float: left;
+	margin-right: 10px;
+	font-weight: 400
+}
+.selectBox .mcSelectBox {
+	border: 0;
+	float: left;
+	margin-right: 10px;
+	width: 75px
+}
+.selectBox .mcSelectBox .grayBtn25 {
+	width: auto;
+	padding-right: 8px;
+	display: block
+}
+.selectBox .mcSelectBox .grayBtn25 {
+	margin: 0;
+	float: none
+}
+.selectBox .mcSelectBox i {
+	border-width: 3px 3px 0 3px;
+	top: 10px
+}
+.selectBox .optionList {
+	left: 0;
+	border: 1px solid #b8b8b8;
+	width: 73px;
+	max-height: none;
+	line-height: 24px
+}
+.selectBox .optionList a {
+	padding: 0 10px
+}
+.selectBox .optionList a:hover, .selectBox .optionList a.active {
+	background-color: #f4f2f3
+}
+.selectBox ul.optionList {
+	width: 264px;
+	overflow: hidden
+}
+.selectBox ul.column2 {
+	width: 176px;
+	overflow: hidden
+}
+.selectBox ul.optionList li {
+	width: 88px;
+	float: left;
+	border-left: 1px dotted #b8b8b8;
+	margin-left: -1px;
+	overflow: hidden;
+	padding-bottom: 300px;
+	margin-bottom: -300px
+}
+.selectBox ul.optionList li.all {
+	width: 100%;
+	clear: none;
+	border: 0;
+	border-bottom: 1px dotted #b8b8b8;
+	padding: 0;
+	margin: 0
+}
+.selectBox ul.optionList li a {
+	padding-left: 10px
+}
+.selectBox ul.optionList li span {
+	height: 24px;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	display: block
+}
+.selectBox .fgx {
+	height: 1px;
+	line-height: 0;
+	font-size: 0;
+	overflow: hidden;
+	border-bottom: 1px dotted #b8b8b8;
+	display: block
+}
+.selectBox .widthAuto {
+	width: auto;
+	padding: 0 2px
+}
+.selectBox .btnAuto, .selectBox .btnAuto .grayBtn25 {
+	width: auto;
+	padding: 0;
+	_display: inline-block
+}
+.selectBox .btnAuto .grayBtn25 {
+	padding: 0 13px 0 11px
+}
+.selectBox .redBtn25 {
+	vertical-align: top
+}
+.selectBox .redBtn30 {
+	margin-right: 20px;
+	padding: 0 15px
+}
+.selectBox label {
+	display: inline-block;
+	vertical-align: middle;
+	font-family: Tahoma;
+*margin-left:-4px
+}
+.selectBox .right {
+	float: right;
+	padding: 0 10px 0 20px;
+	overflow: visible
+}
+.selectBox .right a:link, .selectBox .right a:visited {
+	color: #333
+}
+.selectBox .right a:hover {
+	text-decoration: none;
+	color: red
+}
+.selectBox .right i {
+	background: #fff url(http://pimg1.126.net/caipiao/img/index/indexIcon_other_2a7a5a0.png?10714a94bab45d6aaca6cb87ad0d0f699) no-repeat scroll -15px -106px;
+	position: absolute;
+	width: 11px;
+	height: 17px;
+	margin: 4px 0 0 -16px;
+*margin-top:-2px
+}
+
+.noData_order {
+	height: 170px
+	
+}
+.noData_order i {
+	display: inline-block;
+	margin: 55px 15px 0 250px;
+	width: 50px;
+	height: 61px;
+	background: url(http://pimg1.126.net/caipiao/img/userCenter/tips_icon_91cbf1e.png?20140807) 0 0 no-repeat;
+	vertical-align: middle
+}
+.noData_order .ico_book {
+	background-position: 0 0
+}
+.noData_order .ico_smile {
+	background-position: -126px 0;
+	width: 55px;
+	height: 56px
+}
+.noData_order .ico_letter {
+	background-position: -52px 0;
+	width: 72px;
+	height: 52px
+}
+.noData_order .ico_cry {
+	background-position: -184px 0;
+	width: 55px;
+	height: 56px
+}
+.noData_order strong {
+	display: inline-block;
+	margin-top: 55px;
+	vertical-align: middle;
+	font: 18px/30px "Microsoft Yahei";
+	color: #666
+}
 .betNav {
 	clear: both;
 	float: none;

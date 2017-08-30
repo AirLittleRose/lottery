@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="css/jczqGray_V1.css">
 
 
-
-
 <script type="text/javascript" src="js/soccer.js"></script>
 <div class="wrapper">
 

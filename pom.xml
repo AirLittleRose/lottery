@@ -176,7 +176,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
 		</dependency>
-		
+
 		<!-- dom4j -->
 		<dependency>
 			<groupId>dom4j</groupId>
@@ -188,4 +188,5 @@
 	<build>
 		<finalName>lottery</finalName>
 	</build>
+
 </project>

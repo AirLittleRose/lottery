@@ -4,6 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.soccer.bean.GameMapper">
 
+	<!-- 加入带日志的 ehcache 缓存 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+
 	<!-- 添加比赛信息 -->
 	<insert id="savaGame">
 		insert into game(game_id, oh, od, oa,

@@ -2,12 +2,53 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="header.jsp" %>
+<script type="text/javascript">
+
+function bet(){
+		
+	var redlist = document.getElementsByClassName("c_ba2636");
+	var bluelist = document.getElementsByClassName("c_1e50a2");
+	var multinum = document.getElementById("multinum").value;
+	
+	var redball = new Array();	
+	for(var i=0;i<redlist.length;i++){
+		redball[i] = redlist[i].innerHTML;
+	}
+	
+	var blueball = new Array();	
+	for(var i=0;i<bluelist.length;i++){
+		blueball[i] = bluelist[i].innerHTML;
+	}
+		
+	$.ajax({
+		type:"POST",
+		url:"userBetSsq.action",
+		data:"redball="+redball+"&blueball="+blueball+"&sigprice=2"+"&multinum="+multinum,
+		dataType:"JSON",
+		success:function(data){
+			if(data.code==1){
+				alert("下注成功！");
+				location.href="toBuyInfo.action";
+				console.log(multinum);
+				console.log(redball);
+				console.log(blueball);
+			}else{
+				alert("下注失败，原因："+data.msg);
+				console.log(multinum);
+				console.log(redball);
+				console.log(blueball);
+			}
+		}
+	});
+}
+</script>
+
 
 <aside class="awardBody_ssq">
 		<strong><b class="iconHorn"></b>：</strong>
 		<div class="scrollWrap">
 		<ul class="clearfix">
-			
+		
 		</ul>
 		</div>
 		<strong></strong>
@@ -308,7 +349,7 @@
 								</p>
 							</div>
 						
-							<p class="selectInfo"><span>您当前选中了<strong class="c_ba2636">6</strong>个红球，<strong class="c_1e50a2">1</strong>个蓝球，共<strong class="c_ba2636">1</strong>注，共<strong class="c_ba2636">2</strong>元</span><i></i></p>
+							<p class="selectInfo"><span>您当前选中了<strong class="">6</strong>个红球，<strong class="">1</strong>个蓝球，共<strong class="">1</strong>注，共<strong class="">2</strong>元</span><i></i></p>
 						</div>
 					</div>
 				
@@ -322,7 +363,9 @@
 							<input name="autoSavePool" id="autoSavePool" type="checkbox"><label for="autoSavePool">记忆号码篮数据</label>
 						</div>
 						<div id="select_list_box" class="selected_list">
-							<dl></dl>
+							<dl>
+								
+							</dl>
 						</div>
 						<div class="selected_btnbox"> 
 							<a hidefocus="true" class="selected_btn" num="1" rel="nofollow" href="javascript:;">机选1注</a>
@@ -348,7 +391,7 @@
 								<a href="javascript:;" onclick="jQuery('.addSubtract input:first').val(160);jQuery('.beitouTip_ssq').remove();Core.virualViewStat('#', '立即掏空');">立即掏空</a>&nbsp;<em onclick="jQuery('.beitouTip_ssq').remove()">×</em></span><i></i>
 							</div>
 							<a href="javascript:;" rel="nofollow" hidefocus="true" class="subtract subtractDisable"></a>
-							<input style="ime-mode: disabled;" value="1" type="text">
+							<input id="multinum" style="ime-mode: disabled;" value="1" type="text">
 							<a href="javascript:;" rel="nofollow" hidefocus="true" class="add"></a></span>倍，
 						</span>
 						<span class="periodNumWrap">
@@ -363,7 +406,7 @@
 					
 					<div class="betBtnBox">
 						<p class="betBtns">
-							<span id="normalBtnBox"><a data-bet-type="1" herf="javascript:;" rel="nofollow" class="betting_Btn" title="立即投注"></a></span>
+							<span id="" ><a data-bet-type="1" title="立即投注" class="betting_Btn" href="javascript:void(0)" onclick="bet()"></a></span>
 						</p>
 						<p class="treaty"><input checked="checked" id="agree_rule" name="checkbox" type="checkbox"> 我已经阅读并同意<a href="#" target="_blank">《委托投注规则》 </a></p>
 					</div>
@@ -379,7 +422,7 @@
 						<strong>9591
 						</strong>万
 					</p>
-					<p>可开出<span class="c_ba2636">159注</span>500万大奖</p>
+					<p>可开出<span class="">159注</span>500万大奖</p>
 					<p>每周二、四、日晚上21:15开奖</p>
 				</div>
 				<div class="drawNotice">
@@ -408,25 +451,25 @@
 								<tr>
 									<td>2017091期</td>
 									<td class="t_r">			
-										<em class="c_ba2636">05</em>
-										<em class="c_ba2636">07</em>
-										<em class="c_ba2636">10</em>
-										<em class="c_ba2636">23</em>
-										<em class="c_ba2636">28</em>
-										<em class="c_ba2636">29</em>
-										<em class="c_1e50a2">03</em>
+										<em class="">05</em>
+										<em class="">07</em>
+										<em class="">10</em>
+										<em class="">23</em>
+										<em class="">28</em>
+										<em class="">29</em>
+										<em class="">03</em>
 									</td>
 								</tr>
 								<tr>
 									<td>2017090期</td>
 									<td class="t_r">			
-										<em class="c_ba2636">01</em>
-										<em class="c_ba2636">07</em>
-										<em class="c_ba2636">10</em>
-										<em class="c_ba2636">16</em>
-										<em class="c_ba2636">22</em>
-										<em class="c_ba2636">33</em>
-										<em class="c_1e50a2">09</em>
+										<em class="">01</em>
+										<em class="">07</em>
+										<em class="">10</em>
+										<em class="">16</em>
+										<em class="">22</em>
+										<em class="">33</em>
+										<em class="">09</em>
 									</td>
 								</tr>
 							</tbody>
@@ -460,29 +503,5 @@
 		<script src="js/core.js"></script>
 		<script src="js/history.js"></script>
 		<script src="js/index.js"></script>
-		<script>
-		window.Game.config.gameId = "2010032416YX00000001";
-		window.Game.config.gameEn = "ssq";
-		window.Game.config.gameCn = "双色球";
-		window.Game.config.period = "2017093";
-		window.Game.config.periodBetSaleEndTime = "19:40";
-		window.Game.config.nextPeriod = "2017094";
-		window.Game.config.nextPeriodSaleStartTime = "20:00";
-		window.Core.initData = "";
-		window.Core.config.quickBetTimes = "1";
-		window.Core.config.quickBetPeriods = "";
-		window.Core.config.followPeriods = "20";
-		window.Core.config.followBetTimes = "";
-		window.Core.config.followMode = "";
-		window.Core.config.stopAwardAmount = "";
-		window.Core.config.orderType = "0";
-		window.Core.initGroupData = {
-			feeType : "",
-			totalPieces : "",
-			createrBuyPieces : "",
-			baodi : "",
-			secretLevel : ""
-		};
-		</script>
-
+		
 <%@ include file="bottom.jsp" %>

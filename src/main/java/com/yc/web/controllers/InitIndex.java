@@ -41,42 +41,14 @@ public class InitIndex {
 	@RequestMapping(value="/toSoccer.action")
 	public void toSoccer(HttpServletRequest request, HttpServletResponse response){
 		try {
-			JsonModel jm = new JsonModel();
-			Game game = new Game();
-			String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-			request.setAttribute("date", today);
-			game.setStart(today);
-			game.setEnd(addDate(today, 1));
-			List<Game> list = this.gameBiz.findGames(game);
-			int count = this.gameBiz.getGamesCount(game);
-			if (list == null) {
-				jm.setCode(0);
-				request.setAttribute("info", jm);
-				request.getRequestDispatcher("soccer.jsp").forward(request, response);
-			}
-			jm.setRows(list);
-			jm.setTotal(count);
-			jm.setCode(1);
-			request.setAttribute("info", jm);
 			request.getRequestDispatcher("soccer.jsp").forward(request, response);
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
-	private String addDate(String date, int num) {
-		try {
-			long before = new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime();
-			long after = before + 3600 * 24 * num * 1000L;
-			date = new SimpleDateFormat("yyyy-MM-dd").format(after);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
-	}
+	
 	
 }

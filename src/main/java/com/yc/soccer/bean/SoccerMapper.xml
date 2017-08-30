@@ -3,11 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.soccer.bean.SoccerMapper">
-
+	<!-- 加入带日志的 ehcache 缓存 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+	
 	<!-- 添加足彩投注信息 -->
-	<insert id="saveSoccer" parameterType="Soccer" useGeneratedKeys="true" keyProperty="sid">
+	<insert id="saveSoccer" parameterType="Soccer" useGeneratedKeys="true"
+		keyProperty="sid">
 		insert into soccer(gameid,predictresult,status) values
-		<foreach collection="list" open="" close="" separator="," index="item">
+		<foreach collection="list" open="" close="" separator=","
+			index="item">
 			(#{item.game_id},#{item.predictresult},#{status})
 		</foreach>
 	</insert>
@@ -24,3 +28,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 </mapper>
+
