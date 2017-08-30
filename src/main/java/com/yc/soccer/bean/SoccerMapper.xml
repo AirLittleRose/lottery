@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--   namespace:命名空间 -->
+<mapper namespace="com.yc.scoccer.bean.ScoccerMapper">
+
+<!-- 加入带日志的 ehcache 缓存 -->
+<cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+	
+	
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--   namespace:命名空间 -->
+<mapper namespace="com.yc.ssq.bean.BetSsqMapper">
+
+<!-- 加入带日志的 ehcache 缓存 -->
+<cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+	
+	<!-- 批量添加 -->
+	<insert id="addBetSsq" parameterType="BetSsq">
+		insert into betSsq(usid,sigprice,multinum,redball,blueball) values
+		<foreach collection="list" open="" close="" separator="," item="item">
+			(#{item.usid},#{item.sigprice},#{item.multinum},
+			#{item.redball},#{item.blueball} )
+		</foreach>
+	</insert>
+	
+	<select id="findAfterBuy" parameterType="java.lang.Integer" resultType="BetSsq">
+		select usid,ssq.userid as userid,username,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum 
+			from
+			(
+			select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
+				(select usid,userid,orderid,ordertime,ssq_issue from userSsq where usid=#{usid}) a
+				inner join
+				(select usid,redball,blueball,sigprice,multinum from betSsq) b
+				on a.usid = b.usid
+			) ssq
+			inner join
+			(select userid,username from users) u
+			on ssq.userid = u.userid
+	</select>
+	
+</mapper>

@@ -1,0 +1,26 @@
+<ehcache>
+
+	<!-- mybatis的二级缓存: diskstore表示缓存存对象的位置 , 要缓存的对象必须序列化 -->
+	
+	<diskStore path="java.io.tmpdir" />
+
+
+	<!-- 
+		timeToLiveSeconds =3600 timeToIdleSeconds =300 
+		以上配置代表缓存有效时间为3600秒（自缓存建立起一个小时有效 ），
+		在有效的一个小时内，如果连续五分钟未访问缓存，则缓存失效 
+	-->
+
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="3600" overflowToDisk="true" />
+
+
+	<cache name="sampleCache1" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="600" overflowToDisk="true" />
+
+
+	<cache name="sampleCache2" maxElementsInMemory="1000" eternal="false"
+		timeToIdleSeconds="40" timeToLiveSeconds="120" overflowToDisk="true" />
+
+
+</ehcache>

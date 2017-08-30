@@ -1,0 +1,8 @@
+/target/
+
+/.settings/
+
+.classpath
+.project
+lottery.log
+lottery.log.2017-08-29
