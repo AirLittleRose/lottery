@@ -45,6 +45,25 @@
 <link rel="stylesheet" href="css/history.css">
 <link href="css/collect.css" charset="UTF-8" media="screen" type="text/css" rel="stylesheet">
 
+<script type="text/javascript">
+
+	$.ajax({
+		type:"POST",
+		url:"users_getLoginUser.action",
+		dataType:"JSON",
+		success:function(data){
+			if(data.code ==1){
+				$("#welcome").html('hi~ 欢迎来到人人乐彩票！');
+				$("#loginRegister").html('');
+				$("#loginuser").html(data.obj.username);
+				$("#logout").html('安全退出');				
+			}else{
+			
+			}
+		}
+	});
+
+</script>
 
 </head>
 <body style=" background-color:white;">
@@ -52,15 +71,18 @@
 <nav id="topNav1">
 	<div id="topNavWrap1">
 		<div id="topNavLeft1">
-			<span>Hi！欢迎来到人人乐彩票！</span>
-			<a href="login.jsp">请登录</a>
-			<a href="#">免费注册</a>
+			<span id="welcome">Hi！欢迎来到人人乐彩票！</span>
+			<a href="toLogin.action" id="loginuser">请登录</a>			
+			<a href="toRegister.action" id="loginRegister">免费注册</a>
+			<a id="logout" onclick='document.location="users_logout.action"'></a>
 		</div>
 		<ul id="topNavRight1">
 			<li>
 				<div class="mcDropMenuBox myorder">
 					<a target="_top" user="y" class="topNavHolder" href="#我的订单页order" rel="nofollow">
-					我的订单</a>
+						<img src="images/order.png"/>
+							我的订单
+					</a>
 					<b class="holderLine">|</b>
 				</div>
 			</li>
@@ -126,4 +148,5 @@
 		</ul>
 	</div>
 </nav>
+
 

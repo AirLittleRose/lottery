@@ -18,7 +18,6 @@ $(function () {
     };
     H_login.run();
 
-
 	$("#username").focus(function(){ 
 		$("#username").css("color","#2E2E2E");
 		$("#user").css("border-color","#009ACD");
@@ -44,4 +43,49 @@ $(function () {
 		});
 
 });
+
+	
+function getStyle(obj,attr){
+			//功能性检查
+			if(obj.currentStyle){
+				return div.currentStyle[attr];	
+			}else{
+				return getComputedStyle(obj,null)[attr]	
+			}
+		}	
+
+function checkPass(){
+		var name = document.getElementById("regpass").value;
+		var reg = /^([0-9]|[a-zA-Z]){6,16}$/;
+		
+		if(name.match(reg)&&name!=""){
+			$("#aup").html("<img src='images/right.png' />");		
+		}else{
+			
+		}		
+}
+
+function checkPassAga(){
+		var pass = document.getElementById("regpass").value;
+		var passaga = document.getElementById("regpassaga").value;		
+		
+		if(pass==passaga&&passaga!=""){
+			$("#aug").html("<img src='images/right.png' />");
+			var sh=$("#dologin");
+			sh.removeAttr("disabled");
+			sh.css("backgroundColor","#CD4F39");
+			 
+		}else{
+			$("aug").html("<img src='images/wrong.png' />");
+			var sh=$("#dologin");
+			sh.attr("disabled","true");
+			sh.css("backgroundColor","#CD8162");
+		}		
+}
+
+
+
+
+
+
 

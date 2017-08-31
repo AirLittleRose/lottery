@@ -9,9 +9,9 @@
     <div class="sider_con">
       <div class="wybInfor">
         <div class="userName"> 
-        	<strong class="fs14">用户名 ：abc</strong>
-          	<strong class="fs14">电话号码 ：11112223455</strong>
-          	<strong class="fs14">邮箱 ：1234567833@qq.com</strong>
+        	<strong class="fs14">用户名 ：${users.username }</strong>
+          	<strong class="fs14">电话号码 ：${users.tel }</strong>
+          	<strong class="fs14">邮箱 ：${users.email } </strong>
         </div>
        
       </div>

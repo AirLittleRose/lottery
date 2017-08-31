@@ -58,7 +58,7 @@
 		<!-- 数据源 -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- 包别名,设置了这个在映射文件mapper中的对应的类名就不需要写全称了 -->
-		<property name="typeAliasesPackage" value="com/yc/soccer/bean;com/yc/ssq/bean" />
+		<property name="typeAliasesPackage" value="com/yc/users/bean;com/yc/soccer/bean;com/yc/ssq/bean" />
 		<!-- 映射文件的路径 -->
 		<!-- <property name="mapperLocations" value="classpath*:com/yc/*/bean/*.xml" 
 			/> -->
@@ -66,6 +66,7 @@
 			<array>
 				<value>classpath*:com/yc/soccer/bean/*.xml</value>
 				<value>classpath*:com/yc/ssq/bean/*.xml</value>
+				<value>classpath*:com/yc/users/bean/*.xml</value>
 			</array>
 		</property>
 		<!-- 主要用来配置mybatis中的 configuration中的settings配置 -->

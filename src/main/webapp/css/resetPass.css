@@ -1,16 +1,13 @@
-
 *{
 	padding: 0px;
-	margin: 0px auto;
+	margin: 0px;
 }
-#loginBack{
+#body{
 	padding: 0px;
 	margin: 0px auto;
-	background-image:url(../images/back.jpg);	
+	background-image:url(../images/resetback.jpg);		
 }
 
-
-/*��¼���css*/
 .loginbottom {
 	z-index: 9998;
 	position:fixed;
@@ -31,12 +28,12 @@
 
 .login {
 	z-index:9999;
-	position: fixed;
-	top:50%;
+	position:absolute;
+	top:30%;
 	left:50%;
-	width:420px;
-	height:420px;
-	margin:-180px 0 0 -200px;
+	width:380px;
+	height:350px;
+	margin:-100px 0 0 -200px;
 	border-radius:10px;
 	border:solid 0.5px #999;
 	background-color:#FFF;
@@ -44,17 +41,16 @@
 	box-shadow: 0 0 5px #999;
 }
 
-/*�رհ�ť*/
+
 .login span {
 	position: absolute;
+	font-size: 14px;
 	right:25px;
 	background: #ffffff;
 	border: 0px;
 	width: 25px;
-	height: 25px;
-	
+	height: 25px;	
 }
-
 .login span a {
 	margin:10px 0 0 15px;
 	display: block;
@@ -63,7 +59,7 @@
 	text-decoration: none;
 }
 
-.close:hover{
+.image:hover{
   -webkit-animation:rotate 1s .2s ease both;
   -moz-animation:rotate 1s .2s ease both;
   }
@@ -78,75 +74,97 @@
   100%{transform: rotate(0deg);}
   }
 
-/*�û���css*/
-#user{
-	height:40px;
-	width:320px;
-	border:solid 1px #999;
-	margin:	98px 0 0 50px;
-	
+#userregpass {
+    font-weight: normal;
+    position:absolute;
+    top: 95px;
+    left: 35px;
+    float: left;
+    text-align: center;
+
 }
 
 #userpassword{
 	height:40px;
-	width:320px;
+	width:220px;
 	border:solid 1px #999;
-	margin:	20px 0 0 50px;	
+	margin:	80px 0 0 100px;	
 }
-#username{
+
+#regpass{
 	height:40px;
-	width:270px;
+	width:220px;
 	border:0px;
 	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 	font-size:14px;	
-	color:#999;
-
 }
-#password{
+
+#agapass{
+	font-weight: normal;
+    position: relative;
+    top: 20px;
+    left: 20px;
+    float: left;
+    text-align: center;
+	float:left;
+}
+
+/*ȷ�������div*/
+#regpassdiv{
 	height:40px;
-	width:270px;
+	width:220px;
+	border:solid 1px #999;
+	margin:	30px 0 0 100px;	
+}
+
+/*input��*/
+#regpassaga{
+	height:40px;
+	width:220px;
 	border:0px;
 	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 	font-size:14px;	
-	color:#999;
 
 }
 
-
-/*��¼��ť*/
 #dosubmit{
 	height:40px;
-	width:320px;
-	margin:60px 0 0 50px;
+	width:220px;
+	position: relative;
+    margin: 30px 28px 0 90px;
 }
 
 #dologin{
 	font-size:18px;	
 	color:#FFF;
 	height:40px;
-	width:320px;
-
+	width:220px;
+	cursor:pointer;
 	border:0px;
-	background-color:#CD8162;
+	background-color:#E9967A;
 	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 	
-/*��������ע��*/
-#toother{
-	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-	font-size:12px;	
-	margin:12px 0 0 50px;
+
+
+#aup{
+	float: left;
+    height: 40px;
+    margin: -30px 0 0 230px;
+    position: relative;
+    width: 200px;
+	text-align:inherit;
 }
 
-#toother a{
-	color: #666;
-	cursor:pointer;
-	text-decoration:none;
-}
-		
-#toother a:visited {color: #999}	/* �ѷ��ʵ����� */
-#toother a:hover {color: #333}
 
+#aug{
+	float: left;
+    height: 40px;
+    margin: -30px 0 0 230px;
+    position: relative;
+    width: 200px;
+	text-align:inherit;
+}
 
 
 

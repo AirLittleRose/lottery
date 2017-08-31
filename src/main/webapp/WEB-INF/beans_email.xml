@@ -15,13 +15,24 @@
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task-3.0.xsd
         http://www.springframework.org/schema/mvc 
-           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-
-	
-
-
-
-
-
+			 <!--①邮件服务器-->  
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="protocol" value="smtp" />  
+        <property name="host" value="smtp.163.com" />  
+        <property name="port" value="465" />  
+        <property name="username" value="renrenlecp@163.com" />  
+        <property name="password" value="renrenlecp123" />  
+       
+        <property name="javaMailProperties">  
+            <props>  
+                <prop key="mail.smtp.auth">true</prop>  
+                <!-- 如果是网易邮箱， mail.smtp.starttls.enable 设置为 false-->  
+                <prop key="mail.smtp.starttls.enable">false</prop>  
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>  
+            </props>  
+        </property>  
+    </bean> 
 </beans>
