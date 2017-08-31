@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.users.bean.NewsMapper">
+
+	<!-- 加入带日志的缓存 -->
+ 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache">
+ 	</cache> 	
+ 	
+	
+	<!-- 添加新闻 -->
+	<insert id="saveNews" useGeneratedKeys="true" keyProperty="newid">
+		insert into news(news) values(#{news})
+	</insert>	
+	
+	<!-- 查出新闻数据 -->
+	<select id="getNews" resultType="News" parameterType="News">
+		select * from news limit 10
+	</select>
+	
+	<!-- 更新新闻表数据 -->
+	<delete id="updateNews">
+		truncate table news
+	</delete>
+	
+	
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yc.soccer.bean.User_SoccerMapper">
+
+	<!-- 添加用户购买足彩信息 -->
+	<insert id="saveUser_Soccer" parameterType="User_Soccer">
+		insert into user_soccer(orderid,userid,sid,ordertime) values
+		<foreach collection="list" open="" close="" separator="," index="item">
+			(#{orderid},#{userid},#{sid},now())
+		</foreach>
+	</insert>
+
+
+
+</mapper>

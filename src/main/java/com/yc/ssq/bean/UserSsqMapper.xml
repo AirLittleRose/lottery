@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.ssq.bean.UserSsqMapper">
+
+<!-- 加入带日志的 ehcache 缓存 -->
+<cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+
+	<!-- 添加用户投注信息 -->
+	<insert id="addUserSsq" parameterType="UserSsq" keyProperty="usid" useGeneratedKeys="true">
+		insert into userSsq(userid,orderid,ordertime,ssq_issue) values( #{userid},#{orderid}, now(),#{ssq_issue} )
+	</insert>
+
+	<select id="findSsqIssue" resultType="UserSsq">
+		select distinct ssq_issue from userSsq order by ssq_issue desc	
+	</select>
+</mapper>

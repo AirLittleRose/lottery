@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+/target/
+
+
+/.settings/
+.classpath
+.project
+=======
+/target/
+
+/.settings/
+
+.classpath
+.project
+lottery.log
+lottery.log.2017-08-29
+>>>>>>> branch 'master' of git@github.com:AirLittleRose/lottery.git
