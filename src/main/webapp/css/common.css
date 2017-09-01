@@ -722,9 +722,18 @@ a:link, a:visited {
 }
 
 .noData_order {
-	height: 170px
-	
+	height: 170px	
 }
+
+#userInfo{
+	  margin:5px;
+      padding:5px;
+      background-color:white;
+      line-height:25px;
+      font-family:"微软雅黑","黑体","宋体";
+      font-size:16px;          
+}
+
 .noData_order i {
 	display: inline-block;
 	margin: 55px 15px 0 250px;

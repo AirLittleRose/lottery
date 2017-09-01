@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@ include file="header.jsp" %>
-
-
 
 <script>if(window.top != window.self)window.top.location.href = window.location.href;</script>
 
@@ -185,6 +185,8 @@
 				</div>
 				<script>window.Core && window.Core.loadIndexAD && window.Core.loadIndexAD();</script>
 				
+				
+				
 				<div class="promotionText">
 					<ul class="grayTitle" id="topInfoTab">
 						<li id="forecast" onmousemove="show1()">资讯</li>
@@ -194,7 +196,7 @@
 					<div class="promotion_con"  id="topForecast">
 						<ul class="promotion_list">
 							<c:forEach items="${jsonModel.rows}" var="v">						
-								<li>·${v.news }</li>								
+								<li>·${v.news }</li>							
 							</c:forEach>						
 						</ul>
 					</div>					
@@ -212,6 +214,7 @@
 						<a href="#" target="_blank">领奖指南</a>
 					</p>
 				</div>
+				
 			</div>
 		</div>
 		<!-- 一元购模块 -->
@@ -383,4 +386,3 @@
 </article>
 
 <%@ include file="bottom.jsp" %>
-

@@ -38,22 +38,15 @@
 <script src="js/core.js"></script>
 <script src="js/history.js"></script>
 <script src="js/index.js"></script>
+<script src="js/news.js"></script>
 
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/ssq.css">
 <link rel="stylesheet" href="css/forFrame.css">
 <link rel="stylesheet" href="css/history.css">
-
-<link type="text/css" rel="stylesheet" href="css/login.css" media="all">
-
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/login.js"></script>
-<script type="text/javascript" src="js/news.js"></script>
-
 <link href="css/collect.css" charset="UTF-8" media="screen" type="text/css" rel="stylesheet">
 
 <script type="text/javascript">
-
 	$.ajax({
 		type:"POST",
 		url:"users_getLoginUser.action",
@@ -86,17 +79,16 @@
 		<ul id="topNavRight1">
 			<li>
 				<div class="mcDropMenuBox myorder">
-					<a target="_top" user="y" class="topNavHolder" href="#我的订单页order" rel="nofollow">
+					<a target="_top" user="y" class="topNavHolder" href="user/myOrder.action" rel="nofollow">
 						<img src="images/order.png"/>
 							我的订单
-						<img src="imaes/down.png"/>
 					</a>
 					<b class="holderLine">|</b>
 				</div>
 			</li>
 			<li>
 				<div class="mcDropMenuBox">
-					<a target="_top" user="y" class="topNavHolder" href="#个人主页mylottery_info" rel="nofollow">
+					<a target="_top" user="y" class="topNavHolder" href="user/myList.action" rel="nofollow">
 					我的彩票</a>
 					<b class="holderLine">|</b>
 					
@@ -156,4 +148,3 @@
 		</ul>
 	</div>
 </nav>
-

@@ -1,4 +1,4 @@
-package com.yc.web.users.controllers;
+package com.yc.web.controllers;
 
 import java.io.IOException;
 
@@ -27,35 +27,36 @@ public class InitIndex {
 	
 
 	@RequestMapping(value="/index.action",method=RequestMethod.GET)
-	public String index(News news,HttpServletRequest request,HttpSession session) throws IOException{	
-		JsonModel jsonModel = newsBiz.searchNews(news);
-		if(jsonModel.getCode()==null){
-			newsBiz.putData();			
-		}else{
-			System.out.println(jsonModel);
-		}
-		JsonModel jm = newsBiz.searchNews(news);
-		request.setAttribute("jsonModel", jm);
-		session.setAttribute("list", jm.getRows());
-		return "main";
+	public String index(){	
+		return "../../main";
 	}	
 	
 	@RequestMapping(value="/toRegister.action",method=RequestMethod.GET)
 	public String toRegister(){
 		
-		return "WEB-INF/pages/register";
+		return "../../register";
 	}
 	
 	@RequestMapping(value="/toLogin.action",method=RequestMethod.GET)
 	public String toLogin(){
 		
-		return "WEB-INF/pages/login";
+		return "../../login";
 	}
 	
 	@RequestMapping(value="/resetPass.action",method=RequestMethod.GET)
 	public String toResetPass(){
 		
-		return "../WEB-INF/pages/resetPass";
+		return "../../resetPass";
+	}
+	
+	@RequestMapping(value="user/myOrder.action",method=RequestMethod.GET)
+	public String toMyOrder(){		
+		return "myorder";
+	}
+	
+	@RequestMapping(value="user/myList.action",method=RequestMethod.GET)
+	public String toMyList(){		
+		return "mylist";
 	}
 	
 	@RequestMapping(value="/toSoccer.action")

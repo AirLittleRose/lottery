@@ -3083,11 +3083,17 @@ a.c_939393:hover {
 	color: #ba2636
 }
 
+.red_c_ba2636 {
+    color: #ba2636;
+}
 .c_090, a.c_090:link, a.c_090:visited {
 	color: #090
 }
 
 .c_1e50a2, a.c_1e50a2:link, a.c_1e50a2:visited {
+	color: #1e50a2
+}
+.blue_c_1e50a2{
 	color: #1e50a2
 }
 
@@ -3872,21 +3878,22 @@ a.orangeBtn:hover {
 }
 
 .redball, .blueball, .multipleInput {
-    background: rgba(0, 0, 0, 0) 
-    url("http://pimg1.126.net/caipiao/img/num_bg_1e502f5.png?v1_c3cb8f090e945a8f25ec04b7893ad959") 
-    no-repeat scroll 0 -208px;
-    border: medium none;
-    float: left;
-    font-size: 18px;
-    font-weight: 700;
-    height: 40px;
-    line-height: 24px;
-    margin-right: 2px;
-    padding: 6px 0 4px;
-    text-align: center;
-    vertical-align: middle;
-    width: 40px;
+	background:
+		url(http://pimg1.126.net/caipiao/img/num_bg_1e502f5.png?v1_c3cb8f090e945a8f25ec04b7893ad959)
+		-0px -208px no-repeat;
+	float: left;
+	width: 40px;
+	height: 30px;
+	border: none;
+	vertical-align: middle;
+	line-height: 24px;
+	font-size: 18px;
+	font-weight: 700;
+	text-align: center;
+	padding: 6px 0 4px;
+	margin-right: 2px
 }
+
 .blueball {
 	background-position: -43px -208px
 }

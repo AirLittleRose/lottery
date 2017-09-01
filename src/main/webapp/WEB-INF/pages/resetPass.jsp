@@ -49,7 +49,7 @@ function updatePass(password){
           <h4 id="agapass">确认密码：</h4>
           <div id="regpassdiv"> 
             <input type="password"  class="userfun" name="password" id="regpassaga" onblur="checkPassAga()"
-             onfocus="checkPassAga()" placeholder="请再次确认密码"/>
+             onchange="checkPassAga()" placeholder="请再次确认密码"/>
             <a id="aug"></a>
           </div>                  
           

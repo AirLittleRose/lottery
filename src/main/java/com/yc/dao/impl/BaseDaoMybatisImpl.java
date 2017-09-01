@@ -3,7 +3,6 @@ package com.yc.dao.impl;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -140,6 +139,5 @@ public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseD
 		return null;
 
 	}
-	
 	
 }

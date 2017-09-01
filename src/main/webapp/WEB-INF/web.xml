@@ -35,15 +35,14 @@
 		<filter-name>rightFilter</filter-name>
 		<filter-class>com.yc.web.filters.RightFilter</filter-class>
 	</filter>
-	
-	
+		
 	<filter-mapping>
 		<filter-name>rightFilter</filter-name>
 		<url-pattern>/user/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>rightFilter</filter-name>
-		<url-pattern>/back/*</url-pattern>
+		<url-pattern>/pages/*</url-pattern>
 	</filter-mapping>
 
 	<filter-mapping>

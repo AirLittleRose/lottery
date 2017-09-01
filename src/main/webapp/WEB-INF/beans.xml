@@ -98,7 +98,7 @@
 	<!-- spring mvc 视图解析器 , 访问的页面都在 /page/xxx.jsp -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!--  <property name="prefix" value="/WEB-INF/back/" />-->
+		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 

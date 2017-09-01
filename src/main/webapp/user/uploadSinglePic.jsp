@@ -20,8 +20,6 @@
 	//将结果以客户端指定的函数的形式，以javascript代码写到客户端去，这样客户端的   浏览器的js引擎就可以运行
 	out.println("<script type=\"text/javascript\">");
 	out.println("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'" + map.get("upload_weburl") + "','')");
-
-
 	out.println("</script>");
 	out.flush();
 %>

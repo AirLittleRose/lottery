@@ -56,6 +56,7 @@ public interface BaseDao<T> {
 	 * @param clazz
 	 * @param sqlId
 	 */
+
 	public void update(Class<T> clazz, String sqlId);
 
 	/**

@@ -1,4 +1,4 @@
-package com.yc.web.users.controllers;
+package com.yc.web.controllers;
 
 
 import java.io.IOException;
@@ -29,12 +29,10 @@ import com.yc.web.model.JsonModel;
 @RestController //类注解,同时使用@Controller 和 @ResponseBody
 public class UsersController {
 	@Resource(name = "usersBizImpl")
-	private UsersBiz usersBiz;	
+	private UsersBiz usersBiz;		
 	
-	
-	@Resource
-	private JavaMailSenderImpl mailSender;	
-	
+	//@Resource(name = "javaMailSenderImpl")
+	private JavaMailSenderImpl mailSender;		
 	
 	@RequestMapping("/users_login.action")
 	public JsonModel login(Users users,HttpServletRequest request,HttpSession session){
@@ -78,6 +76,7 @@ public class UsersController {
 	@RequestMapping("users_logout.action")
 	public void logout(HttpSession session,HttpServletResponse response){
 		session.removeAttribute("users");
+		session.setAttribute("users", null);
 		try {
 			response.sendRedirect("index.action");
 		} catch (IOException e) {
@@ -201,7 +200,7 @@ public class UsersController {
 		 }
 		 jm.setCode(1);
 		 jm.setMsg("跳转页面");				
-		 req.getRequestDispatcher("/WEB-INF/back/resetPass.jsp").forward(req, resp);
+		 req.getRequestDispatcher("/WEB-INF/pages/resetPass.jsp").forward(req, resp);
 		 return;	 
 	}
 	

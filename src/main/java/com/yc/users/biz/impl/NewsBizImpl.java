@@ -27,7 +27,7 @@ public class NewsBizImpl implements NewsBiz{
 	@Resource(name="baseDao")
 	private BaseDao baseDao;
 	
-	@Scheduled(cron="0 0 7 * * ?") 
+
 	public void putData() throws IOException{
 		Document doc = Jsoup.connect("http://cai.163.com/").get();
     	Elements links = doc.select("div.headLine a");
@@ -42,7 +42,8 @@ public class NewsBizImpl implements NewsBiz{
 
 	
 	@Override
-	public JsonModel<News> searchNews(News news) {
+	public JsonModel<News> searchNews() {
+		News news = new News();
 		List<News> list = baseDao.findAll(news, "getNews");
 		
 		JsonModel<News> jsonModel = new JsonModel<News>();
@@ -50,10 +51,10 @@ public class NewsBizImpl implements NewsBiz{
 		return jsonModel;
 	}
 
-	@Scheduled(cron="0 0 5 * * ?")   //每天早上5点钟把news表清空
+	@Scheduled(cron="0 0 */1 * * ?")   //每隔一小时news表清空
 	@Override
 	public void cleanNews() {
-		this.baseDao.del(null, "cleanNews");
+		this.baseDao.update(News.class, "cleanNews");
 	}
 
 }

@@ -19,3 +19,13 @@ function show2(){
 	$("#topForecast").css("display","none");
 }
 
+function showOrder(){
+	$("#myOd").css("display","block");
+	$("#myIf").css("display","none");
+}
+
+function showInfo(){
+	$("#myIf").css("display","block");
+	$("#myOd").css("display","none");
+}
+

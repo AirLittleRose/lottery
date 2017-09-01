@@ -1,8 +1,11 @@
 package com.yc.tasks;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -153,7 +156,7 @@ public class SoccerTask {
     }
 	
 	// 获取信息String
-	private File getInfo() {
+	public File getInfo() {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		String uri = "http://yjcp.com/data/sp/jczq/odds.xml";
 		HttpGet get = new HttpGet(uri);
@@ -164,7 +167,7 @@ public class SoccerTask {
 			try {
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
-					String info = EntityUtils.toString(entity, "gb2312");
+					String info = EntityUtils.toString(entity, "GBK");
 					file = this.saveInfo(info);
 				}
 			} finally {
@@ -188,10 +191,11 @@ public class SoccerTask {
 
 	
 	private File saveInfo(String info) {
+		
 		File file = new File("info.xml");
 		Writer writer = null;
 		try {
-			writer = new FileWriter(file);
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"GBK"));
 			writer.write(info);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -15,14 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>	
 	
 	<!-- 查出新闻数据 -->
-	<select id="getNews" resultType="News" parameterType="News">
+	<select id="getNews" resultType="News">
 		select * from news limit 10
 	</select>
 	
 	<!-- 更新新闻表数据 -->
-	<delete id="updateNews">
+	<update id="cleanNews">
 		truncate table news
-	</delete>
+	</update>
 	
 	
 </mapper>
