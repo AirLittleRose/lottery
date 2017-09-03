@@ -29,9 +29,4 @@ public class LeagueController {
 		}
 		return jm;
 	}
-
-	@RequestMapping("/addLeague.action" )
-	public void addLeague() {
-		leagueBiz.saveLeague();
-	}
 }

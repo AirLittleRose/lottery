@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 create database lottery
 
 use lottery

@@ -4,15 +4,13 @@ body {
 }
 
 .wrapper {
-	background:
-		url(http://pimg1.126.net/caipiao/img/lotteryBet/jczqNew/gray/bigBg_6387d55.jpg?20140813)
-		center top no-repeat;
+	
 	overflow: hidden;
 	zoom: 1;
 	background-size:100% 100%;
 	margin-bottom: 10px;
 	position: relative;
-	z-index: 11
+	z-index: 11;
 }
 
 .docBody {
@@ -1486,9 +1484,7 @@ keyframes dropDown {
 	width: 49px;
 	cursor: pointer;
 	overflow: hidden;
-	background:
-		url(http://pimg1.126.net/caipiao/img/lotteryBet/jczqNew/gray/gray_repeat_8b17178.png)
-		0 -87px repeat-x;
+	background:#FFFFFF;
 	height: 39px;
 	line-height: 39px;
 	display: inline-block;
