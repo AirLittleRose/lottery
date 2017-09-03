@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.users.bean.ManagerMapper">
+
+	<!-- 加入带日志的缓存 -->
+ 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache">
+ 	</cache> 	
+ 	
+			
+	<!-- 验证管理员用户 -->
+	<select id="getManager" resultType="Manager">
+		select * from manager where mname=#{mname} and pwd=#{pwd}
+	</select>
+	
+	
+	
+	
+</mapper>

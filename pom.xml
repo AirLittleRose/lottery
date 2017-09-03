@@ -5,7 +5,7 @@
 	<artifactId>lottery</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lottery Maven Webapp</name>
+	<name>voteSys Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -29,13 +29,21 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.1</version>
 		</dependency>
-
+		
 		<!-- 加入日志包 -->
 		<dependency>
 			<groupId>apache-log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
 		</dependency>
+		
+		<!-- 邮箱 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		
 
 		<!-- mybatis使用ehcache缓存 -->
 		<dependency>
@@ -48,14 +56,14 @@
 			<artifactId>mybatis-ehcache</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-
+		
 		<!-- mysql数据库的驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.38</version>
 		</dependency>
-
+		
 		<!-- oracle 驱动 自已在 maven仓库中创建的 -->
 		<dependency>
 			<groupId>com.yc.drivers</groupId>
@@ -163,21 +171,20 @@
 			<version>2.6.2</version>
 		</dependency>
 
-		<!--spring-data-redis相关 -->
+		<!--spring-data-redis相关，会自动引入相关jar -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.7.2.RELEASE</version>
 		</dependency>
-
-		<!--httpClient -->
+		
+		<!-- jsoup -->
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.9.2</version>
 		</dependency>
-
-		<!-- dom4j -->
+		
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -198,10 +205,14 @@
 		    <version>1.9.2</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
 		
 	</dependencies>
 	<build>
 		<finalName>lottery</finalName>
 	</build>
-
 </project>

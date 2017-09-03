@@ -43,6 +43,12 @@ public class InitIndex {
 		return "../../login";
 	}
 	
+	@RequestMapping(value="/mana.action",method=RequestMethod.GET)
+	public String toMana(){
+		
+		return "../../manalogin";
+	}
+	
 	@RequestMapping(value="/resetPass.action",method=RequestMethod.GET)
 	public String toResetPass(){
 		
