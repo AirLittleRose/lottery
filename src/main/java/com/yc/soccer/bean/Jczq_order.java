@@ -14,19 +14,19 @@ public class Jczq_order implements Serializable{
 	private Integer joid;		//id
 	private Integer userid;		//用户id
 	private String order_id;	//订单id
-	private Integer guoguan_type;//过关类型
-	private Integer amout;		//总金额
+	private String guoguan_type;//过关类型
+	private Integer amount;		//总金额
 	private float bonus;		//奖金	
 	private String last_time;	//总开奖时间
 	
-	public Jczq_order(Integer joid, Integer userid, String order_id, Integer guoguan_type, Integer amout, float bonus,
+	public Jczq_order(Integer joid, Integer userid, String order_id, String guoguan_type, Integer amout, float bonus,
 			String last_time) {
 		super();
 		this.joid = joid;
 		this.userid = userid;
 		this.order_id = order_id;
 		this.guoguan_type = guoguan_type;
-		this.amout = amout;
+		this.amount = amout;
 		this.bonus = bonus;
 		this.last_time = last_time;
 	}
@@ -59,20 +59,21 @@ public class Jczq_order implements Serializable{
 		this.order_id = order_id;
 	}
 
-	public Integer getGuoguan_type() {
+	public String getGuoguan_type() {
 		return guoguan_type;
 	}
 
-	public void setGuoguan_type(Integer guoguan_type) {
+	public void setGuoguan_type(String guoguan_type) {
 		this.guoguan_type = guoguan_type;
 	}
 
-	public Integer getAmout() {
-		return amout;
+
+	public Integer getAmount() {
+		return amount;
 	}
 
-	public void setAmout(Integer amout) {
-		this.amout = amout;
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
 	public float getBonus() {
@@ -94,7 +95,7 @@ public class Jczq_order implements Serializable{
 	@Override
 	public String toString() {
 		return "Jczq_order [joid=" + joid + ", userid=" + userid + ", order_id=" + order_id + ", guoguan_type="
-				+ guoguan_type + ", amout=" + amout + ", bonus=" + bonus + ", last_time=" + last_time + "]";
+				+ guoguan_type + ", amout=" + amount + ", bonus=" + bonus + ", last_time=" + last_time + "]";
 	}
 	
 	
