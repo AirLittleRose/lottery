@@ -14,7 +14,6 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
-
 import com.jspsmart.upload.Files;
 import com.jspsmart.upload.Request;
 import com.jspsmart.upload.SmartUpload;
@@ -120,6 +119,8 @@ public class FileUpload {
 		}
 		return map;
 	}
+
+
 
 	private String genNewFilePrefixName() {
 		// 生成新的文件名

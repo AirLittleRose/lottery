@@ -56,7 +56,8 @@ public interface BaseDao<T> {
 	 * @param clazz
 	 * @param sqlId
 	 */
-	void update(Class<T> clazz, String sqlId);
+
+	public void update(Class<T> clazz, String sqlId);
 
 	/**
 	 * 批量更新指定的行 <br />
@@ -72,7 +73,7 @@ public interface BaseDao<T> {
 	 * @param sqlId
 	 * @param list
 	 */
-	void update(Class<T> clazz, String sqlId, List<T> list);
+	public void update(Class<T> clazz, String sqlId, List<T> list);
 
 	/**
 	 * 只根据id删除一条数据 <br />

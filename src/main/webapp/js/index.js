@@ -589,16 +589,16 @@
 														* t;
 												a
 														.html([
-																'您当前选中了<strong class="c_ba2636">',
+																'您当前选中了<strong class="red_c_ba2636">',
 																e,
 																"</strong>个红球，",
-																'<strong class="c_1e50a2">',
+																'<strong class="blue_c_1e50a2">',
 																t,
 																"</strong>个蓝球，",
-																'共<strong class="c_ba2636">',
+																'共<strong class="red_c_ba2636">',
 																i,
 																"</strong>注，",
-																'共<strong class="c_ba2636">',
+																'共<strong class="red_c_ba2636">',
 																2 * i,
 																"</strong>元" ]
 																.join(""))

@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,6 +99,7 @@ public class UserSsqBizImpl implements UserSsqBiz {
 
 
 	@Override
+	//@Scheduled(cron = "0/5 * * * * *")
 	public List<UserSsq> findSsqIssue() throws Exception {
 		List<UserSsq> list = null;
 		list = this.baseDao.findAll(UserSsq.class, "findSsqIssue");

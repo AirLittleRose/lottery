@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yc.ssq.bean.BetSsq;
 import com.yc.ssq.bean.UserSsq;
 import com.yc.ssq.biz.UserSsqBiz;
+import com.yc.users.bean.Users;
 import com.yc.utils.DateUtil;
 import com.yc.web.model.JsonModel;
 
@@ -55,7 +56,8 @@ public class UserBetSsqController {
 			blueball.add(bluelists[i]);
 		}		
 		UserSsq ussqs = new UserSsq();
-		ussqs.setUserid(2);
+		Users user = (Users) session.getAttribute("users");
+		ussqs.setUserid(user.getUserid());
 		ussqs.setOrderid();
 		ussqs.setSsq_issue();
 		List<BetSsq> betlists = new ArrayList<BetSsq>();

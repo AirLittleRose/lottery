@@ -185,15 +185,26 @@
 				</div>
 				<script>window.Core && window.Core.loadIndexAD && window.Core.loadIndexAD();</script>
 				
+				
+				
 				<div class="promotionText">
 					<ul class="grayTitle" id="topInfoTab">
-						<li class="" rel="#topForecast">彩票资讯</li>
+						<li id="forecast" onmousemove="show1()">资讯</li>
+						<li id="notice" class="" onmousemove="show2()">公告</li>
 					</ul>
 					
-					<div class="promotion_con" id="topForecast" style="display: block;">
+					<div class="promotion_con"  id="topForecast">
 						<ul class="promotion_list">
-							<li>·<a href="#" target="_blank" title="资讯标题1">资讯标题1</a></li>
-							<li>·<a href="#" target="_blank" title="资讯标题2">资讯标题2</a></li>
+							<c:forEach items="${jsonModel.rows}" var="v">						
+								<li>·${v.news }</li>							
+							</c:forEach>						
+						</ul>
+					</div>					
+					
+					<div class="promotion_con" id="topNotice" style="display:none;">
+						<ul class="promotion_list">
+							<li>·<a href="#" target="_blank" title="公告1">公告1</a></li>
+							<li>·<a href="#" target="_blank" title="公告2">公告2</a></li>
 						</ul>
 					</div>
 					
@@ -203,6 +214,7 @@
 						<a href="#" target="_blank">领奖指南</a>
 					</p>
 				</div>
+				
 			</div>
 		</div>
 		<!-- 一元购模块 -->

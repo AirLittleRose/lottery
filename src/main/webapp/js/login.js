@@ -17,22 +17,31 @@ $(function () {
         this.openLogin();
     };
     H_login.run();
-});
 
-$(function(){ 
-$('.userfun').bind({ 
-			focus:function(){ 
-			if (this.value == this.defaultValue){ 
-			this.value=""; 
-		} 
-	}, 
-blur:function(){ 
-			if (this.value == ""){ 
-			this.value = this.defaultValue; 
-			} 
-		} 
+
+	$("#username").focus(function(){ 
+		$("#username").css("color","#2E2E2E");
+		$("#user").css("border-color","#009ACD");
 	}); 
-}) 
+	
+	$("#username").blur(function(){ 
+		$("#username").css("color","#2E2E2E");
+		$("#user").css("border-color","#999");
+	}); 
+	
+	$("#password").focus(function(){ 
+		$("#password").css("color","#2E2E2E");
+		$("#userpassword").css("border-color","#009ACD")
+	}); 
+	
+	$("#password").blur(function(){ 
+		$("#password").css("color","#2E2E2E");
+		$("#userpassword").css("border-color","#999")
+	}); 
 
+	$("#close").mouseover(function(){
+		  $("#close").css("-moz-transform","rotate(200deg)");
+		});
 
+});
 

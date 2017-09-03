@@ -3,11 +3,14 @@
 	padding: 0px;
 	margin: 0px auto;
 }
-body {
+#loginBack{
 	padding: 0px;
-	margin: 0px auto;		
+	margin: 0px auto;
+	background-image:url(../images/back.jpg);	
 }
-/*µÇÂ¼¿òµÄcss*/
+
+
+/*ï¿½ï¿½Â¼ï¿½ï¿½ï¿½css*/
 .loginbottom {
 	z-index: 9998;
 	position:fixed;
@@ -41,16 +44,17 @@ body {
 	box-shadow: 0 0 5px #999;
 }
 
-/*¹Ø±Õ°´Å¥*/
+/*ï¿½Ø±Õ°ï¿½Å¥*/
 .login span {
 	position: absolute;
-	font-size: 14px;
 	right:25px;
 	background: #ffffff;
 	border: 0px;
 	width: 25px;
-	height: 25px;	
+	height: 25px;
+	
 }
+
 .login span a {
 	margin:10px 0 0 15px;
 	display: block;
@@ -59,7 +63,22 @@ body {
 	text-decoration: none;
 }
 
-/*ÓÃ»§Ãûcss*/
+.close:hover{
+  -webkit-animation:rotate 1s .2s ease both;
+  -moz-animation:rotate 1s .2s ease both;
+  }
+  @-webkit-keyframes rotate{
+  0%{transform: rotate(0deg);}
+  75%{transform: rotate(360deg);}
+  100%{transform: rotate(0deg);}
+  }
+  @-moz-keyframes rotate{
+  0%{transform: rotate(0deg);}
+  75%{transform: rotate(360deg);}
+  100%{transform: rotate(0deg);}
+  }
+
+/*ï¿½Ã»ï¿½ï¿½ï¿½css*/
 #user{
 	height:40px;
 	width:320px;
@@ -74,7 +93,7 @@ body {
 	border:solid 1px #999;
 	margin:	20px 0 0 50px;	
 }
-#userid{
+#username{
 	height:40px;
 	width:270px;
 	border:0px;
@@ -83,7 +102,7 @@ body {
 	color:#999;
 
 }
-#userpwd{
+#password{
 	height:40px;
 	width:270px;
 	border:0px;
@@ -92,29 +111,13 @@ body {
 	color:#999;
 
 }
-/*ÑéÖ¤Âë*/
-#zccode{
-	height:30px;
-	width:320px;
-	border:solid 1px #999;
-	border-radius:20px;
-	margin:	30px 0 0 50px;
-	background-color:#F4F4F4;
-}
 
-#zccodein{
-	padding:5px 100px 5px 100px;
-	position:absolute;
-	left:70px;
-	bottom:160px;
-	font-size:12px;
-	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-}
-/*µÇÂ¼°´Å¥*/
+
+/*ï¿½ï¿½Â¼ï¿½ï¿½Å¥*/
 #dosubmit{
 	height:40px;
 	width:320px;
-	margin:20px 0 0 50px;
+	margin:60px 0 0 50px;
 }
 
 #dologin{
@@ -122,13 +125,13 @@ body {
 	color:#FFF;
 	height:40px;
 	width:320px;
-	cursor:pointer;
+
 	border:0px;
-	background-color:#F08080;
+	background-color:#CD8162;
 	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 	
-/*Íü¼ÇÃÜÂëºÍ×¢²á*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½*/
 #toother{
 	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 	font-size:12px;	
@@ -141,7 +144,7 @@ body {
 	text-decoration:none;
 }
 		
-#toother a:visited {color: #999}	/* ÒÑ·ÃÎÊµÄÁ´½Ó */
+#toother a:visited {color: #999}	/* ï¿½Ñ·ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ */
 #toother a:hover {color: #333}
 
 

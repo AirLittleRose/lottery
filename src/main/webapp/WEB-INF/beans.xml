@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task-3.0.xsd
         http://www.springframework.org/schema/mvc 
-           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
 	<import resource="beans_email.xml" />
 	<import resource="beans_redis.xml" />
@@ -22,7 +22,6 @@
 
 	<!-- 混合配置: 1. 开启包扫描，即读取包下带有注解的类，并托管 -->
 	<context:component-scan base-package="com.yc" />
-
 	<!-- 开启spring mvc的注解解析 -->
 	<mvc:annotation-driven />
 
@@ -44,26 +43,25 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-
-
 	<!-- 配置数据源 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
 		<property name="driverClass" value="${jdbc.driverClassName}" /> <property 
 		name="jdbcUrl" value="${jdbc.url}" /> <property name="user" value="${jdbc.username}" 
 		/> <property name="password" value="${jdbc.password}" /> </bean> -->
-
-
+		
+		
 
 	<!-- mybatis的会话工厂,主要完成读取mybatis的配置文件的工作 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 数据源 -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- 包别名,设置了这个在映射文件mapper中的对应的类名就不需要写全称了 -->
-		<property name="typeAliasesPackage" value="com/yc/soccer/bean;com/yc/ssq/bean" />
+		<property name="typeAliasesPackage" value="com/yc/users/bean;com/yc/soccer/bean;com/yc/ssq/bean" />
 		<!-- 映射文件的路径 -->
 		<!-- <property name="mapperLocations" value="classpath*:com/yc/*/bean/*.xml" 
 			/> -->
 		<property name="mapperLocations">
 			<array>
+				<value>classpath*:com/yc/users/bean/*.xml</value>
 				<value>classpath*:com/yc/soccer/bean/*.xml</value>
 				<value>classpath*:com/yc/ssq/bean/*.xml</value>
 			</array>
@@ -75,9 +73,11 @@
 			</props>
 		</property>
 	</bean>
-	<!-- 如果不读取 mybatis-config.xml文件，那 typealiases, mapper的配置都要单独配 -->
-	<!-- 配置 configLocation :mybatis的配置文件路径 , 空上sqlSessionFactory会完成读取 这个配置文件 
-		<property name="configLocation" value="classpath:mybatisConfiguration.xml"/> -->
+		<!-- 如果不读取 mybatis-config.xml文件，那 typealiases, mapper的配置都要单独配 -->
+		<!-- 
+			配置 configLocation :mybatis的配置文件路径 , 空上sqlSessionFactory会完成读取 这个配置文件 
+			<property name="configLocation" value="classpath:mybatisConfiguration.xml"/> 
+		-->
 
 	<!-- 通过工厂创建 session -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

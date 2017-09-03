@@ -19,6 +19,10 @@ function bet(){
 	for(var i=0;i<bluelist.length;i++){
 		blueball[i] = bluelist[i].innerHTML;
 	}
+
+	console.log(multinum);
+	console.log(redball);
+	console.log(blueball);
 		
 	$.ajax({
 		type:"POST",
@@ -112,7 +116,7 @@ function bet(){
 										<span>14</span>
 									</li>
 									<li>
-										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball got active" data-value="3">03</a>
+										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball" data-value="3">03</a>
 										<span>4</span>
 									</li>
 									<li>
@@ -128,7 +132,7 @@ function bet(){
 										<span>4</span>
 									</li>
 									<li>
-										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball got active" data-value="7">07</a>
+										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball" data-value="7">07</a>
 										<span>0</span>
 									</li>
 									<li>
@@ -136,7 +140,7 @@ function bet(){
 										<span>8</span>
 									</li>
 									<li>
-										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball got active" data-value="9">09</a>
+										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball" data-value="9">09</a>
 										<span>3</span>
 									</li>
 									<li>
@@ -200,7 +204,7 @@ function bet(){
 										<span>7</span>
 									</li>
 									<li>
-										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball got active" data-value="25">25</a>
+										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball" data-value="25">25</a>
 										<span>2</span>
 									</li>
 									<li>
@@ -212,11 +216,11 @@ function bet(){
 										<span>12</span>
 									</li>
 									<li>
-										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball got active" data-value="28">28</a>
+										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball" data-value="28">28</a>
 										<span>0</span>
 									</li>
 									<li>
-										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball got active" data-value="29">29</a>
+										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball" data-value="29">29</a>
 										<span>0</span>
 									</li>
 									<li>
@@ -281,7 +285,7 @@ function bet(){
 										<span>10</span>
 									</li>
 									<li>
-										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball got active" data-value="6">06</a>
+										<a href="javascript:;" hidefocus="true" rel="nofollow" class="js_ball" data-value="6">06</a>
 										<span>3</span>
 									</li>
 									<li>
@@ -349,7 +353,8 @@ function bet(){
 								</p>
 							</div>
 						
-							<p class="selectInfo"><span>您当前选中了<strong class="">6</strong>个红球，<strong class="">1</strong>个蓝球，共<strong class="">1</strong>注，共<strong class="">2</strong>元</span><i></i></p>
+							<p class="selectInfo"><span>您当前选中了<strong class="red_c_ba2636">0</strong>个红球，<strong class="blue_c_1e50a2">0</strong>个蓝球，共<strong class="red_c_ba2636">0</strong>注，共<strong class="red_c_ba2636">0</strong>元</span><i></i></p>
+
 						</div>
 					</div>
 				

@@ -246,3 +246,10 @@ body .hide3 {
 	color: #fff;
 	text-decoration: underline
 }
+
+#showOrder {
+	height: 10px;
+	width: 10px;
+	background-color: green;
+	float: left;
+}
