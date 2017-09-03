@@ -1,5 +1,6 @@
 package com.yc.users.biz;
 
+import com.yc.users.bean.Manager;
 import com.yc.users.bean.Users;
 
 public interface UsersBiz {
@@ -44,5 +45,12 @@ public interface UsersBiz {
 	 * @return
 	 */
 	public boolean updateForPass(Users users);
+
+	/**
+	 * 管理员登录
+	 * @param manager
+	 * @return
+	 */
+	public Manager manaLogin(Manager manager);
 
 }	

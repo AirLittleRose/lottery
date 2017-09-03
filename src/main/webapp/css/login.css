@@ -113,6 +113,41 @@
 }
 
 
+
+#mana{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	98px 0 0 50px;
+	
+}
+
+#manapwd{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	20px 0 0 50px;	
+}
+#mname{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+#pwd{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+
+
 /*��¼��ť*/
 #dosubmit{
 	height:40px;
@@ -121,6 +156,17 @@
 }
 
 #dologin{
+	font-size:18px;	
+	color:#FFF;
+	height:40px;
+	width:320px;
+
+	border:0px;
+	background-color:#CD8162;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+#doManaLogin{
 	font-size:18px;	
 	color:#FFF;
 	height:40px;

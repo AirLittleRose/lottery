@@ -42,6 +42,26 @@ $(function () {
 	$("#close").mouseover(function(){
 		  $("#close").css("-moz-transform","rotate(200deg)");
 		});
+	
+	$("#mname").focus(function(){ 
+		$("#mname").css("color","#2E2E2E");
+		$("#mana").css("border-color","#009ACD");
+	}); 
+	
+	$("#mname").blur(function(){ 
+		$("#mname").css("color","#2E2E2E");
+		$("#mana").css("border-color","#999");
+	}); 
+	
+	$("#pwd").focus(function(){ 
+		$("#pwd").css("color","#2E2E2E");
+		$("#manapwd").css("border-color","#009ACD")
+	}); 
+	
+	$("#pwd").blur(function(){ 
+		$("#pwd").css("color","#2E2E2E");
+		$("#manapwd").css("border-color","#999")
+	}); 
 
 });
 

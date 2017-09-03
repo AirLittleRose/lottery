@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yc.dao.BaseDao;
+import com.yc.users.bean.Manager;
 import com.yc.users.bean.Users;
 import com.yc.users.biz.UsersBiz;
 import com.yc.utils.Encrypt;
@@ -70,6 +71,17 @@ public class UsersBizImpl implements UsersBiz {
 		users.setPassword(Encrypt.md5AndSha(users.getPassword()));
 		baseDao.update(users, "UserUpdatePass");
 		return true;
+	}
+	
+	/**
+	 * 管理员登录
+	 */
+	@Override
+	@Transactional(readOnly=true,propagation=Propagation.SUPPORTS)	
+	public Manager manaLogin(Manager manager) {
+		manager.setPwd(manager.getPwd());
+		Manager mg = (Manager) this.baseDao.findOne(manager, "getManager");
+		return mg;
 	}
 
 

@@ -211,7 +211,16 @@ select * from users;
 delete from  users;
 drop table users;
 
+--管理员表
+create table manager(
+  mid int primary key auto_increment,  
+  mname varchar(100) unique not null,  
+  pwd varchar(50)     
+);
 
+insert into manager values(null,'a','a');
+
+--资讯表
 create table news(
 	newid int primary key auto_increment,
 	news varchar(200) not null,
@@ -221,6 +230,26 @@ create table news(
 
 drop table news;
 select * from news;
+
+--公告表
+	--编号(凭编号排序)
+	--标题
+	--内容
+	--发布日期
+	--来源于哪个管理员
+	--图片
+	--备用字段1
+	--备用字段2
+create table annos(
+  anid int primary key auto_increment,  
+  title varchar(400) not null, 
+  andate date,  
+  content varchar(4000),  
+  auth varchar(100),
+  pic varchar(4000), 
+  temp1 varchar(50),
+  temp2 varchar(50)  
+);
 
 
 select * from league;
