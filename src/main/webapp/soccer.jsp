@@ -2,12 +2,51 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="header.jsp" %>
+<style>
+.black_overlay{
+ display: none;
+ position: absolute;
+ top: 0%;
+ left: 0%;
+ width: 100%;
+ height: 100%;
+ background-color: black;
+ z-index:1001;
+ -moz-opacity: 0.8;
+ opacity:.80;
+ filter: alpha(opacity=80);
+}
+.white_content {
+ display: none;
+ position: absolute;
+ top: 10%;
+ left: 10%;
+ width: 80%;
+ height: 80%;
+ border: 16px solid lightblue;
+ background-color: white;
+ z-index:1002;
+ overflow: auto;
+ position:fixed; 
+}
+.white_content_small {
+ display: none;
+ position: absolute;
+ top: 20%;
+ left: 30%;
+ width: 40%;
+ height: 50%;
+ border: 16px solid lightblue;
+ background-color: white;
+ z-index:1002;
+ overflow: auto;
+}
+</style>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/core.css">
 <link rel="stylesheet" href="css/analyTab.css">
 <link rel="stylesheet" href="css/jczqGray_V1.css">
-
-
+<link rel="stylesheet" href="css/soccer.css">
 <script type="text/javascript" src="js/soccer.js"></script>
 <div class="wrapper">
 
@@ -61,15 +100,16 @@
 							</colgroup>
 							<thead>
 								<tr>
-								<th>场次</th>
-								<th colspan="3">主队　VS　客队</th>
+									<th>场次</th>
+									<th colspan="3">主队　VS　客队</th>
+									<th>胆<i class="questionMark jtip" inf="将您认为一定猜中的比赛设为&quot;胆&quot;,只保留包含该场次的投注，从而节省投注金额"></i></th>
 								</tr>
 							</thead>
 						</table>
 						
-						<div class="scrollMoni jspScrollable" style="overflow: hidden; padding: 0px; height: 138px; width: 240px;" tabindex="0">
-							<div class="jspContainer" hidefocus="true" style="width: 240px; height: 138px;">
-								<div class="jspPane" hidefocus="true" style="padding: 0px; top: 0px; width: 229px;">
+						<div class="scrollMoni jspScrollable" style=" padding: 0px; height: 250px; width: 240px;" tabindex="0">
+							<div class="jspContainer" hidefocus="true" style="overflow-y: scroll; width: 240px; height: 100%;">
+								<div class="jspPane" hidefocus="true" style=" padding: 0px; top: 0px; width: 229px;">
 									<table id="selectGamePool">
 										<colgroup>
 											<col width="65">
@@ -82,31 +122,19 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="jspVerticalBar">
-									<div class="jspCap jspCapTop"></div>
-									<div class="jspTrack" style="height: 138px;">
-										<div class="jspDrag" style="height: 99px; top: 0px;">
-											<div class="jspDragTop"></div>
-											<div class="jspDragBottom"></div>
-										</div>
-									</div>
-									<div class="jspCap jspCapBottom"></div>
-								</div>
+								
 							</div>
 						</div>
 						<div class="unSeleTips">请在左侧列表选择投注比赛</div>
 					</div>
 					
 					<div class="select_1" id="poolStep2">
-						<h2><i>2</i>过关方式</h2>
+						<h2><i>2</i>过关方式(自由过关)</h2>
 						<div class="methodContent">
-							 
-								<ul class="guoguanList clearfix" methodtype="m_1">
-									
-									<li inf="猜中一场比赛就有奖" class="jtip"><i class="icoDx icoDx_active"></i>猜一场</li>
-									
-								</ul>
-						<div class="unSeleTips" id="poolErrorTips">请在左侧列表选择投注比赛</div>
+							<ul class="guoguanList clearfix" methodtype="m_1" id="guoguan_type">
+								<span>&lt;&lt;&lt;&nbsp;&nbsp;请在左侧选择场次</span>
+								
+							</ul>
 						</div>
 					</div>
 					<div class="select_1" id="poolStep3">
@@ -116,9 +144,9 @@
 							<div class="dott">
 								我要买
 								<span class="addSubtract" id="betTimes">
-									<a class="subtract" hidefocus="true" rel="nofollow" href="javascript:;"></a>
-										<input style="ime-mode: disabled;" value="10" type="text">
-									<a class="add" hidefocus="true" rel="nofollow" href="javascript:;"></a>
+									<a class="subtract" hidefocus="true" rel="nofollow" href="javascript:;" onclick="subtract()"></a>
+										<input style="ime-mode: disabled;" value="10" type="text" onchange="amount()">
+									<a class="add" hidefocus="true" rel="nofollow" href="javascript:;" onclick="add()"></a>
 								</span>倍  
 								<a href="javascript:void(0);" inf="系统自动配对后，为了更好地分配奖金  以达到最优效果，投注倍数最小为5倍，建议为10倍以上." class="jtip">最少5倍?</a>
 							</div>
@@ -128,13 +156,13 @@
 								您选择了： <strong id="gameNumber" class="c_f6c15a"> 0 </strong> 场比赛，
 								共<strong id="gameZhu" class="c_f6c15a"> 0 </strong> 注
 							</p>
-							<p>总金额：<strong class="c_f6c15a totalMoney"><span id="totalMoney"> 0.00 </span>元</strong></p>
+							<p>总金额：<strong class="c_f6c15a totalMoney"><span id="totalMoney"> 0 </span>元</strong></p>
 						
 							<p><span id="bonusLabel">参考奖金：</span><strong class="c_f6c15a"><span id="maxbonus"> 0 </span>元</strong></p>
 							<p><a href="#" id="openDetailBonus">奖金明细</a></p>
 						
 							<div class="tzBtnBox">
-								<a class="tjfaBtn" href="javascript:;"></a>
+								<a class="tjfaBtn" href="javascript:;" onclick="to_xiazhu()"></a>
 							</div>
 							<p>风险提示
 								<i class="questionMark jtip" inf="•为避免投注退票风险，建议您尽早提交投注(大额订单建议赛前20分钟完成投注)&lt;br /&gt;•官方存在夜间停售时段变化赔率情况，夜间提交订单请，请以出票成功出票赔率为准。"></i>
@@ -194,10 +222,8 @@
 						</div>
 					</div>
 					
-					<div class="dataBody  unAttention">
-						<dl id="gamesInfo">
-							
-						</dl>
+					<div class="dataBody  unAttention" id="gamesInfo">
+						
 					</div>
 				</div>
 				
@@ -227,10 +253,54 @@
     </ul>
 </div>
 
+<!-- 弹出层背景层DIV -->
+<div id="fade" class="black_overlay"></div>
 
+<!-- 弹出层 -->
+<div id="MyDiv" class="white_content">
+    <div style="text-align: right; cursor: default; height: 40px;">
+        <span style="font-size: 16px;" onclick="CloseDiv('MyDiv','fade')">关闭</span>
+    </div>
+  	<div class="docBody clearfix from_bet" id="bonusCalc">
+	    <div class="resultBox">
+	        <table>
+	            <colgroup>
+	                <col width="96">
+	                <col width="150">
+	                <col width="180">
+	                <col width="90">
+	                <col width="90">
+	                <col>
+	            </colgroup>
+	            <thead>
+	                <tr>
+	                    <th>场次</th>
+	                    <th>时间</th>
+	                    <th>主队VS客队</th>
+	                    <th>玩法</th>
+	                    <th>彩果</th>
+	                    <th>投注方案<span class="oper">
+	                </tr>
+	            </thead>
+	            <tbody id="info_tbody">
+	            	
+	            </tbody>
+	        </table>
+	        <div class="hr"></div>
+	        <div class="total">
+	            <div class="row"><span>总共 <i class="matchNum">0</i> 场</span>
+	            <span>过关方式：<i class="methods"></i></span></div>
+	            <div class="row">
+	                <span>倍数：<i class="betTimes" id="times">0</i> 倍</span>
+	                <span>投入：<i id="amount" class="totalMoney">0</i> 元</span>
+	            </div>
+	        </div>
+	        <a id="confirm" href="to_jczq_order.action">确认下注</a>
+	    </div>
+	</div>
+</div>
 <script>Core && Core.fastInit && Core.fastInit("1");</script>
-<script src="js/ntes.js"></script>
-<script>try{_ntes_nacc=window.top===window.self?"caipiao":"cpiframe";neteaseTracker();neteaseClickStat();}catch(e){}</script>
+
 
 
 <%@ include file="bottom.jsp" %>

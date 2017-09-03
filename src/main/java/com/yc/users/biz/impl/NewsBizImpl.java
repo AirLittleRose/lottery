@@ -21,7 +21,6 @@ import com.yc.web.model.JsonModel;
 
 @Service
 @Transactional
-@Component
 public class NewsBizImpl implements NewsBiz{
 	
 	@Resource(name="baseDao")
