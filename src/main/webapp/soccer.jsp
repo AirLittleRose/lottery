@@ -66,7 +66,8 @@
 				<span class="text"><i>提示：投注为全场90分钟（含伤停补时）的比分结果，不含加时赛及点球结果</i></span>
 			</div>
 			<ul class="gameMenu clearfix">
-				<li class="active"><a href="#" hidefocus="true">混合投注</a></li>        
+				<li class="active"><a href="soccer.jsp" hidefocus="true">混合投注</a></li>
+				<li class="J_dggd "><a href="jczq-score.jsp" hidefocus="true">足球比分</a></li>        
 			</ul>
 			<div class="headerBg"></div>
 		</header>

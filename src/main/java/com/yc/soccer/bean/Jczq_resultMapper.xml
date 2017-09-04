@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.soccer.bean.Jczq_resultMapper">
+
+	<!-- 加入带日志的 ehcache 缓存 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+
+	<!-- 添加比赛结果 -->
+	<insert id="addResult" parameterType="Jczq_result" useGeneratedKeys="true" keyProperty="jrid">
+		insert into jczq_result(game_id, home_score, away_score, result) values
+		<foreach collection="list" open="" close="" separator="," item="item">
+			(#{item.game_id},#{item.home_score},#{item.away_score},#{item.result})
+		</foreach>
+	</insert>
+	
+	<!-- 根据game_id模糊查出比赛结果 -->
+	<select id="selectResultByGameId" parameterType="Jczq_result" resultType="Jczq_result">
+		 select * from jczq_result where game_id like #{game_id} order by game_id asc
+	</select>
+</mapper>
