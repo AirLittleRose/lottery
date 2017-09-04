@@ -229,36 +229,59 @@ function xiazhu(obj){
 		block = "Fu";
 		break;
 	}
-//	alert(cc+":"+home_name+":"+away_name+":"+index+":"+result+":"+block);
-	var str = $("#selectGamePool").children("tbody").html() + "<tr matchcode='" + game_id + "'class='gameTitle' index='" + index + "' game_time='" + game_time + "'><th><a class='icoDel'href='javascript:;' onclick='remove_xiazhu(this)'></a>" + game_id.substring(2) + "</th><th class='tr'>" + home_name + "</th><th></th><th class='tl'>" + away_name + "</th><th><a href='javascript:;'class='icoDan icoDanDis'disabled='disabled'></a></th></tr><tr class='gameOption'matchcode='" + game_id + "'><td colspan='5'class='betList'><a index='" + index + "'gametype='spf'matchcode='" + game_id + "'href='javascript:;'class='block" + block + "' Odds='" + Odds + "'>" + result + "</a></td></tr>"
-	$("#selectGamePool").children("tbody").html(str);
+	
+	//用于判断添加类型  添加比赛,或添加胜平负
+	var temp = 0;
+	//该场次是否存在
+	$(".gameTitle").each(function(){
+		if($(this).attr("matchcode") == game_id){
+			temp = 1;	//1->只添加胜平负
+			var str = $(this).next().children().html();
+			str += "<a class='block" + block + "' Odds='" + Odds + "' href='javascript:;' matchcode='" + game_id + "' gametype='spf' index='" + index + "'onclick='remove_xiazhu_2(this)'>" + result + "</a>"
+			$(this).next().children().html(str);
+			//修改index
+			var temp_index = $(this).attr("index").toString();
+			temp_index += ","+index;
+			$(this).attr("index",temp_index);
+			return "";
+		} 
+	});
+	if(temp == 0){
+		var str = $("#selectGamePool").children("tbody").html() + "<tr matchcode='" + game_id + "'class='gameTitle' index='" + index + "' game_time='" + game_time + "'><th><a class='icoDel'href='javascript:;' onclick='remove_xiazhu_1(this)'></a>" + game_id.substring(2) + "</th><th class='tr'>" + home_name + "</th><th></th><th class='tl'>" + away_name + "</th><th><a href='javascript:;'class='icoDan icoDanDis'disabled='disabled'></a></th></tr><tr class='gameOption'matchcode='" + game_id + "'><td colspan='5'class='betList'><a index='" + index + "'gametype='spf'matchcode='" + game_id + "'href='javascript:;'class='block" + block + "' Odds='" + Odds + "'onclick='remove_xiazhu_2(this)'>" + result + "</a></td></tr>"
+		$("#selectGamePool").children("tbody").html(str);
+	}
 	xiazhu_type();
 }
 
-//取消下注
-function remove_xiazhu(obj){
+//取消下注 (整场)
+function remove_xiazhu_1(obj){
 
+	//场次
 	var match_code = $(obj).parent().parent().attr("matchcode").toString();
+	//获取index  给选项框消除  "红色背景"
 	var index = $(obj).parent().parent().attr("index").toString();
+	var indexs = index.split(",");
 	$("#gamesInfo").children("dl").find("dd").each(function(){
 		var str = $(this).attr("game_id").toString();
 		if(str == match_code){
 			$(this).children("span.co6").children("div.line1").children().each(function(){
-				if($(this).attr("index").toString() == index){
-					$(this).css("background", "#FFFFFF");
-					$(this).mouseover(function () {
-						$(this).css("background", "#B12034");
-					});
-					$(this).mouseout(function () {
+				for(var i=0; i<indexs.length; i++){
+					if($(this).attr("index").toString() == indexs[i]){
 						$(this).css("background", "#FFFFFF");
-					});
-					$(this).click(function () {
-							xiazhu(this);
+						$(this).mouseover(function () {
 							$(this).css("background", "#B12034");
-							$(this).unbind("mouseout");  
-				            $(this).unbind("mouseover");
-				            $(this).unbind("click");
-					});
+						});
+						$(this).mouseout(function () {
+							$(this).css("background", "#FFFFFF");
+						});
+						$(this).click(function () {
+								xiazhu(this);
+								$(this).css("background", "#B12034");
+								$(this).unbind("mouseout");  
+					            $(this).unbind("mouseover");
+					            $(this).unbind("click");
+						});
+					}
 				}
 			});
 		}
@@ -266,6 +289,43 @@ function remove_xiazhu(obj){
 	$(obj).parent().parent().next().remove();
 	$(obj).parent().parent().remove();
 	xiazhu_type();
+}
+
+//取消单个胜平负下注(如只有一个选项就整场取消)
+function remove_xiazhu_2(obj){
+	//场次
+	var game_id = $(obj).attr("matchcode");
+	//下标
+	var index = $(obj).attr("index");
+	
+	if($(obj).siblings().size() == 0){
+		remove_xiazhu_1($(obj).parent().parent().prev().children().first().children(".icoDel"));
+	}else{
+		$("#gamesInfo").children("dl").find("dd").each(function(){
+			//获取当前的game_id
+			var str = $(this).attr("game_id").toString();
+			if(str == game_id){
+				$(this).children("span.co6").children("div.line1").children().each(function(){
+					if($(this).attr("index").toString() == index){
+						$(this).css("background", "#FFFFFF");
+						$(this).mouseover(function () {
+							$(this).css("background", "#B12034");
+						});
+						$(this).mouseout(function () {
+							$(this).css("background", "#FFFFFF");
+						});
+						$(this).click(function () {
+								$(this).css("background", "#B12034");
+								$(this).unbind("mouseout");  
+					            $(this).unbind("mouseover");
+					            $(this).unbind("click");
+						});
+					}
+				});
+			}
+		});
+		$(obj).remove();
+	}
 }
 
 // 生成"通关类型"

@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 查询比赛 -->
 	<select id="findGames" resultType="Game" parameterType="Game">
-		select game_id, league_id, league_name, home_id, home_name, i.away_id, away_name, oh, od, oa, game_time, color from 
+		select distinct(game_id), league_id, league_name, home_id, home_name, i.away_id, away_name, oh, od, oa, game_time, color from 
 			(
 				select x.*,y.home_name from
 					(

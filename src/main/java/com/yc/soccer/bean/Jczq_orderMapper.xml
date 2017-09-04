@@ -9,8 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 添加下注订单  -->
 	<insert id="addOrder" parameterType="Jczq_order" useGeneratedKeys="true" keyProperty="joid">
-		insert into jczq_order(userid, order_id, guoguan_type, amount, bonus, last_time)
-		values(#{userid}, #{order_id}, #{guoguan_type}, #{amount}, #{bonus}, #{last_time})
+		insert into jczq_order(userid, order_id, guoguan_type, amount, bonus, last_time, buy_time)
+		values(#{userid}, #{order_id}, #{guoguan_type}, #{amount}, #{bonus}, #{last_time}, now())
 	</insert>
 
 </mapper>

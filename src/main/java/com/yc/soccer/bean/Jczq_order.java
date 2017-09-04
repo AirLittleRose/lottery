@@ -18,17 +18,20 @@ public class Jczq_order implements Serializable{
 	private Integer amount;		//总金额
 	private float bonus;		//奖金	
 	private String last_time;	//总开奖时间
+	private String buy_time;
 	
-	public Jczq_order(Integer joid, Integer userid, String order_id, String guoguan_type, Integer amout, float bonus,
-			String last_time) {
+
+	public Jczq_order(Integer joid, Integer userid, String order_id, String guoguan_type, Integer amount, float bonus,
+			String last_time, String buy_time) {
 		super();
 		this.joid = joid;
 		this.userid = userid;
 		this.order_id = order_id;
 		this.guoguan_type = guoguan_type;
-		this.amount = amout;
+		this.amount = amount;
 		this.bonus = bonus;
 		this.last_time = last_time;
+		this.buy_time = buy_time;
 	}
 
 	public Jczq_order() {
@@ -92,11 +95,22 @@ public class Jczq_order implements Serializable{
 		this.last_time = last_time;
 	}
 
+	public String getBuy_time() {
+		return buy_time;
+	}
+
+	public void setBuy_time(String buy_time) {
+		this.buy_time = buy_time;
+	}
+
 	@Override
 	public String toString() {
 		return "Jczq_order [joid=" + joid + ", userid=" + userid + ", order_id=" + order_id + ", guoguan_type="
-				+ guoguan_type + ", amout=" + amount + ", bonus=" + bonus + ", last_time=" + last_time + "]";
+				+ guoguan_type + ", amount=" + amount + ", bonus=" + bonus + ", last_time=" + last_time + ", buy_time="
+				+ buy_time + "]";
 	}
+
+	
 	
 	
 	

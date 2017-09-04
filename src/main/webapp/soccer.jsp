@@ -295,12 +295,16 @@
 	                <span>投入：<i id="amount" class="totalMoney">0</i> 元</span>
 	            </div>
 	        </div>
-	        <a id="confirm" href="to_jczq_order.action">确认下注</a>
+	        <a id="confirm" href="jczq/to_jczq_order.action">确认下注</a>
 	    </div>
 	</div>
 </div>
 <script>Core && Core.fastInit && Core.fastInit("1");</script>
 
 
+<%	
+	//防止action重复提交
+	session.setAttribute("flag", 0);
+%>
 
 <%@ include file="bottom.jsp" %>

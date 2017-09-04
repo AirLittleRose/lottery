@@ -3,8 +3,8 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-	
-	<!-- 在spring容器加载前,装配的数据  -->
+
+	<!-- 在spring容器加载前,装配的数据 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/beans.xml</param-value>
@@ -15,7 +15,7 @@
 		<filter-name>HiddenHttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
 	</filter>
-	
+
 	<!-- 字符过滤器 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
@@ -35,7 +35,18 @@
 		<filter-name>rightFilter</filter-name>
 		<filter-class>com.yc.web.filters.RightFilter</filter-class>
 	</filter>
-		
+	<filter>
+		<filter-name>jczqFilter</filter-name>
+		<filter-class>com.yc.web.filters.JczqFilter</filter-class>
+	</filter>
+
+
+
+	<filter-mapping>
+		<filter-name>jczqFilter</filter-name>
+		<url-pattern>/jczq/*</url-pattern>
+	</filter-mapping>
+	<!-- 权限校验 -->
 	<filter-mapping>
 		<filter-name>rightFilter</filter-name>
 		<url-pattern>/user/*</url-pattern>
@@ -44,7 +55,7 @@
 		<filter-name>rightFilter</filter-name>
 		<url-pattern>/pages/*</url-pattern>
 	</filter-mapping>
-
+	<!-- 字符编码集 -->
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -55,17 +66,18 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+
 	<!-- spring容器初始化 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<!-- 监听器,spring容器加载前,装载监听器的数据 -->
 	<listener>
 		<listener-class>com.yc.web.listeners.InitListener</listener-class>
 	</listener>
 
-		<!-- 启动spring-mvc -->
+	<!-- 启动spring-mvc -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
 		<!-- springmvc的前端分发器 -->
@@ -74,7 +86,7 @@
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.action</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
 
 	<!-- 欢迎页面 -->
 	<welcome-file-list>

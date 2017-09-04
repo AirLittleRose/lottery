@@ -12,10 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 竞彩足球用户权限校验
+ * 竞彩足球的用户登录校验
+ * @author xiang
+ *
  */
 public class JczqFilter implements Filter {
 
+	public void destroy() {
+	}
+	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req=(HttpServletRequest)request;
 		HttpServletResponse resp=(HttpServletResponse)response;
@@ -27,13 +32,7 @@ public class JczqFilter implements Filter {
 		}
 	}
 
-	@Override
-	public void destroy() {
+	public void init(FilterConfig fConfig) throws ServletException {
 	}
-
-	@Override
-	public void init(FilterConfig arg0) throws ServletException {
-	}
-
 
 }

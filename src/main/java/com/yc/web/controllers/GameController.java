@@ -71,29 +71,33 @@ public class GameController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/to_jczq_order.action")
+	@RequestMapping("/jczq/to_jczq_order.action")
 	public String to_jczq_order(HttpSession session) {
-		//获取用户对象信息
-		Users user = (Users) session.getAttribute("users");
-		//获取前台信息
-		Jczq_info ji = (Jczq_info) session.getAttribute("info");
-
-		if(ji != null && user != null) {
-			//订单信息解析
-			Jczq_order jo = this.parse2Order(ji, user);
-			//下注信息解析
-			List<Jczq> jczqs = this.parse2Jczq(ji, jo);
-
-			session.setAttribute("jczq_order", jo);
-			session.setAttribute("jczqs", jczqs);
-			
-			try {
-				jcza_orderBiz.addOrder(jo, jczqs);
-			} catch (Exception e) {
-				e.printStackTrace();
+		if(session.getAttribute("flag") != null) {
+			//获取用户对象信息
+			Users user = (Users) session.getAttribute("users");
+			//获取前台信息
+			Jczq_info ji = (Jczq_info) session.getAttribute("info");
+	
+			if(ji != null && user != null) {
+				//订单信息解析
+				Jczq_order jo = this.parse2Order(ji, user);
+				//下注信息解析
+				List<Jczq> jczqs = this.parse2Jczq(ji, jo);
+	
+				session.setAttribute("jczq_order", jo);
+				session.setAttribute("jczqs", jczqs);
+				
+				session.setAttribute("flag", null);
+				session.removeAttribute("flag");
+				
+				try {
+					jcza_orderBiz.addOrder(jo, jczqs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
 		return "jczq_order";
 	}
 	
@@ -116,11 +120,12 @@ public class GameController {
 	 */
 	private Jczq_order parse2Order(Jczq_info ji, Users user) {
 		Jczq_order jo = new Jczq_order();
-//		jo.setUserid(user.getUserid());		//用户id
+		jo.setUserid(user.getUserid());		//用户id
 		jo.setOrder_id(UUID.randomUUID().toString());	//UUID->单号
 		jo.setGuoguan_type(ji.getType());	//过关类型
 		jo.setAmount(Integer.parseInt(ji.getAmount()));	//总金额
 		jo.setLast_time(this.getLastTime(ji.getGame_time()));	//设置最后时间
+		jo.setBuy_time(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 		return jo;
 	}
 	
@@ -135,6 +140,7 @@ public class GameController {
 		for(int i=0; i<Integer.parseInt(ji.getNum()); i++) {
 			Jczq jczq = new Jczq();
 			jczq.setOrder_id(jo.getOrder_id());
+			jczq.setGame_id(ji.getGame_id()[i]);
 			jczq.setPredict(Integer.parseInt(ji.getSp()[i]));
 			jczq.setOdds(Float.parseFloat(ji.getOdds()[i]));
 			jczq.setTimes(Integer.parseInt(ji.getPel()));
