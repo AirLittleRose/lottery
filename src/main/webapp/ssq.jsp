@@ -26,13 +26,13 @@ function bet(){
 		
 	$.ajax({
 		type:"POST",
-		url:"userBetSsq.action",
+		url:"user/userBetSsq.action",
 		data:"redball="+redball+"&blueball="+blueball+"&sigprice=2"+"&multinum="+multinum,
 		dataType:"JSON",
 		success:function(data){
 			if(data.code==1){
 				alert("下注成功！");
-				location.href="toBuyInfo.action";
+				location.href="user/toBuyInfo.action";
 				console.log(multinum);
 				console.log(redball);
 				console.log(blueball);

@@ -79,7 +79,7 @@
 		<ul id="topNavRight1">
 			<li>
 				<div class="mcDropMenuBox myorder">
-					<a target="_top" user="y" class="topNavHolder" href="user/myOrder.action" rel="nofollow">
+					<a target="_top" user="y" class="topNavHolder" href="user/toMyorder.action" rel="nofollow">
 						<img src="images/order.png"/>
 							我的订单
 					</a>
@@ -88,7 +88,7 @@
 			</li>
 			<li>
 				<div class="mcDropMenuBox">
-					<a target="_top" user="y" class="topNavHolder" href="user/myList.action" rel="nofollow">
+					<a target="_top" user="y" class="topNavHolder" href="user/toMyorder.action" rel="nofollow">
 					我的彩票</a>
 					<b class="holderLine">|</b>
 					

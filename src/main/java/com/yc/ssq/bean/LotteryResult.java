@@ -19,7 +19,6 @@ public class LotteryResult implements Serializable {
 	private String resulttime;
 	private String redball;
 	private String blueball;
-	private String validity;
 	
 	public Integer getLrid() {
 		return lrid;
@@ -61,18 +60,10 @@ public class LotteryResult implements Serializable {
 		this.blueball = blueball;
 	}
 
-	public String getValidity() {
-		return validity;
-	}
-
-	public void setValidity(String validity) {
-		this.validity = validity;
-	}
-
 	@Override
 	public String toString() {
 		return "LotteryResult [lrid=" + lrid + ", ssq_issue=" + ssq_issue + ", resulttime=" + resulttime + ", redball="
-				+ redball + ", blueball=" + blueball + ", validity=" + validity + "]";
+				+ redball + ", blueball=" + blueball + "]";
 	}
 
 }

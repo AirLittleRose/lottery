@@ -151,18 +151,19 @@ create table userSsq(
 	orderid varchar(30) not null,
 	ordertime datetime not null,	
 	ssq_issue varchar(20) not null,
-	status int,
-    temp2 varchar(50),
+	
+    status int,
     temp3 varchar(50)
 )
+alter table betSsq drop column status
 select * from userSsq;
-update userSsq set status = 1;
+update userSsq set status = 0 where ssq_issue='2017100';
 alter table userSsq alter column status set default 0;
 select distinct ssq_issue from userSsq order by ssq_issue desc;
 delete from userSsq;
 delete from betSsq;
 
-alter table userSsq change column temp1 status int;
+alter table userSsq change column temp2 status int;
 
 insert into userSsq(userid,orderid,ordertime) values(2,now()+'23456', now() )
 ---------------------------------------------------
@@ -207,13 +208,26 @@ create table betSsq(
 	multinum int not null,
 	redball varchar(50) not null,
 	blueball varchar(10) not null,
-	temp1 varchar(50),
+	
     temp2 varchar(50),
     temp3 varchar(50)
 )
+update betSsq set status = 0 ;
+alter table betSsq alter column status set default 0;
+alter table betSsq change column temp1 status int;
+select * from betSsq;
 drop table userSsq;
 alter table betSsq modify column redball varchar(50) not null;
+delete from userSsq where usid=22
 
+	select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
+		(select usid,userid,orderid,ordertime,ssq_issue from userSsq) a
+		inner join
+		(select usid,redball,blueball,sigprice,multinum from betSsq) b
+		on a.usid = b.usid
+		where ssq_issue='2017102'
+-----------------------------------------------------------------------------
+select ssq_issue,resulttime,redball,blueball from lotteryResult where ssq_issue='2017099';
 --双色球开奖结果	lotteryResult
 	--lrid
 	--期号	ssq_issue
@@ -230,10 +244,29 @@ create table lotteryResult(
     temp2 varchar(50),
     temp3 varchar(50)
 )
+
+insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017102','2017-08-31','04 08 10 14 18 20','11')
+delete from lotteryResult;
 select * from lotteryResult;
 alter table lotteryResult modify column resulttime varchar(30) not null;
 alter table lotteryResult drop column validity
-
+-----------------------------------
+select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status,grade,award
+from
+(select usid,redball,blueball,grade,award from awardInfo ) ai
+inner join
+(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+	from
+	(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
+	inner join 
+	(select usid,multinum from betSsq) b
+	on a.usid=b.usid
+) ssq
+on ssq.usid = ai.usid
+where userid=2
+order by ssq_issue desc,grade asc
+-------------------------------------
 --中奖信息		awardInfo
 	--aid
 	--userid
@@ -244,8 +277,9 @@ alter table lotteryResult drop column validity
 	--（期号、红蓝球号码、注数、单注价格、收益倍率）
 create table awardInfo(
 	aid int primary key auto_increment,
-	userid int not null,
-	orderid varchar(30) not null,
+	usid int not null,
+	redball varchar(30) not null,
+	blueball varchar(10) not null,
 	grade int not null check(grade in(1,2,3,4,5,6) ),
 	award double not null,
 	temp1 varchar(50),
@@ -253,6 +287,28 @@ create table awardInfo(
     temp3 varchar(50)
 )
 
+select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status,grade,award,count(distinct(redball)) as awardInfocount
+		from
+		(select usid,redball,blueball,grade,award from awardInfo ) ai
+		inner join
+		(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+			from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
+			inner join 
+			(select usid,multinum from betSsq) b
+			on a.usid=b.usid
+		) ssq
+		on ssq.usid = ai.usid
+		where userid=2
+
+
+drop table awardInfo;
+insert into awardInfo(userid,orderid,grade,award) values(11,'20170825110351812403',6,5.0);
+insert into notAwardInfo(userid,orderid) values(11,'20170825110351812403');
+select * from awardInfo;
+delete from awardInfo where aid = 1;
+select * from notAwardInfo;
 --未中奖信息		
 	--aid
 	--userid
@@ -260,13 +316,15 @@ create table awardInfo(
 	--单号
 create table notAwardInfo(
 	aid int primary key auto_increment,
-	userid int not null,
-	orderid varchar(30) not null,
+	usid int not null,
+	redball varchar(30) not null,
+	blueball varchar(10) not null,
 	temp1 varchar(50),
     temp2 varchar(50),
     temp3 varchar(50)
 )
-
+delete from notAwardInfo
+drop table notAwardInfo;
 
 
 --彩票
@@ -295,7 +353,7 @@ create table lotteryTickets(
     --兑奖截止日期
 create table ssq(
 	ssqid int primary key auto_increment,
-	lttype int not null,
+	lttype
 	rednums varchar(60) not null,
     bluenums varchar(50) not null,
 	temp1 varchar(50),

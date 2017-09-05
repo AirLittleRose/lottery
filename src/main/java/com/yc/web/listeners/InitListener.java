@@ -34,29 +34,13 @@ public class InitListener implements ServletContextListener {
 		// 利用spring提代的 WebApplicationContextUtils类来获取 spring 容器
 		ac = WebApplicationContextUtils.getWebApplicationContext(application);
 
-		UserSsqBiz userSsqBiz = (UserSsqBiz) ac.getBean("userSsqBizImpl");
-		try {
-			List<UserSsq> lists = userSsqBiz.findSsqIssue();
-			application.setAttribute("ssqIssueList", lists);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		NewsBiz newsBiz = (NewsBiz) ac.getBean("newsBizImpl");
-		try {
-			JsonModel jsonModel = newsBiz.searchNews();
-			if(jsonModel.getRows().size()==0){			
-					newsBiz.putData();			
-					
-			}else{				
-			}
-			JsonModel jm = newsBiz.searchNews();
-			application.setAttribute("jsonModel", jm);
-			application.setAttribute("list", jm.getRows());
-		} catch (IOException e) {
-			e.printStackTrace();
-		
-		}
+//		UserSsqBiz userSsqBiz = (UserSsqBiz) ac.getBean("userSsqBizImpl");
+//		try {
+//			List<UserSsq> lists = userSsqBiz.findSsqIssue();
+//			application.setAttribute("ssqIssueList", lists);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {

@@ -15,7 +15,7 @@ public class RightFilter implements Filter {
 
 	public void destroy() {
 	}
-	//TODO:   权限过滤
+	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req=(HttpServletRequest)request;
 		HttpServletResponse resp=(HttpServletResponse)response;
@@ -23,7 +23,7 @@ public class RightFilter implements Filter {
 		if(   session.getAttribute("users")==null){
 			resp.sendRedirect("../index.action");
 		}else if(session.getAttribute("manager")==null){
-			resp.sendRedirect("../index.action");			
+			resp.sendRedirect("../index.action");
 		}else{
 			chain.doFilter(request, response);
 		}

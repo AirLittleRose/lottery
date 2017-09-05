@@ -2,6 +2,74 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../header.jsp" %>
 <link rel="stylesheet" href="css/myLott.css">
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/pageBar.js"></script>
+<script type="text/javascript">
+	$(function(){
+		gopage(1);
+		
+	});
+	
+	function gopage( pages ){
+		var checkValue="1";
+		$("#lotteryType").change(function(){
+			checkValue=$("#lotteryType").val();
+			console.log("------v-----   "+checkValue);
+		}); 
+		if(checkValue=="1"){
+			findAwardInfo(pages);
+		}
+		if(checkValue=="0"){
+			console.log("------v-----   "+checkValue);
+		}
+		
+	}
+	
+	function findAwardInfo(pages){
+		$.ajax({
+			type:"POST",
+			url:"user/findAwardInfo.action",
+			data:"pages="+pages+"&pagesize=5",
+			dataType:"JSON",
+			success:function(data){
+				if(data.code== 1){
+					$("#awardInfoBody").html("");
+					$(data.rows).each(
+							function(index,item){  
+					//for(var i = 0;i<data.obj.length;i++){  var item=data.obj[i]; }
+						
+								var str = "  <tr ><td>双色球</td>"+
+									"<td>"+item.ssq_issue +"</td>"+
+									"<td>"+item.ordertime +"</td>"+
+									"<td>"+item.orderid +"</td>"+
+									"<td>"+item.redball +" | "+item.blueball +"</td>"+
+						          	"<td>"+item.multinum +"</td>";
+						        if(item.status==1){
+						        	str+="<td>已开奖</td>";
+						        }else{
+						        	str+="<td>未开奖</td>";
+						        }
+								str+="<td>"+item.grade +"等奖</td>"+
+									"<td>"+item.award +"</td></tr>";
+								$("#awardInfoBody").html($("#awardInfoBody").html()+str);
+							});
+					$.createPageBar( data,"pagebardiv" );
+					
+				}else{
+					alert("查询失败！原因"+data.msg);
+				}
+			}
+		});
+
+	}
+	
+</script>
+
+<style>
+tr:hover {
+	background-color: #fecaad;
+}
+</style>
 
 <article class="docBody clearfix">
 
@@ -16,13 +84,13 @@
        
       </div>
       <ul class="leftManu">
-        <li class="active"><a target="_self" onclick="showOrder()">我的订单</a><i>&gt;</i></li>  
-        <li class="active"><a target="_self" onclick="showInfo()">个人信息</a><i>&gt;</i></li>        
+        <li class="active"><a target="_self" href="myorder.html">我的订单</a><i>&gt;</i></li>  
+        <li class="active"><a target="_self" href="mylottery.html">个人信息</a><i>&gt;</i></li>        
       </ul>
      
     </div>
   </aside>
-  <div id="myOd" class="rightModule" style="display:block;">
+  <div class="rightModule">
     <ul class="redTab">
       <li class="active"><a target="_self" href="">投注记录</a></li>
      
@@ -32,9 +100,8 @@
        <span class="mcSelectBox btnAuto"> 
         	 <select class="text" name="lotteryType" id="lotteryType">
         	 	<option value="0">全&nbsp;&nbsp;&nbsp;&nbsp;部</option>
-				<option value="1">双色球</option>
+				<option value="1" selected="selected">双色球</option>
 				<option value="2">足&nbsp;&nbsp;&nbsp;&nbsp;彩</option>
-				<option value="3">大乐透</option>
 			</select>        
         </span> 
        
@@ -46,65 +113,53 @@
         	 	</c:forEach>				
 			</select>
         </span> 
-       
-        <input value="" style="margin-left: 20px;" type="checkbox" id="winOrder">
-        <label for="winOrder">中奖订单</label>
+        <select class="text" name="winOrder" id="winOrder">
+        	 	<option value="0">未中奖订单</option>
+				<option value="1" selected="selected">中奖订单</option>
+		</select>
+       	
         &nbsp;
-        <input value="" type="checkbox" id="waitOrder">
-        <label for="waitOrder">等待开奖</label>
+        <select class="text" name="winStatus" id="winStatus">
+        	 	<option value="0">未开奖</option>
+				<option value="1" selected="selected">已开奖</option>
+		</select>
       </div>
       <table class="tableData">
         <colgroup>
-        <col width="10%">
+        <col width="8%">
+        <col width="8%">
         <col width="15%">
-        <col width="14%">
-        <col width="12%">
         <col width="20%">
-        <col width="19%">
-        <col>
+        <col width="20%">
+        <col width="5%">
+        <col width="8%">
+        <col width="8%">
+        <col width="12%">
         </colgroup>
-        <tbody>
-          <tr>
-            <th>时间</th>
-            <th>彩种</th>
-            <th>订单信息</th>
-            <th class="tr">订单金额(元)</th>
-            <th>状态</th>
-            <th>奖金(元)</th>
-            <th>操作</th>
-          </tr>
+        <thead>
+        	<tr>
+	          	<th style="width:100px">彩种</th>
+	          	<th style="width:100px">期号</th>
+	            <th>购彩时间</th>
+	            <th>订单号</th>
+	            <th>订单信息</th>
+	            <th>倍数</th>
+	            <th>开奖状态</th>
+	            <th>中奖等级</th>
+	            <th>奖金(元)</th>
+	         </tr>
+        
+        </thead>
+        <tbody class="awardInfoBody" id="awardInfoBody">
+         
         </tbody>
       </table>
-      <div class="noData_order"> <i class="ico_book"></i><strong>没有任何订单</strong> </div>
-    </div>
-    <section class="grayBorder mt10">
-      <h2 class="tit">热门彩种</h2>
-      <ul class="clearfix hotLott">
-        <li style="background: url(images/ssqt.png) -10px -6px no-repeat;" class="hot_ssq">
-         <a style="background-image:url(images/ssqt.png);" id="bgis" href="" target="" title="双色球"> 双色球 </a> 
-         <i class="redBtn25">立即投注</i> 
-        </li>
-        <li class="hot_jczq"> 
-        	<a style="background-image:url(images/jczqt.png);" id="bgij" href="" target="" title="竞彩足球"> 竞彩足球<br>
-          	</a> 
-        <i class="redBtn25">立即投注</i> </li>
-      </ul>
-    </section>
-  </div>
-  
-  
-  
-  <div id="myIf" class="rightModule" style="display:none;">
-    <ul class="redTab">
-      <li class="active"><a target="_self" href="">个人信息</a></li>
-     
-    </ul>
-    <div class="orderDataBox grayBorder"> 
-        <div  id="userInfo">
-      		用户名 ：${users.username }<br/>
-          	电话号码 ：${users.tel }<br/>
-          	邮箱 ：${users.email }<br/>
-      	</div>
+      <div id="pagebardiv"></div>
+      
+      <!-- <div class="noData_order"> 
+      		<i class="ico_book"></i><strong>没有任何订单</strong>
+      		</div>
+       -->
     </div>
     <section class="grayBorder mt10">
       <h2 class="tit">热门彩种</h2>
