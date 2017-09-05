@@ -13,4 +13,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{userid}, #{order_id}, #{guoguan_type}, #{amount}, #{bonus}, #{last_time}, now())
 	</insert>
 
+	<!-- 查出每个过关订单的下注赔率和倍数 -->
+	<!-- 
+		1.统计每个订单的中奖数量 (即在每个订单号(order_id)下注信息(jczq)中result=1的个数)
+		2.如果中奖数量大于订单个数,就开始算奖金
+	 -->
+	 <select id="selectWinInfo" resultType="Jczq">
+	    select d.order_id,odds,times from 
+			(select c.order_id from
+				(select a.order_id,guoguan_type,num from 
+					jczq_order a
+				left join
+					(select count(*) num,order_id from jczq where result = 1  order by order_id) b
+				on 
+					a.order_id = b.order_id 
+				)c
+			where
+				guoguan_type &lt;= num
+			)d
+		left join
+			(select * from jczq)e
+		on 
+			d.order_id = e.order_id and result = 1
+		order by order_id
+	 </select>
+	 
+	 
+	 <!-- 查出用户所有的订单id -->
+	 <select id="selectAllOrder" resultType="Jczq">
+	        select * from jczq_order where userid = #{userid}
+	 </select>
+	 
+	 <select id="selectOrderDetail" resultType="OrderDetail" parameterType="Jczq_order">
+	 	select order_id,guoguan_type,amount,bonus,last_time,buy_time,game_id,predict,odds,times,result,league_name,home_name,away_name,game_time from
+			(select a.order_id,guoguan_type,amount,bonus,last_time,buy_time,game_id,predict,odds,times,result from
+				(select * from 
+					jczq_order 
+				 where 
+					order_id = #{order_id})a
+			left join
+				(select * from jczq)b
+			on
+				a.order_id = b.order_id)c
+		left join
+			(select game_id,league_name,home_name,team_name as away_name,game_time from 
+				(select game_id,league_name,team_name as home_name,away_id,game_time from 
+					(select game_id,league_name,home_id,away_id,game_time from 		
+						(select 
+							game_id,league_id,home_id,away_id,game_time 
+						from 
+							game)a
+						left join 
+							(select * from league)b
+						on 
+							a.league_id = b.league_id)c
+					left join
+						(select * from team)e
+					on 
+						home_id = team_id)f
+				left join
+					(select * from team)g
+				on
+					f.away_id = g.team_id)d
+			on
+				c.game_id = d.game_id
+	 </select>
+	 
 </mapper>
