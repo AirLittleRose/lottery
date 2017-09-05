@@ -37,10 +37,10 @@
 	<!-- 定时任务执行规律 	 -->
 	<task:scheduled-tasks>
 		<!-- 这里表示的是每隔一天执行一次  -->
-		<task:scheduled ref="SoccerTask" method="addInfo" cron="* 0/1 * * * ? "/>
-		<task:scheduled ref="SoccerTask" method="saveLeague" cron="* 0/1 * * * ? "/>
-		<task:scheduled ref="SoccerTask" method="saveTeam" cron="* 0/1 * * * ? "/>
-		<task:scheduled ref="SoccerTask" method="savaGame" cron="* 0/1 * * * ? "/>
+		<task:scheduled ref="SoccerTask" method="addInfo" cron="0 0 0 1/1 * ? "/>
+		<task:scheduled ref="SoccerTask" method="saveLeague" cron="0 0 0 1/1 * ? "/>
+		<task:scheduled ref="SoccerTask" method="saveTeam" cron="0 0 0 1/1 * ? "/>
+		<task:scheduled ref="SoccerTask" method="savaGame" cron="0 0 0 1/1 * ? "/>
 		<!-- 0 0 0 1/1 * ?-->
 	</task:scheduled-tasks> 
 

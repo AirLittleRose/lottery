@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="css/login.css" media="all">
 <link rel="stylesheet" href="css/drag.css" media="all">
-<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="js/login.js" type="text/javascript"></script>
 <script src="js/drag.js" type="text/javascript"></script>
 
