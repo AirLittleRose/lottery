@@ -129,5 +129,4 @@ public class BetSsq implements Serializable {
 				+ ", orderid=" + orderid + ", ordertime=" + ordertime + ", ssq_issue=" + ssq_issue + ", sigprice="
 				+ sigprice + ", multinum=" + multinum + ", redball=" + redball + ", blueball=" + blueball + "]";
 	}
-	
 }

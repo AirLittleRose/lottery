@@ -1,5 +1,8 @@
 package com.yc.users.biz.impl;
 
+
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -7,10 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yc.dao.BaseDao;
+import com.yc.users.bean.Annos;
 import com.yc.users.bean.Manager;
+import com.yc.users.bean.News;
 import com.yc.users.bean.Users;
 import com.yc.users.biz.UsersBiz;
 import com.yc.utils.Encrypt;
+import com.yc.web.model.JsonModel;
 
 @Service
 @Transactional
@@ -84,6 +90,34 @@ public class UsersBizImpl implements UsersBiz {
 		return mg;
 	}
 
+	/**
+	 * 发布公告
+	 */
+	@Override
+	public void saveAnno(Annos annos) {
+		this.baseDao.save(annos, "saveAnnos");
+	}	
 
+	//查看公告
+	@Override
+	public JsonModel<Annos> searchAnnos() {
+		Annos annos = new Annos();
+		List<Annos> list = baseDao.findAll(annos, "getAnnos");
+		
+		JsonModel<Annos> jm = new JsonModel<Annos>();
+		jm.setRows(list);
+		return jm;
+	}
 
+	@Override
+	public Annos isAnnosExist(Annos annos) {
+		Annos as = (Annos) this.baseDao.findOne(annos, "konwAnnos");
+		return as;
+	}
+	
+	@Override
+	public Annos isAnnosDetail(Annos annos) {
+		Annos as = (Annos) this.baseDao.findOne(annos, "detailAnnos");
+		return as;
+	}
 }

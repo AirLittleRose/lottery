@@ -46,6 +46,4 @@ public class NotAwardInfo implements Serializable {
 	public String toString() {
 		return "NotAwardInfo [aid=" + aid + ", usid=" + usid + ", redball=" + redball + ", blueball=" + blueball + "]";
 	}
-
-
 }

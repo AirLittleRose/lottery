@@ -1,24 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../header.jsp" %>
+<%@ include file="../../header_login.jsp" %>
 
-<script type="text/javascript" src="../../ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
 
 <script type="text/javascript">
+	
+	function Ckupdate() {
+	    for(instance in CKEDITOR.instances){
+	        CKEDITOR.instances[instance].updateElement();
+	    }
+	}
+
 	$(function(){
-		showNewsType();
-		$("#addBtn").click(function(){			
+		$("#addBtn").click(function(){
+			Ckupdate();
 			$.ajax({
 				type:"POST",
-				url:"back/news.action",
+				url:"newsAdd.action",
 				data:$("#addNewsForm").serialize(),
-				dataType:"json",  //
+				dataType:"json",  
 				success:function(data){
 					if(data.code==1){
-						$.messager.alert('Warning','添加成功');
+						alert(content);
+						alert('添加成功');
 					}else{
-						$.messager.alert('Warning','添加失败,'+data.errorMsg);
+						alert('添加失败,'+data.errorMsg);
 					}
 				}
 			});
@@ -38,39 +46,32 @@
 		}
 		reader.readAsDataURL(file)
 	}
+	
+ 
+
+	   
 </script>
 
 <title>添加公告</title>
 </head>
 <body>
 
-	<center>
-		发布公告
-		<hr/>
-		<form id="addNewsForm" action="pages/newsAdd.action" method="post" enctype="multipart/form-data">
-			<div style="text-align:left; ">
-				<input type="hidden" name="op" value="add"/>
-				新闻类别：<select id="tid" name="tid">
-					
-				</select><br/>
+	
+		
+		<form id="addNewsForm" enctype="multipart/form-data">
+			<div style="text-align:left; ">					
+			
 				标题：<input type="text" name="title" id="title"/><br/>
-				权重：<input type="text" name="weight" id="weight"/><br/>
-				首页图片：<input type="file" name="pic" id="pic" onchange="showUploadImg(this,'showpic')" accept="image/*"/><br/>
-				<input type="button" value="隐藏图片" onclick="document.getElementById('showpic').style.display='none';"/>
-				<input type="button" value="显示图片" onclick="document.getElementById('showpic').style.display='block';"/>
-				<br/>
-				<img id="showpic"/><br/>
-				内容：<input type="submit" id="addBtn" value="添加"  />
-			
-				<textarea class="ckeditor" name="content" ></textarea>
-				<br/>
-				<hr/>
 				
-			</div>
-			
+				内容：			
+				<textarea class="ckeditor" name="content"></textarea>			
+				
+				<input type="button" id="addBtn" value="添加"  />
+				
+			</div>			
+		
 		</form>
-		</center>
-
+	
 
 </body>
 </html>

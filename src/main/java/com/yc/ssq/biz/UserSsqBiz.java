@@ -60,4 +60,5 @@ public interface UserSsqBiz {
 	public List<AwardInfo> findAwardInfo(AwardInfo ai)throws Exception;
 	
 	public Integer findAwardInfoCount(AwardInfo ai)throws Exception;
+
 }

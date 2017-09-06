@@ -6,8 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 加入带日志的缓存 -->
  	<cache type="org.mybatis.caches.ehcache.LoggingEhcache">
- 	</cache> 	
- 	
+ 	</cache> 
 			
 	<!-- 验证管理员用户 -->
 	<select id="getManager" resultType="Manager">

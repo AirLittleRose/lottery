@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../header_login.jsp" %>
-<link rel="stylesheet" type="text/css" href="easyui15/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="easyui15/themes/ui-pepper-grinder/easyui.css">
 <link rel="stylesheet" type="text/css" href="easyui15/themes/icon.css"> 	
 <script type="text/javascript" src="easyui15/jquery.min.js"></script>
 <script type="text/javascript" src="easyui15/jquery.easyui.min.js"></script>
@@ -23,7 +23,7 @@
  				"children":[{
  						"text":"新增公告",
  						"attributes":{
- 							"url":"<iframe src='WEB-INF/pages/addNews.jsp' style='width:100%;height:100%;border:0px;'/>"
+ 							"url":"<iframe src='addNews.action' style='width:100%;height:100%;border:1px;'/>"
  						}
  					},{
  						"text":"公告维护",
@@ -60,13 +60,11 @@
  						openTab(node);
  					}
  				}
- 			}); 	
- 			*/
+ 			}); 
+ 			*/ 			
  			
  			showTree("newsTree",treeData);
- 			showTree("LotTree",treeDataLot);
- 			
- 		 		
+ 			showTree("LotTree",treeDataLot); 		 		
  		});
  		
  		
@@ -93,11 +91,7 @@
  				$("#mainTt").tabs("add",{
  					title:node.text,
  					selected:true,
- 					closed:true,
- 					tools:[{
- 						iconCls:'icon-cancel',
- 						handler:function(){alert('save')}
- 					}],
+ 					closable:true,
  					//href:node.attributes.url
  					content:node.attributes.url
  				})
@@ -113,7 +107,8 @@
 	
 	<div class="easyui-layout" style="width:100%; height:750px;">
 			<div data-options="region:'north'" style="height:50px">
-				<h1 style="">人人乐彩票后台管理</h1>
+				<h1 style="text-align:center;line-height:40px;">人人乐彩票后台管理</h1>
+			
 			</div>
 			
 			<div data-options="region:'south',split:true"  style="height:50px;"></div>

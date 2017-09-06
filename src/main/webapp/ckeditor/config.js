@@ -37,10 +37,14 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	
 	//设置宽度
-	config.width = 495;
+	config.width = 800;
+	
+	//设置高度
+	config.height = 200;
 	
 	//上传图片的服务器端地址
-	config.filebrowserImageUploadUrl = "user/uploadSinglePic.jsp"
+	config.filebrowserImageUploadUrl = "uploadSinglePic.action"
+
 };
 
 

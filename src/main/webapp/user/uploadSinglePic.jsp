@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../../header_login.jsp" %>
+<%@ page import="com.yc.utils.*,java.util.*"%>
 
-<%@ page
-	import="com.yc.utils.*,java.util.*"%>
 
 <%
 	//配合ckeditor的文件上传

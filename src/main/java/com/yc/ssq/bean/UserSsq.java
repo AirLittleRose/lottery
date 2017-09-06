@@ -237,5 +237,4 @@ public class UserSsq implements Serializable {
 				+ ", ordertime=" + ordertime + ", ssq_issue=" + ssq_issue + ", status=" + status + ", betlists="
 				+ betlists + ", ssqs=" + ssqs + "]";
 	}
-		
 }

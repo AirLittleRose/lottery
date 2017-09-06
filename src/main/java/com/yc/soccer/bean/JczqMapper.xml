@@ -24,5 +24,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="openJczqLottery" parameterType="Jczq">
         update jczq set result = ${result} where jid = ${jid} 
 	</update>
-	
 </mapper>

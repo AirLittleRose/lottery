@@ -9,27 +9,28 @@
 <script type="text/javascript" src="js/register.js"></script>
 
 <script type="text/javascript">
-
-function reg(){
-	$.ajax({
-		type:"POST",
-		data:$("#myRegister").serialize(),
-		url:"user_register.action",
-		dataType:"JSON",
-		success:function(data){
-			if(data.code== 1){
-				alert("注册成功！");	
-				location.href="http://localhost:8080/lottery/toLogin.action";
-			}else{
-				alert("注册失败！原因"+data.msg);
+$(function(){
+	$("#dologin").click(function(){	
+		$.ajax({
+			type:"POST",
+			data:$("#myRegister").serialize(),
+			url:"user_register.action",
+			dataType:"JSON",
+			success:function(data){
+				if(data.code== 1){
+					alert("注册成功！");	
+					location.href="http://localhost:8080/lottery/toLogin.action";
+				}else{
+					alert("注册失败！原因"+data.msg);
+				}
 			}
-		}
-	});
-}
+		});
+	});	
+});
 
 function checkUser(username){
 		var name = document.getElementById("userreg").value;
-		var reg = /^[0-9a-zA-Z\u4e00-\u9fa5_]{3,16}$/;
+		var reg = /^[0-9a-zA-Z\u4e00-\u9fa5_]{4,16}$/;
 		
 		if(name.match(reg)&&name!=""){
 			$.ajax({
@@ -109,11 +110,11 @@ function checkUser(username){
           </div>
           
           <div id="dosubmit">
-             <input id="dologin" type="button" onblur="reg()" value="注&nbsp;&nbsp;册" disabled="true"/>
+             <input id="dologin" type="button" value="注&nbsp;&nbsp;册" disabled="true"/>
           </div>
           
           <div id="toother">
-          	<a href="main.action" id="tologin">→_→去主页</a>
+          	<a href="index.action" id="tologin">→_→去主页</a>
           </div>
          
         

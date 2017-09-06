@@ -218,35 +218,5 @@ public class UsersController {
 			jm.setMsg("密码修改失败");
 		}
 		return jm;
-	}
-	
-	//管理员登录
-	@RequestMapping("/mana_login.action")
-	public JsonModel manalogin(Manager manager,HttpServletRequest request,HttpSession session){
-		JsonModel jsonModel = new JsonModel();
-			try {
-				manager = usersBiz.manaLogin(manager);
-				if(manager!=null){
-					session.setAttribute("manager", manager);
-					jsonModel.setCode(1);
-					manager.setPwd(null); //设为空后,密码就不会传到
-					jsonModel.setObj(manager);
-				}else{
-					jsonModel.setCode(0);
-					jsonModel.setMsg("管理员名或密码错误");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				jsonModel.setCode(0);
-				jsonModel.setMsg(e.getMessage());
-			}		
-		return jsonModel;
-	}
-	
-	@RequestMapping("/managemain.action")
-	public void toBuyInfo(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		request.getRequestDispatcher("/WEB-INF/pages/managemain.jsp").forward(request, response);
-	}
-
-	
+	}	
 }

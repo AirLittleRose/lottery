@@ -3,7 +3,11 @@
 
 <%@ include file="header.jsp" %>
 
-<script>if(window.top != window.self)window.top.location.href = window.location.href;</script>
+<script>if(window.top != window.self)window.top.location.href = window.location.href;
+	
+	
+
+</script>
 
 <article class="docBody clearfix">
 	<section class="siderBox">
@@ -203,8 +207,9 @@
 					
 					<div class="promotion_con" id="topNotice" style="display:none;">
 						<ul class="promotion_list">
-							<li>·<a href="#" target="_blank" title="公告1">公告1</a></li>
-							<li>·<a href="#" target="_blank" title="公告2">公告2</a></li>
+							<c:forEach items="${jm.rows}" var="a">						
+								<li>·${a.title }</li>							
+							</c:forEach>	
 						</ul>
 					</div>
 					

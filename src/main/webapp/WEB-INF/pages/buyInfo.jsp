@@ -28,7 +28,7 @@ tr:hover {
 		<p style="line-height:52px;font-family:华文新魏;font-size:40px;color: #ED2240;">购买成功！！！</p>
 		<p style="font-size:12px;">
 			<a href="ssq.jsp">继续购买</a>&emsp;&emsp;&emsp;
-			<a href="user/toMyorder.action">仅显示前五条 → 查看更多请点击</a>			
+			<a href="myorder.jsp">仅显示前五条 → 查看更多请点击</a>			
 		</p>
 		
 	</div>
@@ -109,19 +109,6 @@ tr:hover {
 	
 </div>
 </article>
-姑娘你要出嫁
-离开了你的家
-天边的余晖啊
-裁一片做头纱
-姑娘你要出嫁
-明天它太远啊
-天边的白云飞
-采一朵做白马
-灯火茫茫千万家 
-柴米油盐酱醋茶
-一身红妆你给了他
-来日游历夕阳下
-举案齐眉梦里花
-莫忘往事里有个家
+
 
 <%@ include file="../../bottom.jsp" %>
