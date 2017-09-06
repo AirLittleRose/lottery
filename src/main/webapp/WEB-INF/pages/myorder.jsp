@@ -5,24 +5,45 @@
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="js/pageBar.js"></script>
 <script type="text/javascript">
+
+	function findButton(){
+		var lotteryType="1";
+		$("#lotteryType").change(function(){
+			lotteryType=$("#lotteryType").val();
+		});
+		var winStatus ="1";
+		$("#winStatus").change(function(){
+			winStatus=$("#winStatus").val();
+		});
+		var winorder="1";
+		$("#winOrder").change(function(){
+			winorder=$("#winOrder").val();
+		});
+		
+		if(lotteryType=="1"){
+			if(winStatus=="0"){
+				$("#winOrder").hide();
+			}else{
+				$("#winOrder").show();
+				if(winorder=="1"){
+				}else{
+					//findNotAwardInfo();
+				}
+			}
+		}
+		if(lotteryType=="0"){
+			console.log("------v-----   "+lotteryType);
+		}
+	}
+	
 	$(function(){
 		gopage(1);
 		
 	});
 	
-	function gopage( pages ){
-		var checkValue="1";
-		$("#lotteryType").change(function(){
-			checkValue=$("#lotteryType").val();
-			console.log("------v-----   "+checkValue);
-		}); 
-		if(checkValue=="1"){
-			findAwardInfo(pages);
-		}
-		if(checkValue=="0"){
-			console.log("------v-----   "+checkValue);
-		}
-		
+	function gopage( pages ){		
+		findAwardInfo(pages);
+			
 	}
 	
 	function findAwardInfo(pages){
@@ -113,16 +134,20 @@ tr:hover {
         	 	</c:forEach>				
 			</select>
         </span> 
-        <select class="text" name="winOrder" id="winOrder">
-        	 	<option value="0">未中奖订单</option>
-				<option value="1" selected="selected">中奖订单</option>
-		</select>
-       	
-        &nbsp;
+        
         <select class="text" name="winStatus" id="winStatus">
         	 	<option value="0">未开奖</option>
 				<option value="1" selected="selected">已开奖</option>
 		</select>
+        	
+        &nbsp;
+        <select class="text" name="winOrder" id="winOrder">
+        	 	<option value="0">未中奖订单</option>
+				<option value="1" selected="selected">中奖订单</option>
+		</select>
+       
+       <input type="button" value="查询" id="findButton"  href="javascript:void(0)" onclick="findButton()"/>
+        
       </div>
       <table class="tableData">
         <colgroup>
