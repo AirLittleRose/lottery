@@ -6,9 +6,9 @@ public class NotAwardInfo implements Serializable {
 	private static final long serialVersionUID = 2656861810120468035L;
 	
 	private Integer aid;
-	private Integer userid;
-	private String username;
-	private String orderid;
+	private Integer usid;
+	private String redball;
+	private String blueball;
 	
 	public Integer getAid() {
 		return aid;
@@ -17,35 +17,33 @@ public class NotAwardInfo implements Serializable {
 	public void setAid(Integer aid) {
 		this.aid = aid;
 	}
-	
-	public Integer getUserid() {
-		return userid;
+
+	public Integer getUsid() {
+		return usid;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setUsid(Integer usid) {
+		this.usid = usid;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getRedball() {
+		return redball;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setRedball(String redball) {
+		this.redball = redball;
 	}
 
-	public String getOrderid() {
-		return orderid;
+	public String getBlueball() {
+		return blueball;
 	}
 
-	public void setOrderid(String orderid) {
-		this.orderid = orderid;
+	public void setBlueball(String blueball) {
+		this.blueball = blueball;
 	}
 
 	@Override
 	public String toString() {
-		return "NotAwardInfo [aid=" + aid + ", userid=" + userid + ", username=" + username + ", orderid=" + orderid
-				+ "]";
+		return "NotAwardInfo [aid=" + aid + ", usid=" + usid + ", redball=" + redball + ", blueball=" + blueball + "]";
 	}
-
 }

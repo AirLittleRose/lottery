@@ -108,6 +108,7 @@
 	<div class="easyui-layout" style="width:100%; height:750px;">
 			<div data-options="region:'north'" style="height:50px">
 				<h1 style="text-align:center;line-height:40px;">人人乐彩票后台管理</h1>
+			
 			</div>
 			
 			<div data-options="region:'south',split:true"  style="height:50px;"></div>

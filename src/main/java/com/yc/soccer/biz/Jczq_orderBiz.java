@@ -16,4 +16,6 @@ public interface Jczq_orderBiz {
 	 * @param jo
 	 */
 	void addOrder(Jczq_order jo,List<Jczq> jczqs);
+	
+	void calculateBonus();
 }

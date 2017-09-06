@@ -77,6 +77,5 @@ public interface UsersBiz {
 
 	
 	public Annos isAnnosDetail(Annos annos);
-	
 
 }	

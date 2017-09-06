@@ -15,4 +15,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 
+	<!-- 通过game_id模糊查询 -->
+	<select id="selectJczqByGameId" parameterType="Jczq" resultType="Jczq">
+		select * from jczq where game_id like #{game_id} order by game_id asc
+	</select>
+	
+	<!-- 开奖,修改下注信息表(jczq)的result -->
+	<update id="openJczqLottery" parameterType="Jczq">
+        update jczq set result = ${result} where jid = ${jid} 
+	</update>
 </mapper>

@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 	
-	<select id="findAfterBuy" parameterType="java.lang.Integer" resultType="BetSsq">
+	<select id="findAfterBuy" parameterType="UserSsq" resultType="BetSsq">
 		select usid,ssq.userid as userid,username,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum 
 			from
 			(
@@ -30,6 +30,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			inner join
 			(select userid,username from users) u
 			on ssq.userid = u.userid
+	</select>
+	
+	
+	<select id="findUserSsqBetBySsqIssue" parameterType="java.lang.String" resultType="BetSsq">
+		select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
+			(select usid,userid,orderid,ordertime,ssq_issue from userSsq) a
+			inner join
+			(select usid,redball,blueball,sigprice,multinum from betSsq) b
+			on a.usid = b.usid
+			where ssq_issue=#{ssq_issue}	
 	</select>
 	
 </mapper>

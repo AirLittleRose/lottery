@@ -10,11 +10,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 批量添加 -->
 	<insert id="addLotteryResult" parameterType="LotteryResult">
-		insert into lotteryResult(sq_issue,resulttime,redball,blueball) values
+		insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values
 		<foreach collection="list" open="" close="" separator="," item="item">
-			(#{item.sq_issue},#{item.resulttime},
+			(#{item.ssq_issue},#{item.resulttime},
 			#{item.redball},#{item.blueball} )
 		</foreach>
 	</insert>
+	
+	<delete id="deleteOldResult">
+		delete from lotteryResult
+	</delete>
+	
+	<select id="findLotteryResult" parameterType="java.lang.String" resultType="LotteryResult">
+		select ssq_issue,resulttime,redball,blueball from lotteryResult where ssq_issue=#{ssq_issue}	
+	</select>
 	
 </mapper>

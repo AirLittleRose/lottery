@@ -1,5 +1,6 @@
 package com.yc.users.biz.impl;
 
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -119,7 +120,4 @@ public class UsersBizImpl implements UsersBiz {
 		Annos as = (Annos) this.baseDao.findOne(annos, "detailAnnos");
 		return as;
 	}
-
-
-
 }
