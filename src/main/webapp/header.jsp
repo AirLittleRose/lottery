@@ -79,7 +79,7 @@
 		<ul id="topNavRight1">
 			<li>
 				<div class="mcDropMenuBox myorder">
-					<a target="_top" user="y" class="topNavHolder" href="myorder.jsp" rel="nofollow">
+					<a target="_top" user="y" class="topNavHolder" href="user/toMyorder.action" rel="nofollow">
 						<img src="images/order.png"/>
 							我的订单
 					</a>

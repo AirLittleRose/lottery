@@ -5,22 +5,28 @@
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="js/pageBar.js"></script>
 <script type="text/javascript">
+
+	
 	$(function(){
 		gopage(1);
-		
 	});
 	
 	function gopage( pages ){
-		var checkValue="1";
+		var checkValue=$("#lotteryType").val();
 		$("#lotteryType").change(function(){
 			checkValue=$("#lotteryType").val();
-			console.log("------v-----   "+checkValue);
+			if(checkValue=="1"){
+				findAwardInfo(pages);
+			}
+			if(checkValue == "2"){
+				findJczqOrder(pages);
+			}
 		}); 
 		if(checkValue=="1"){
 			findAwardInfo(pages);
 		}
-		if(checkValue=="0"){
-			console.log("------v-----   "+checkValue);
+		if(checkValue=="2"){
+			findJczqOrder(pages)
 		}
 		
 	}
@@ -63,6 +69,53 @@
 
 	}
 	
+	//竞彩足球
+	function findJczqOrder(pages){
+		$.ajax({
+			type:"POST",
+			url:"findJczqOrder.action",
+			data:"pages="+pages+"&pagesize=5",
+			dataType:"JSON",
+			success:function(data){
+				if(data.code== 1){
+					$("#awardInfoBody").html("");
+					
+					$("#headSize").html("");
+					$("#headSize").html("<col width='8%'><col width='15%'><col width='25%'><col width='20%'> <col width='20%'><col width='12%'>");
+					
+					$("#infoHead").html("");
+					var head = "<tr><th>彩种</th><th>购彩时间</th><th>订单号</th><th>过关方式</th><th>最后开奖时间</th><th>已获奖金(元)</th></tr>";
+					
+					$("#infoHead").html(head);
+					var str = ""
+					$(data.rows).each(
+							function(index,item){ 
+								str += "<tr><td>竞彩足球</td>"
+									+"<td>"+ item.buy_time.substring(0,19) +"</td>"
+									+"<td>"+ item.order_id +"</td>"
+									+"<td>"+ item.guoguan_type +"串1</td>"
+									+"<td>"+ addDate(item.last_time.substring(0,10),1) +"</td>"
+									+"<td>"+ item.bonus +"</td>";
+							});
+					$("#awardInfoBody").html(str);
+					$.createPageBar( data,"pagebardiv" );
+					
+				}else{
+					alert("查询失败！原因"+data.msg);
+				}
+			}
+		});
+
+	}
+	
+	function addDate(date,add){
+		var s = date;
+		s = s.replace(/-/g,"/");
+		var d = new Date(s);
+		d.setDate(d.getDate() + add);
+		var m = d.getMonth() + 1;
+		return d.getFullYear() + '-' + m + '-' + d.getDate();
+	}
 </script>
 
 <style>
@@ -125,7 +178,7 @@ tr:hover {
 		</select>
       </div>
       <table class="tableData">
-        <colgroup>
+        <colgroup id="headSize">
         <col width="8%">
         <col width="8%">
         <col width="15%">
@@ -136,7 +189,7 @@ tr:hover {
         <col width="8%">
         <col width="12%">
         </colgroup>
-        <thead>
+        <thead id="infoHead">
         	<tr>
 	          	<th style="width:100px">彩种</th>
 	          	<th style="width:100px">期号</th>
