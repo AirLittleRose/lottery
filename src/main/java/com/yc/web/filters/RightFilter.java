@@ -22,8 +22,6 @@ public class RightFilter implements Filter {
 		HttpSession session=req.getSession();
 		if(   session.getAttribute("users")==null){
 			resp.sendRedirect("../index.action");
-		}else if(session.getAttribute("manager")==null){
-			resp.sendRedirect("../index.action");
 		}else{
 			chain.doFilter(request, response);
 		}

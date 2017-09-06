@@ -48,7 +48,7 @@
 		<task:scheduled ref="SoccerTask" method="saveLeague" cron="0 0/1 * * * ? "/>
 		<task:scheduled ref="SoccerTask" method="saveTeam" cron="0 0/1 * * * ? "/>
 		<task:scheduled ref="SoccerTask" method="savaGame" cron="0 0/1 * * * ? "/>
-		<task:scheduled ref="SoccerTask" method="saveResult" cron="0 0/1 * * * ? "/> --> 
+		<task:scheduled ref="SoccerTask" method="saveResult" cron="0 0/1 * * * ? "/> -->
 	</task:scheduled-tasks>
 
 </beans>

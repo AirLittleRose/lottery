@@ -40,17 +40,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	 
 	 <!-- 查出用户所有的订单id -->
-	 <select id="selectAllOrder" resultType="Jczq">
+	 <select id="selectAllOrder" resultType="Jczq_order">
 	        select * from jczq_order where userid = #{userid}
+	        order by buy_time desc
+	        <if test="start != null and pagesize != null">
+				limit #{start},#{pagesize}
+			</if>
 	 </select>
 	 
 	 <select id="selectOrderDetail" resultType="OrderDetail" parameterType="Jczq_order">
-	 	select order_id,guoguan_type,amount,bonus,last_time,buy_time,game_id,predict,odds,times,result,league_name,home_name,away_name,game_time from
+		select order_id,guoguan_type,amount,bonus,last_time,buy_time,c.game_id,predict,odds,times,result,league_name,home_name,away_name,game_time from
 			(select a.order_id,guoguan_type,amount,bonus,last_time,buy_time,game_id,predict,odds,times,result from
 				(select * from 
 					jczq_order 
 				 where 
-					order_id = #{order_id})a
+					order_id in (select order_id from jczq_order where userid = #{userid}))a
 			left join
 				(select * from jczq)b
 			on
@@ -77,6 +81,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					f.away_id = g.team_id)d
 			on
 				c.game_id = d.game_id
+			order by buy_time desc
+			<if test="start != null and pagesize != null">
+				limit #{start},#{pagesize}
+			</if>
 	 </select>
 	 
+	 
+	 <!-- 查出用户的订单数 -->
+	<select id="getOrderCount" resultType="double" parameterType="Jczq_order">
+		select count(*) from jczq_order where userid = #{userid} 
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

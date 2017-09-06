@@ -2,12 +2,14 @@ package com.yc.soccer.bean;
 
 import java.io.Serializable;
 
+import com.yc.bean.CommonBean;
+
 /**
  * 竞彩足球 -- 下单
  * @author xiang
  *
  */
-public class Jczq_order implements Serializable{
+public class Jczq_order extends CommonBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

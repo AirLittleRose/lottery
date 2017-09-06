@@ -241,31 +241,35 @@ public class SoccerTask {
 			org.jsoup.nodes.Document doc = Jsoup.connect("http://live.caipiao.163.com/jcbf/?date=" + date).get();
 			org.jsoup.select.Elements gameList = doc.getElementById("gameList").children();
 			for(int i=0; i<gameList.size(); i++) {
-				//比分
-				String[] score = gameList.get(i).attr("score").split(":");
-				//结果
-				int result = 0;
-				if(Integer.parseInt(score[0]) > Integer.parseInt(score[1])) {
-					result = 0;
-				}else if(Integer.parseInt(score[0]) == Integer.parseInt(score[1])) {
-					result = 1;
+				if("-".equals(gameList.get(i).attr("score"))) {
+					continue;
 				}else {
-					result = 2;
+					//比分
+					String[] score = gameList.get(i).attr("score").split(":");
+					//结果
+					int result = 0;
+					if(Integer.parseInt(score[0]) > Integer.parseInt(score[1])) {
+						result = 0;
+					}else if(Integer.parseInt(score[0]) == Integer.parseInt(score[1])) {
+						result = 1;
+					}else {
+						result = 2;
+					}
+					String game_id = "";
+					if(i<10) {
+						game_id = "00"+(i+1);
+					}else if(i >= 10 && i<100) {
+						game_id = "0"+(i+1);
+					}else {
+						game_id = (i+1)+"";
+					}
+					Jczq_result jr = new Jczq_result();
+					jr.setGame_id(prev + game_id);
+					jr.setHome_score(Integer.parseInt(score[0]));
+					jr.setAway_score(Integer.parseInt(score[1]));
+					jr.setResult(result);
+					list.add(jr);
 				}
-				String game_id = "";
-				if(i<10) {
-					game_id = "00"+(i+1);
-				}else if(i >= 10 && i<100) {
-					game_id = "0"+(i+1);
-				}else {
-					game_id = (i+1)+"";
-				}
-				Jczq_result jr = new Jczq_result();
-				jr.setGame_id(prev + game_id);
-				jr.setHome_score(Integer.parseInt(score[0]));
-				jr.setAway_score(Integer.parseInt(score[1]));
-				jr.setResult(result);
-				list.add(jr);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -9,18 +9,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 添加比赛信息 -->
 	<insert id="savaGame">
-		insert into game(game_id, oh, od, oa,
-		league_id,
-		home_id, away_id, game_time)
-		select distinct(xid) as
-		game_id, oh,
-		od, oa,
-		lid as league_id, htid as home_id,
-		gtid as away_id, mtime as game_time
-		from
-		info where add_date = (select max(add_date) from info)
-		and xid not
-		in (select game_id from game)
+	   insert into game(game_id, oh, od, oa,
+			league_id,
+			home_id, away_id, game_time)
+	        select game_id,oh,od,oa,league_id,home_id,away_id,game_time from 
+			(select distinct(xid) as
+			game_id, oh,
+			od, oa,
+			lid as league_id, htid as home_id,
+			gtid as away_id, mtime as game_time,
+	        count(distinct xid) 
+			from
+			info where add_date = (select max(add_date) from info)
+			and xid not
+			in (select game_id from game) group by xid)a
 	</insert>
 
 
@@ -79,6 +81,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		order by game_id asc
 	</select>
+
+	
 
 	<!-- 查出比赛数量 -->
 	<select id="getGamesCount" resultType="double" parameterType="Game">
