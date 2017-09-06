@@ -218,6 +218,5 @@ public class UsersController {
 			jm.setMsg("密码修改失败");
 		}
 		return jm;
-	}
-	
+	}	
 }

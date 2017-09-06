@@ -1,24 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
-
-<%@ include file="header_login.jsp" %>
+<%@ include file="../../header_login.jsp" %>
 
 
 <link rel="stylesheet" href="css/login.css" media="all">
 <link rel="stylesheet" href="css/drag.css" media="all">
-<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="js/login.js" type="text/javascript"></script>
 <script src="js/drag.js" type="text/javascript"></script>
 
 
 <script type="text/javascript">
-//判断是否敲击了Enter键 
-$(document).keyup(function(event){ 
-    if(event.keyCode ==13){ 
-      $("#dologin").trigger("click"); 
-    } 
-});
-
 $(function(){
 	$("#dologin").click(function(){
 		$.ajax({
@@ -28,14 +20,8 @@ $(function(){
 			dataType:"JSON",
 			success:function(data){
 				if(data.code== 1){
-					alert("登录成功！");					
-					//如果通过注册页面进入的登录页面,就跳到主页,剩下的都返回原来的网页
-					var fromurl = document.referrer;
-					if(fromurl=="http://localhost:8080/lottery/toRegister.action"){
-						location.href="http://localhost:8080/lottery/index.action";
-					}else{
-						history.go(-1);
-					}
+					alert("登录成功！");
+					location.href="index.action";
 				}else{
 					alert("登录失败！原因"+data.msg);
 				}

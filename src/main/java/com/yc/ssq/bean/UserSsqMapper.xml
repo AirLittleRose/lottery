@@ -12,7 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into userSsq(userid,orderid,ordertime,ssq_issue) values( #{userid},#{orderid}, now(),#{ssq_issue} )
 	</insert>
 
-	<select id="findSsqIssue" resultType="UserSsq">
-		select distinct ssq_issue from userSsq order by ssq_issue desc	
+	<select id="findSsqIssue" resultType="UserSsq" parameterType="java.lang.Integer">
+		select distinct ssq_issue from userSsq where userid=#{userid} order by ssq_issue desc	
 	</select>
+	
+	<update id="updateStatus" parameterType="java.lang.String">
+		update userSsq set status = 1 where ssq_issue=#{ssq_issue}
+	</update>	
+
 </mapper>

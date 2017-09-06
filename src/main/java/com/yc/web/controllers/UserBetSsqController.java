@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.yc.ssq.bean.AwardInfo;
 import com.yc.ssq.bean.BetSsq;
 import com.yc.ssq.bean.UserSsq;
 import com.yc.ssq.biz.UserSsqBiz;
@@ -30,8 +32,8 @@ public class UserBetSsqController {
 	
 	private DateUtil dateUil;
 	
-	@RequestMapping("/userBetSsq.action")
-	public JsonModel userBetSsq(HttpServletRequest request,HttpSession session) throws Exception {
+	@RequestMapping("/user/userBetSsq.action")
+	public JsonModel userBetSsq(HttpServletRequest request,HttpSession session) {
 		JsonModel jm = new JsonModel();
 		String[] redlist = request.getParameterValues("redball");
 		String[] bluelist = request.getParameterValues("blueball");
@@ -59,7 +61,13 @@ public class UserBetSsqController {
 		Users user = (Users) session.getAttribute("users");
 		ussqs.setUserid(user.getUserid());
 		ussqs.setOrderid();
-		ussqs.setSsq_issue();
+		try {
+			ussqs.setSsq_issue();
+		} catch (Exception e) {
+			e.printStackTrace();
+			jm.setCode(0);
+			jm.setMsg(e.getMessage());
+		}
 		List<BetSsq> betlists = new ArrayList<BetSsq>();
 		for(int i=0;i<redball.size();i++){
 			
@@ -91,8 +99,67 @@ public class UserBetSsqController {
 		return jm;
 	}
 	
-	@RequestMapping("/toBuyInfo.action")
+	@RequestMapping("/user/toBuyInfo.action")
 	public void toBuyInfo(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		request.getRequestDispatcher("/WEB-INF/pages/buyInfo.jsp").forward(request, response);
+	}
+	
+	@RequestMapping("/user/toMyorder.action")
+	public void toMyorder(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException{
+		this.findSsqIssue(request,session);
+		request.getRequestDispatcher("/WEB-INF/pages/myorder.jsp").forward(request, response);
+	}
+	
+	@RequestMapping("/user/findSsqIssue.action")
+	public JsonModel findSsqIssue(HttpServletRequest request,HttpSession session){
+		JsonModel jm = new JsonModel();
+		try {
+			Integer userid = ((Users) session.getAttribute("users")).getUserid();
+			List<UserSsq> lists = this.userSsqBiz.findSsqIssue(userid);
+			if(lists!=null){
+				request.getSession().setAttribute("ssqIssueList", lists);
+				jm.setCode(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			jm.setCode(0);
+			jm.setMsg(e.getMessage());
+		}
+		
+		return jm;		
+	}
+	
+	@RequestMapping("/user/findAwardInfo.action")
+	public JsonModel findAwardInfo(HttpServletRequest request,HttpSession session){
+		Integer pages = Integer.parseInt(  request.getParameter("pages").toString()  );
+		Integer pagesize = Integer.parseInt(  request.getParameter("pagesize")  );
+		Integer start = (pages-1)*pagesize;
+		JsonModel jm = new JsonModel();
+		AwardInfo ai = new AwardInfo();
+		Integer userid = ((Users) session.getAttribute("users")).getUserid();
+		ai.setUserid(userid);
+		ai.setStatus(1);
+		ai.setPages(pages);
+		ai.setPagesize(pagesize);
+		ai.setStart(start);
+		try {
+			List<AwardInfo> list = this.userSsqBiz.findAwardInfo(ai);
+			if(list!=null){
+				request.getSession().setAttribute("awardInfoList", list);
+				jm.setCode(1);
+				jm.setRows(list);
+				jm.setPages(pages);
+				jm.setPagesize(pagesize);
+			}
+			Integer count = this.userSsqBiz.findAwardInfoCount(ai);
+			if(count!=null){
+				jm.setTotal(count);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			jm.setCode(0);
+			jm.setMsg(e.getMessage());
+		}
+		return jm;
 	}
 }

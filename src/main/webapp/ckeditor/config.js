@@ -36,7 +36,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	
-	
 	//设置宽度
 	config.width = 800;
 	
@@ -45,6 +44,7 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	//上传图片的服务器端地址
 	config.filebrowserImageUploadUrl = "uploadSinglePic.action"
+
 };
 
 
