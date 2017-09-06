@@ -1,0 +1,201 @@
+
+*{
+	padding: 0px;
+	margin: 0px auto;
+}
+#loginBack{
+	padding: 0px;
+	margin: 0px auto;
+	background-image:url(../images/back.jpg);	
+}
+
+
+/*��¼���css*/
+.loginbottom {
+	z-index: 9998;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	display:none
+}
+
+#first{
+	float:left;
+	margin:30px 0px 0px 110px;	
+}
+
+.login {
+	z-index:9999;
+	position: fixed;
+	top:50%;
+	left:50%;
+	width:420px;
+	height:420px;
+	margin:-180px 0 0 -200px;
+	border-radius:10px;
+	border:solid 0.5px #999;
+	background-color:#FFF;
+	display:none;
+	box-shadow: 0 0 5px #999;
+}
+
+/*�رհ�ť*/
+.login span {
+	position: absolute;
+	right:25px;
+	background: #ffffff;
+	border: 0px;
+	width: 25px;
+	height: 25px;
+	
+}
+
+.login span a {
+	margin:10px 0 0 15px;
+	display: block;
+	font-size: 16px;
+	color:#000;
+	text-decoration: none;
+}
+
+.close:hover{
+  -webkit-animation:rotate 1s .2s ease both;
+  -moz-animation:rotate 1s .2s ease both;
+  }
+  @-webkit-keyframes rotate{
+  0%{transform: rotate(0deg);}
+  75%{transform: rotate(360deg);}
+  100%{transform: rotate(0deg);}
+  }
+  @-moz-keyframes rotate{
+  0%{transform: rotate(0deg);}
+  75%{transform: rotate(360deg);}
+  100%{transform: rotate(0deg);}
+  }
+
+/*�û���css*/
+#user{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	98px 0 0 50px;
+	
+}
+
+#userpassword{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	20px 0 0 50px;	
+}
+#username{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+#password{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+
+
+
+#mana{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	98px 0 0 50px;
+	
+}
+
+#manapwd{
+	height:40px;
+	width:320px;
+	border:solid 1px #999;
+	margin:	20px 0 0 50px;	
+}
+#mname{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+#pwd{
+	height:40px;
+	width:270px;
+	border:0px;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:14px;	
+	color:#999;
+
+}
+
+
+/*��¼��ť*/
+#dosubmit{
+	height:40px;
+	width:320px;
+	margin:60px 0 0 50px;
+}
+
+#dologin{
+	font-size:18px;	
+	color:#FFF;
+	height:40px;
+	width:320px;
+
+	border:0px;
+	background-color:#CD8162;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+#doManaLogin{
+	font-size:18px;	
+	color:#FFF;
+	height:40px;
+	width:320px;
+
+	border:0px;
+	background-color:#CD8162;
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+	
+/*��������ע��*/
+#toother{
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size:12px;	
+	margin:12px 0 0 50px;
+}
+
+#toother a{
+	color: #666;
+	cursor:pointer;
+	text-decoration:none;
+}
+		
+#toother a:visited {color: #999}	/* �ѷ��ʵ����� */
+#toother a:hover {color: #333}
+
+
+
+
+
+
+

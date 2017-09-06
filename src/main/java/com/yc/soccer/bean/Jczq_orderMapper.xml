@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.soccer.bean.Jczq_orderMapper">
+
+	<!-- 加入带日志的 ehcache 缓存 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+
+	<!-- 添加下注订单  -->
+	<insert id="addOrder" parameterType="Jczq_order" useGeneratedKeys="true" keyProperty="joid">
+		insert into jczq_order(userid, order_id, guoguan_type, amount, bonus, last_time, buy_time)
+		values(#{userid}, #{order_id}, #{guoguan_type}, #{amount}, #{bonus}, #{last_time}, now())
+	</insert>
+
+</mapper>
