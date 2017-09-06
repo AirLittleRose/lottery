@@ -28,7 +28,7 @@ tr:hover {
 		<p style="line-height:52px;font-family:华文新魏;font-size:40px;color: #ED2240;">购买成功！！！</p>
 		<p style="font-size:12px;">
 			<a href="soccer.jsp">继续购买</a>&emsp;&emsp;&emsp;
-			<a href="#">查看所有订单</a>	
+			<a href="user/toMyorder.action">查看所有订单</a>	
 		</p>
 		
 	</div>
