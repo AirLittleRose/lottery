@@ -56,6 +56,7 @@
 				$("#welcome").html('hi~ 欢迎来到人人乐彩票！');
 				$("#loginRegister").html('');
 				$("#loginuser").html(data.obj.username);
+				$("#loginuser").attr('href','user/myOrder.action');
 				$("#logout").html('安全退出');				
 			}else{
 			
@@ -88,7 +89,9 @@
 			</li>
 			<li>
 				<div class="mcDropMenuBox">
+
 					<a target="_top" user="y" class="topNavHolder" href="user/toMyorder.action" rel="nofollow">
+
 					我的彩票</a>
 					<b class="holderLine">|</b>
 					

@@ -108,16 +108,14 @@ public class UsersBizImpl implements UsersBiz {
 		jm.setRows(list);
 		return jm;
 	}
-
-	@Override
-	public Annos isAnnosExist(Annos annos) {
-		Annos as = (Annos) this.baseDao.findOne(annos, "konwAnnos");
-		return as;
-	}
 	
+	/**
+	 * 查看公告详情
+	 */
 	@Override
-	public Annos isAnnosDetail(Annos annos) {
-		Annos as = (Annos) this.baseDao.findOne(annos, "detailAnnos");
+	public Annos isAnnosExist(Annos annos) {		
+		Annos as = (Annos) baseDao.findOne(annos, "konwAnnos");
 		return as;
-	}
+	}	
+
 }

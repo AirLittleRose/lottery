@@ -31,13 +31,18 @@ $(function(){
 					alert("登录成功！");					
 					//如果通过注册页面进入的登录页面,就跳到主页,剩下的都返回原来的网页
 					var fromurl = document.referrer;
+					var pass = document.referrer.toString();
+					var frompass = pass.indexOf("?");				
 					if(fromurl=="http://localhost:8080/lottery/toRegister.action"){
+						location.href="http://localhost:8080/lottery/index.action";
+					}else if(frompass=="56"){
 						location.href="http://localhost:8080/lottery/index.action";
 					}else{
 						history.go(-1);
 					}
 				}else{
 					alert("登录失败！原因"+data.msg);
+					location.reload();
 				}
 			}
 		});
@@ -73,7 +78,7 @@ $(function(){
 
 <div class="login">
 		<span>
-   		  <a href="main.action" class="close-login">
+   		  <a href="index.action" class="close-login">
          	<img class="close" src="images/close.png"/>
    		 </a>
     	</span>

@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into jczq_order(userid, order_id, guoguan_type, amount, bonus, last_time, buy_time)
 		values(#{userid}, #{order_id}, #{guoguan_type}, #{amount}, #{bonus}, #{last_time}, now())
 	</insert>
-
+	
 	<!-- 查出每个过关订单的下注赔率和倍数 -->
 	<!-- 
 		1.统计每个订单的中奖数量 (即在每个订单号(order_id)下注信息(jczq)中result=1的个数)
@@ -91,11 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <!-- 查出用户的订单数 -->
 	<select id="getOrderCount" resultType="double" parameterType="Jczq_order">
 		select count(*) from jczq_order where userid = #{userid} 
-	</select>
+	</select>	
 	
-	
-	
-	
-	
-	
+
 </mapper>

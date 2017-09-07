@@ -6,7 +6,7 @@
 <script type="text/javascript" src="easyui15/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="easyui15/jquery.edatagrid.js"></script>
  	
- 	<title>人人乐彩票管理后台欢迎您</title>
+ 	<title>人人乐彩票公告管理后台欢迎您</title>
  	<script type="text/javascript">
  	<%--	$(function(){
  			$('#westpanel').panel({
@@ -24,16 +24,19 @@
  						"text":"新增公告",
  						"attributes":{
  							"url":"<iframe src='addNews.action' style='width:100%;height:100%;border:1px;'/>"
- 						}
- 					},{
+ 						} 			
+ 					}]
+ 				/*,{
  						"text":"公告维护",
  						"attributes":{
  							"url":"<iframe src='WEB-INF/pages/manaNews.jsp'style='width:100%;height:100%;border:0px;'/>"
  						}
- 					}]
+ 					}]*/
+ 				
  			}];
+ 			showTree("newsTree",treeData);
  			
- 			var treeDataLot=[{
+ 			/*var treeDataLot=[{
  				"text":"彩票管理",
  				"state":"closed",
  				"children":[{
@@ -49,7 +52,7 @@
  					}]
  			}];
  			
- 			/*
+ 			
  			//相当于$(document).ready(function(){});
  			$("#newsTypeTree").tree({
  				data:treeData, 	   //将这里改成：url:" right.action" 这个地址会得到一个上面treeData 这样的字符串
@@ -61,10 +64,11 @@
  					}
  				}
  			}); 
- 			*/ 			
+ 						
  			
  			showTree("newsTree",treeData);
- 			showTree("LotTree",treeDataLot); 		 		
+ 			showTree("LotTree",treeDataLot); 
+ 			*/
  		});
  		
  		
@@ -107,7 +111,7 @@
 	
 	<div class="easyui-layout" style="width:100%; height:750px;">
 			<div data-options="region:'north'" style="height:50px">
-				<h1 style="text-align:center;line-height:40px;">人人乐彩票后台管理</h1>
+				<h1 style="text-align:center;line-height:40px;">人人乐彩票公告后台管理</h1>
 			
 			</div>
 			
@@ -130,7 +134,8 @@
 					</div>
 					
 				</div>
-							
+				
+				<!-- 		
 				<div title="彩票管理" style="overflow:auto; padding:10px; overflow:scroll;">
 					<div class="easyui-panel" style="padding:5px">
 						<ul id="LotTree" class="easyui-tree" data-options="animate:true,state:closed,fit:true">
@@ -145,6 +150,8 @@
 				<div title="系统备份还原"  style="overflow:auto; padding:10px;">系统备份还原</div>					
 				
 				<div title="权限管理"  style="overflow:auto; padding:10px;">权限管理</div>
+				 -->
+				
 		
 			</div>
 				

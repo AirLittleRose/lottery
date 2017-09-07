@@ -16,6 +16,7 @@ public interface Jczq_orderBiz {
 	 * 添加订单信息
 	 * @param jo
 	 */
+
 	void addOrder(Jczq_order jo,List<Jczq> jczqs);
 	
 	void calculateBonus();
