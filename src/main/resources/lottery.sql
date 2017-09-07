@@ -178,7 +178,7 @@ create table manager(
 	pwd varchar(10)
 );
 select * from manager;
-
+insert into manager(mname,pwd) values('a','a')
 --咨询表
 create table news(
 	newid int primary key auto_increment,
