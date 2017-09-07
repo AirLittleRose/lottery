@@ -19,6 +19,7 @@ function bet(){
 	for(var i=0;i<bluelist.length;i++){
 		blueball[i] = bluelist[i].innerHTML;
 	}
+
 	console.log(multinum);
 	console.log(redball);
 	console.log(blueball);
@@ -353,6 +354,7 @@ function bet(){
 							</div>
 						
 							<p class="selectInfo"><span>您当前选中了<strong class="red_c_ba2636">0</strong>个红球，<strong class="blue_c_1e50a2">0</strong>个蓝球，共<strong class="red_c_ba2636">0</strong>注，共<strong class="red_c_ba2636">0</strong>元</span><i></i></p>
+
 						</div>
 					</div>
 				

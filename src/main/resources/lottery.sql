@@ -1,4 +1,3 @@
-
 create database lottery
 
 use lottery
@@ -69,11 +68,6 @@ create table game(
     game_time datetime
 )
 
-
-
-
-
-
 -- 通过info的信息插入新的League
 insert into league(league_id,league_name,color)
 		(select distinct(lid) as league_id ,ln as league_name,cl as color from info
@@ -96,98 +90,6 @@ team_id from team)
 insert into game(game_id, oh, od, oa, league_id, home_id, away_id, game_time)
 select distinct(xid) as game_id, oh, od, oa, lid as league_id, htid as home_id, gtid as away_id, mtime as game_time from info where add_date = (select max(add_date) from info) and xid not in (select game_id from game)
 ------------------------------------------
-
---联赛
-	--Id
-	--联赛名
-create table league(
-	leagueid int primary key,
-	leaguename varchar(50) not null,
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50)
-) 
-
-
---球队
-	--id
-	--联赛id
-	--球队名
-create table team(
-	teamid int primary key,
-	leagueid int,
-	teamname varchar(50) not null ,	
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-	foreign key (leagueid) references league(leagueid)
-)
-
-
---比赛
-	--id
-	--赛季id
-	--主场id
-	--客场id
-	--主场得分
-	--客场得分
-	--比赛状态
-		--	未开始=0,比赛取消=3,比赛进行中=32,比赛 结束 =30
-	--比赛日期
-create table game(
-	gameid varchar(20) primary key,
-	seasonid int not null,
-	leagueid int,
-	homeid int not null,
-	awayid int not null,
-	homescore int,
-	awayscore int,
-	gamestatus int check (matchstatus in (0,3,30,32)),
-	matchdate varchar(20) not null,
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-    foreign key (leagueid) references league(leagueid),
-    foreign key (homeid) references team(teamid),
-    foreign key (awayid) references team(teamid)
-)
-  --单注足彩投注信息
-	--id
-	--比赛id
-    --预测结果
-    	--0主胜, 1平, 2主败
-    --开奖状态
-    	--0 未开奖, 1已开奖
-create table soccer(
-	sid int primary key auto_increment,
-    gameid char(20),
-    predictresult int check(predictresult in (0,1,2)),
-    status int check(status in (0,1)),
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-    foreign key (gameid) references game(gameid)
-)
-
-
---用户投注足彩
-	--投注id
-	--单号
-	--用户id
-	--投注信息id
-	--投注时间
-create table user_soccer(
-	usid int primary key auto_increment,
-	orderid int not null unique,
-	userid int ,
-	sid int,
-	ordertime datetime not null,
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-    foreign key (userid) references users(userid),
-    foreign key (sid) references soccer(sid)
-)
 
 
 
@@ -217,7 +119,15 @@ select * from users;
 delete from  users;
 drop table users;
 
+--管理员表
+create table manager(
+	mid int primary key auto_increment,
+	mname varchar(10) not null,
+	pwd varchar(10)
+);
+select * from manager;
 
+--咨询表
 create table news(
 	newid int primary key auto_increment,
 	news varchar(200) not null,
@@ -228,103 +138,27 @@ create table news(
 drop table news;
 select * from news;
 
+--公告表
+	--编号(凭编号排序)
+	--标题
+	--内容
+	--发布日期
+	--来源于哪个管理员
+	--备用字段1
+	--备用字段2
+create table annos(
+  anid int primary key auto_increment,  
+  title varchar(400) not null, 
+  adate date,  
+  content varchar(4000),  
+  auth varchar(100), 
+  temp1 varchar(50),
+  temp2 varchar(50)  
+);
 
-select * from league;
-select * from team;
-select * from game;
-
---联赛
-	--Id
-	--联赛名
-create table league(
-	leagueid int primary key,
-	leaguename varchar(50) not null,
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50)
-) 
-
-
---球队
-	--id
-	--联赛id
-	--球队名
-create table team(
-	teamid int primary key,
-	leagueid int,
-	teamname varchar(50) not null ,	
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-	foreign key (leagueid) references league(leagueid)
-)
-
-
---比赛
-	--id
-	--赛季id
-	--主场id
-	--客场id
-	--主场得分
-	--客场得分
-	--比赛状态
-		--	未开始=0,比赛取消=3,比赛进行中=32,比赛 结束 =30
-	--比赛日期
-create table game(
-	gameid varchar(20) primary key,
-	seasonid int not null,
-	leagueid int,
-	homeid int not null,
-	awayid int not null,
-	homescore int,
-	awayscore int,
-	gamestatus int check (matchstatus in (0,3,30,32)),
-	matchdate varchar(20) not null,
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-    foreign key (leagueid) references league(leagueid),
-    foreign key (homeid) references team(teamid),
-    foreign key (awayid) references team(teamid)
-)
-  --单注足彩投注信息
-	--id
-	--比赛id
-    --预测结果
-    	--0主胜, 1平, 2主败
-    --开奖状态
-    	--0 未开奖, 1已开奖
-create table soccer(
-	sid int primary key auto_increment,
-    gameid char(20),
-    predictresult int check(predictresult in (0,1,2)),
-    status int check(status in (0,1)),
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-    foreign key (gameid) references game(gameid)
-)
-
-
---用户投注足彩
-	--投注id
-	--单号
-	--用户id
-	--投注信息id
-	--投注时间
-create table user_soccer(
-	usid int primary key auto_increment,
-	orderid int not null unique,
-	userid int ,
-	sid int,
-	ordertime datetime not null,
-	temp1 varchar(50),
-    temp2 varchar(50),
-    temp3 varchar(50),
-    foreign key (userid) references users(userid),
-    foreign key (sid) references soccer(sid)
-)
-
+select * from annos;
+drop table annos;
+delete from annos;
 
 insert into users(username,password,tel,email,idcard) values
 	('adc','adc','15574749058','1092318651@qq.com','433711199804237672')
@@ -353,7 +187,7 @@ select * from userSsq;
 update userSsq set status = 0 where ssq_issue='2017100';
 alter table userSsq alter column status set default 0;
 select distinct ssq_issue from userSsq order by ssq_issue desc;
-delete from userSsq;
+delete from userSsq where ssq_issue='2017099';
 delete from betSsq;
 
 alter table userSsq change column temp2 status int;
@@ -413,12 +247,21 @@ drop table userSsq;
 alter table betSsq modify column redball varchar(50) not null;
 delete from userSsq where usid=22
 
-	select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
-		(select usid,userid,orderid,ordertime,ssq_issue from userSsq) a
+	select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,redball,blueball,sigprice,multinum from
+		(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=0) a
 		inner join
 		(select usid,redball,blueball,sigprice,multinum from betSsq) b
 		on a.usid = b.usid
-		where ssq_issue='2017102'
+		where userid=2
+		order by ssq_issue desc,ordertime desc
+		
+select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,redball,blueball,sigprice,multinum,
+				count(distinct(redball)) as waitcount from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=0) a
+			inner join
+			(select usid,redball,blueball,sigprice,multinum from betSsq) b
+			on a.usid = b.usid
+			where userid=2
 -----------------------------------------------------------------------------
 select ssq_issue,resulttime,redball,blueball from lotteryResult where ssq_issue='2017099';
 --双色球开奖结果	lotteryResult
@@ -437,28 +280,20 @@ create table lotteryResult(
     temp2 varchar(50),
     temp3 varchar(50)
 )
-
 insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017102','2017-08-31','04 08 10 14 18 20','11')
-delete from lotteryResult;
+insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017103','2017-09-03','01 21 23 25 31 33','01')
+insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017104','2017-09-05','01 14 15 20 23 30','14')
+delete from lotteryResult where lrid=104;
 select * from lotteryResult;
 alter table lotteryResult modify column resulttime varchar(30) not null;
 alter table lotteryResult drop column validity
 -----------------------------------
-select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
-				multinum,status,grade,award
-from
-(select usid,redball,blueball,grade,award from awardInfo ) ai
-inner join
-(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
-	from
-	(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
-	inner join 
-	(select usid,multinum from betSsq) b
-	on a.usid=b.usid
-) ssq
-on ssq.usid = ai.usid
-where userid=2
-order by ssq_issue desc,grade asc
+select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
+			(select usid,userid,orderid,ordertime,ssq_issue from userSsq) a
+			inner join
+			(select usid,redball,blueball,sigprice,multinum from betSsq) b
+			on a.usid = b.usid
+			where ssq_issue='2017103'
 -------------------------------------
 --中奖信息		awardInfo
 	--aid
@@ -479,6 +314,7 @@ create table awardInfo(
     temp2 varchar(50),
     temp3 varchar(50)
 )
+insert into awardInfo(usid,redball,blueball,grade,award) values
 
 select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
 				multinum,status,grade,award,count(distinct(redball)) as awardInfocount
@@ -519,7 +355,36 @@ create table notAwardInfo(
 delete from notAwardInfo
 drop table notAwardInfo;
 
-
+select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status
+		from
+		(select usid,redball,blueball from notAwardInfo ) ai
+		inner join
+		(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+			from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
+			inner join 
+			(select usid,multinum from betSsq) b
+			on a.usid=b.usid
+		) ssq
+		on ssq.usid = ai.usid
+		where userid=2
+		order by ssq_issue desc
+		
+select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status,count(distinct(redball)) as awardInfocount
+		from
+		(select usid,redball,blueball from notAwardInfo ) ai
+		inner join
+		(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+			from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
+			inner join 
+			(select usid,multinum from betSsq) b
+			on a.usid=b.usid
+		) ssq
+		on ssq.usid = ai.usid
+		where userid=2		
 --彩票
 	--彩票id  用来在数据库中唯一标识
 	--彩票类型     1：双色球       2：足彩   (关联  双色球玩法表        足彩玩法表)
@@ -624,5 +489,3 @@ create table ssqresult(
     temp2 varchar(50),
     temp3 varchar(50)
 )
-
-

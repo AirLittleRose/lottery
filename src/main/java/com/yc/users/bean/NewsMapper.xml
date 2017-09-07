@@ -10,19 +10,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
 	
 	<!-- 添加新闻 -->
-	<insert id="saveNews" parameterType="News" useGeneratedKeys="true" keyProperty="newid">
+	<insert id="saveNews" useGeneratedKeys="true" keyProperty="newid">
 		insert into news(news) values(#{news})
 	</insert>	
 	
 	<!-- 查出新闻数据 -->
-	<select id="getNews" resultType="News" parameterType="News">
+	<select id="getNews" resultType="News">
 		select * from news limit 10
 	</select>
 	
 	<!-- 更新新闻表数据 -->
-	<delete id="updateNews">
+	<update id="cleanNews">
 		truncate table news
-	</delete>
+	</update>
 	
 	
 </mapper>

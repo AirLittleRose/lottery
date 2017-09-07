@@ -1,5 +1,6 @@
 package com.yc.ssq.biz;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yc.ssq.bean.AwardInfo;
 import com.yc.ssq.bean.BetSsq;
 import com.yc.ssq.bean.LotteryResult;
+import com.yc.ssq.bean.NotAwardInfo;
 import com.yc.ssq.bean.UserSsq;
 
 @Service
@@ -37,6 +39,16 @@ public interface UserSsqBiz {
 	 */
 	public List<UserSsq> findSsqIssue(Integer userid) throws Exception;
 	
+	/**
+	 * 查看未开奖的订单
+	 * @param bs
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BetSsq> findWaitOpen(BetSsq bs)throws Exception;
+	
+	public Integer findWaitOpenCount(BetSsq bs)throws Exception;
+	
 	/**定时器
 	 * 每次开奖的时候，将每期的结果存入数据库
 	 * @param lotteryResultList
@@ -44,6 +56,7 @@ public interface UserSsqBiz {
 	 */
 	public void addLotteryResult()throws Exception;
 	
+	public void getLotteryData() throws IOException;
 	/**定时器
 	 * 比较开奖结果和在本站购买的双色球，然后把中奖的放在中奖表里，未中奖的放在未中奖表里
 	 * 
@@ -60,4 +73,15 @@ public interface UserSsqBiz {
 	public List<AwardInfo> findAwardInfo(AwardInfo ai)throws Exception;
 	
 	public Integer findAwardInfoCount(AwardInfo ai)throws Exception;
+
+	/**
+	 * 查找用户的未中奖信息
+	 * @param ai  需要：userid status
+	 * @return
+	 * @throws Exception
+	 */
+	public List<NotAwardInfo> findNotAwardInfo(NotAwardInfo ai)throws Exception;
+	
+	public Integer findNotAwardInfoCount(NotAwardInfo ai)throws Exception;
+
 }

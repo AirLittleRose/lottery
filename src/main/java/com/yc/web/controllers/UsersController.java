@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yc.users.bean.Manager;
 import com.yc.users.bean.Users;
 import com.yc.users.biz.NewsBiz;
 import com.yc.users.biz.UsersBiz;
@@ -75,7 +76,8 @@ public class UsersController {
 	
 	@RequestMapping("users_logout.action")
 	public void logout(HttpSession session,HttpServletResponse response){
-		session.removeAttribute("users");
+		session.setAttribute("users", null);
+		session.removeAttribute("users");		
 		try {
 			response.sendRedirect("index.action");
 		} catch (IOException e) {
@@ -216,7 +218,5 @@ public class UsersController {
 			jm.setMsg("密码修改失败");
 		}
 		return jm;
-	}
-
-	
+	}	
 }

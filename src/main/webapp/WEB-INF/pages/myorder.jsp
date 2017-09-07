@@ -6,84 +6,21 @@
 <script type="text/javascript" src="js/pageBar.js"></script>
 <script type="text/javascript">
 
-	function findButton(){
-		var lotteryType="1";
-		$("#lotteryType").change(function(){
-			lotteryType=$("#lotteryType").val();
-		});
-		var winStatus ="1";
-		$("#winStatus").change(function(){
-			winStatus=$("#winStatus").val();
-		});
-		var winorder="1";
-		$("#winOrder").change(function(){
-			winorder=$("#winOrder").val();
-		});
-		
-		if(lotteryType=="1"){
-			if(winStatus=="0"){
-				$("#winOrder").hide();
-			}else{
-				$("#winOrder").show();
-				if(winorder=="1"){
-				}else{
-					//findNotAwardInfo();
-				}
-			}
-		}
-		if(lotteryType=="0"){
-			console.log("------v-----   "+lotteryType);
-		}
-	}
 	
 	$(function(){
-		gopage(1);
-		
+		findSsqOrder();
 	});
 	
-	function gopage( pages ){		
-		findAwardInfo(pages);
-			
-	}
-	
-	function findAwardInfo(pages){
+	function findSsqOrder(){
 		$.ajax({
-			type:"POST",
-			url:"user/findAwardInfo.action",
-			data:"pages="+pages+"&pagesize=5",
-			dataType:"JSON",
-			success:function(data){
-				if(data.code== 1){
-					$("#awardInfoBody").html("");
-					$(data.rows).each(
-							function(index,item){  
-					//for(var i = 0;i<data.obj.length;i++){  var item=data.obj[i]; }
-						
-								var str = "  <tr ><td>双色球</td>"+
-									"<td>"+item.ssq_issue +"</td>"+
-									"<td>"+item.ordertime +"</td>"+
-									"<td>"+item.orderid +"</td>"+
-									"<td>"+item.redball +" | "+item.blueball +"</td>"+
-						          	"<td>"+item.multinum +"</td>";
-						        if(item.status==1){
-						        	str+="<td>已开奖</td>";
-						        }else{
-						        	str+="<td>未开奖</td>";
-						        }
-								str+="<td>"+item.grade +"等奖</td>"+
-									"<td>"+item.award +"</td></tr>";
-								$("#awardInfoBody").html($("#awardInfoBody").html()+str);
-							});
-					$.createPageBar( data,"pagebardiv" );
-					
-				}else{
-					alert("查询失败！原因"+data.msg);
-				}
+			url : "user/findSsqOrder.action",
+			dataType:"HTML",
+			success : function(data){
+				$("#orderDataBox").html(data);
 			}
 		});
-
 	}
-	
+
 </script>
 
 <style>
@@ -105,8 +42,8 @@ tr:hover {
        
       </div>
       <ul class="leftManu">
-        <li class="active"><a target="_self" href="myorder.html">我的订单</a><i>&gt;</i></li>  
-        <li class="active"><a target="_self" href="mylottery.html">个人信息</a><i>&gt;</i></li>        
+        <li class="active"><a target="_self" href="javascript:void(0)" onclick="findSsqOrder()">双色球 订单</a><i>&gt;</i></li>  
+        <li class="active"><a target="_self" href="">个人信息</a><i>&gt;</i></li>        
       </ul>
      
     </div>
@@ -116,76 +53,15 @@ tr:hover {
       <li class="active"><a target="_self" href="">投注记录</a></li>
      
     </ul>
-    <div class="orderDataBox grayBorder">
-      <div class="selectBox clearfix">
-       <span class="mcSelectBox btnAuto"> 
-        	 <select class="text" name="lotteryType" id="lotteryType">
-        	 	<option value="0">全&nbsp;&nbsp;&nbsp;&nbsp;部</option>
-				<option value="1" selected="selected">双色球</option>
-				<option value="2">足&nbsp;&nbsp;&nbsp;&nbsp;彩</option>
-			</select>        
-        </span> 
-       
-        <span class="mcSelectBox">
-        	 <select class="text" name="issue" id="issue">
-        	 	<option value="0">全&nbsp;&nbsp;&nbsp;&nbsp;部</option>
-        	 	<c:forEach items="${ssqIssueList }" var="ssq">
-        	 		<option value="1">${ssq.ssq_issue }</option>
-        	 	</c:forEach>				
-			</select>
-        </span> 
-        
-        <select class="text" name="winStatus" id="winStatus">
-        	 	<option value="0">未开奖</option>
-				<option value="1" selected="selected">已开奖</option>
-		</select>
-        	
-        &nbsp;
-        <select class="text" name="winOrder" id="winOrder">
-        	 	<option value="0">未中奖订单</option>
-				<option value="1" selected="selected">中奖订单</option>
-		</select>
-       
-       <input type="button" value="查询" id="findButton"  href="javascript:void(0)" onclick="findButton()"/>
-        
-      </div>
-      <table class="tableData">
-        <colgroup>
-        <col width="8%">
-        <col width="8%">
-        <col width="15%">
-        <col width="20%">
-        <col width="20%">
-        <col width="5%">
-        <col width="8%">
-        <col width="8%">
-        <col width="12%">
-        </colgroup>
-        <thead>
-        	<tr>
-	          	<th style="width:100px">彩种</th>
-	          	<th style="width:100px">期号</th>
-	            <th>购彩时间</th>
-	            <th>订单号</th>
-	            <th>订单信息</th>
-	            <th>倍数</th>
-	            <th>开奖状态</th>
-	            <th>中奖等级</th>
-	            <th>奖金(元)</th>
-	         </tr>
-        
-        </thead>
-        <tbody class="awardInfoBody" id="awardInfoBody">
-         
-        </tbody>
-      </table>
-      <div id="pagebardiv"></div>
+    <div class="orderDataBox grayBorder" id="orderDataBox">
       
       <!-- <div class="noData_order"> 
       		<i class="ico_book"></i><strong>没有任何订单</strong>
       		</div>
        -->
+
     </div>
+    
     <section class="grayBorder mt10">
       <h2 class="tit">热门彩种</h2>
       <ul class="clearfix hotLott">

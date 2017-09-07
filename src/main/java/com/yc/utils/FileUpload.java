@@ -120,6 +120,8 @@ public class FileUpload {
 		return map;
 	}
 
+
+
 	private String genNewFilePrefixName() {
 		// 生成新的文件名
 		Date d = new Date();

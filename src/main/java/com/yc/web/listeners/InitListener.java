@@ -1,5 +1,6 @@
 package com.yc.web.listeners;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -11,6 +12,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.yc.ssq.bean.UserSsq;
 import com.yc.ssq.biz.UserSsqBiz;
+import com.yc.users.biz.NewsBiz;
+import com.yc.users.biz.UsersBiz;
+import com.yc.web.model.JsonModel;
 
 
 /**
@@ -38,6 +42,22 @@ public class InitListener implements ServletContextListener {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
+		
+		//加载资讯
+		NewsBiz newsBiz = (NewsBiz) ac.getBean("newsBizImpl");
+		try {
+			JsonModel jsonModel = newsBiz.searchNews();
+			if(jsonModel.getRows().size()==0){			
+					newsBiz.putData();						
+			}else{				
+			}
+			JsonModel jm = newsBiz.searchNews();
+			application.setAttribute("jsonModel", jm);
+			application.setAttribute("list", jm.getRows());
+		} catch (IOException e) {
+			e.printStackTrace();
+		
+		}
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {

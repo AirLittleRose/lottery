@@ -6,9 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.yc.bean.CommonBean;
 import com.yc.ssq.biz.impl.UserSsqBizImpl;
 
-public class BetSsq implements Serializable {
+public class BetSsq extends CommonBean implements Serializable {
 
 	private static final long serialVersionUID = 349646827466255851L;
 	/*
@@ -29,11 +30,13 @@ public class BetSsq implements Serializable {
 	private String orderid;
 	private String ordertime;
 	private String ssq_issue;
+	private Integer status;
 	
 	private Integer sigprice;
 	private Integer multinum;
 	private String redball;
 	private String blueball;
+	private Integer waitcount;
 	
 	public Integer getBsid() {
 		return bsid;
@@ -123,11 +126,28 @@ public class BetSsq implements Serializable {
 		this.ssq_issue = ssq_issue;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public Integer getWaitcount() {
+		return waitcount;
+	}
+
+	public void setWaitcount(Integer waitcount) {
+		this.waitcount = waitcount;
+	}
+
 	@Override
 	public String toString() {
 		return "BetSsq [usid=" + usid + ", bsid=" + bsid + ", userid=" + userid + ", username=" + username
-				+ ", orderid=" + orderid + ", ordertime=" + ordertime + ", ssq_issue=" + ssq_issue + ", sigprice="
-				+ sigprice + ", multinum=" + multinum + ", redball=" + redball + ", blueball=" + blueball + "]";
+				+ ", orderid=" + orderid + ", ordertime=" + ordertime + ", ssq_issue=" + ssq_issue + ", status="
+				+ status + ", sigprice=" + sigprice + ", multinum=" + multinum + ", redball=" + redball + ", blueball="
+				+ blueball + ", waitcount=" + waitcount + "]";
 	}
 	
 }

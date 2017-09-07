@@ -1,7 +1,6 @@
 package com.yc.ssq.bean;
 
 import java.io.Serializable;
-
 import com.yc.bean.CommonBean;
 
 public class AwardInfo extends CommonBean implements Serializable {

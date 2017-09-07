@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import org.apache.ibatis.session.RowBounds;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -19,7 +19,6 @@ import com.yc.dao.BaseDao;
 @Repository(value = "baseDao")
 public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseDao<T> {
 
-	//private final String MAPPERPATH = "com.yc.ssq.bean.";
 
 	// 重写了父类 SqlSessionDaoSupport 方法实现注入 sqlSessionTemplate
 	// 为什么要重写? 如果不重写的话，则需要 xml配置spring
@@ -35,7 +34,7 @@ public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseD
 
 	@Override
 	public void save(Class<T> clazz, String sqlId, Map<String, Object> parameterMap) {
-		super.getSqlSession().insert(clazz.getPackage().getName()+"." + clazz.getSimpleName() + "Mapper." + sqlId, parameterMap);
+		super.getSqlSession().insert(clazz.getPackage().getName()+"."+ clazz.getSimpleName() + "Mapper." + sqlId, parameterMap);
 	}
 	
 	@Override
@@ -50,7 +49,7 @@ public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseD
 	
 	@Override
 	public void update(T t, String sqlId) {
-		super.getSqlSession().update(t.getClass().getPackage().getName()+"." + t.getClass().getSimpleName() + "Mapper." + sqlId, t);
+		super.getSqlSession().update(t.getClass().getPackage().getName()+"."  + t.getClass().getSimpleName() + "Mapper." + sqlId, t);
 	}
 
 	@Override
@@ -69,7 +68,7 @@ public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseD
 	}
 	@Override
 	public void del(T t, String sqlId) {
-		super.getSqlSession().delete(t.getClass().getPackage().getName()+"." + t.getClass().getSimpleName() + "Mapper." + sqlId,t);
+		super.getSqlSession().delete(t.getClass().getPackage().getName()+"."  + t.getClass().getSimpleName() + "Mapper." + sqlId,t);
 	}
 
 	@Override
@@ -89,12 +88,11 @@ public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseD
 
 	@Override
 	public List<T> findAll(T t, String sqlId) {
-		return super.getSqlSession().selectList(  t.getClass().getPackage().getName()+"." + t.getClass().getSimpleName() + "Mapper." + sqlId ,t);
+		return super.getSqlSession().selectList(t.getClass().getPackage().getName()+"."+ t.getClass().getSimpleName() + "Mapper." + sqlId ,t);
 	}
 
 	@Override
 	public List<T> findAll(Class<T> clazz, String sqlId, Map<String, Object> parameterMap) {
-		Object obj = super.getSqlSession();
 		return super.getSqlSession().selectList(  clazz.getPackage().getName()+"." + clazz.getSimpleName() + "Mapper." + sqlId ,parameterMap);
 	}
 
@@ -105,7 +103,7 @@ public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseD
 
 	@Override
 	public double getFunc(T t, String sqlId) {
-		return super.getSqlSession().selectOne(t.getClass().getPackage().getName()+"." + t.getClass().getSimpleName()+ "Mapper." + sqlId ,t);
+		return super.getSqlSession().selectOne(t.getClass().getPackage().getName()+"."  + t.getClass().getSimpleName()+ "Mapper." + sqlId ,t);
 	}
 
 	@Override
@@ -141,5 +139,5 @@ public class BaseDaoMybatisImpl<T> extends SqlSessionDaoSupport implements BaseD
 		return null;
 
 	}
-
+	
 }

@@ -38,6 +38,7 @@
 <script src="js/core.js"></script>
 <script src="js/history.js"></script>
 <script src="js/index.js"></script>
+<script src="js/news.js"></script>
 
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/ssq.css">
@@ -46,7 +47,6 @@
 <link href="css/collect.css" charset="UTF-8" media="screen" type="text/css" rel="stylesheet">
 
 <script type="text/javascript">
-
 	$.ajax({
 		type:"POST",
 		url:"users_getLoginUser.action",
@@ -148,5 +148,3 @@
 		</ul>
 	</div>
 </nav>
-
-

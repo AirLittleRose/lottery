@@ -3,7 +3,11 @@
 
 <%@ include file="header.jsp" %>
 
-<script>if(window.top != window.self)window.top.location.href = window.location.href;</script>
+<script>if(window.top != window.self)window.top.location.href = window.location.href;
+	
+	
+
+</script>
 
 <article class="docBody clearfix">
 	<section class="siderBox">
@@ -148,22 +152,23 @@
 				
 				<div class="promotionText">
 					<ul class="grayTitle" id="topInfoTab">
-						<li id="forecast" onmousemove="show1()">资讯<>
-						<li id="notice" class="" onmousemove="show2()">公告<>
+						<li id="forecast" onmousemove="show1()">资讯</li>
+						<li id="notice" class="" onmousemove="show2()">公告</li>
 					</ul>
 					
 					<div class="promotion_con"  id="topForecast">
 						<ul class="promotion_list">
 							<c:forEach items="${jsonModel.rows}" var="v">						
-								<li>·${v.news }<>								
+								<li>·${v.news }</li>							
 							</c:forEach>						
 						</ul>
 					</div>					
 					
 					<div class="promotion_con" id="topNotice" style="display:none;">
 						<ul class="promotion_list">
-							<li>·<a href="#" target="_blank" title="公告1">公告1</a><>
-							<li>·<a href="#" target="_blank" title="公告2">公告2</a><>
+							<c:forEach items="${jm.rows}" var="a">						
+								<li>·${a.title }</li>							
+							</c:forEach>	
 						</ul>
 					</div>
 					

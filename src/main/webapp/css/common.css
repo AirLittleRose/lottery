@@ -718,13 +718,27 @@ a:link, a:visited {
 	width: 11px;
 	height: 17px;
 	margin: 4px 0 0 -16px;
-*margin-top:-2px
+	*margin-top:-2px
 }
 
 .noData_order {
-	height: 170px
-	
+	height: 170px	
 }
+
+#userInfo{
+	  margin:5px;
+      padding:5px;
+      background-color:white;
+      line-height:25px;
+      font-family:"微软雅黑","黑体","宋体";
+      font-size:16px;          
+}
+
+.info{
+	disabled:disabled;
+	border:0px;
+}
+
 .noData_order i {
 	display: inline-block;
 	margin: 55px 15px 0 250px;

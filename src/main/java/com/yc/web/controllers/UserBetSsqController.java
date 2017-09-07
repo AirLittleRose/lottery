@@ -5,7 +5,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -14,10 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.yc.ssq.bean.AwardInfo;
 import com.yc.ssq.bean.BetSsq;
+import com.yc.ssq.bean.NotAwardInfo;
 import com.yc.ssq.bean.UserSsq;
 import com.yc.ssq.biz.UserSsqBiz;
 import com.yc.users.bean.Users;
@@ -103,6 +108,12 @@ public class UserBetSsqController {
 		request.getRequestDispatcher("/WEB-INF/pages/buyInfo.jsp").forward(request, response);
 	}
 	
+	@RequestMapping("/toBuySsq.action")
+	public void toBuySsq(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		request.getRequestDispatcher("/ssq.jsp").forward(request, response);
+	}
+	
+	
 	@RequestMapping("/user/toMyorder.action")
 	public void toMyorder(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException{
 		this.findSsqIssue(request,session);
@@ -133,27 +144,70 @@ public class UserBetSsqController {
 		Integer pages = Integer.parseInt(  request.getParameter("pages").toString()  );
 		Integer pagesize = Integer.parseInt(  request.getParameter("pagesize")  );
 		Integer start = (pages-1)*pagesize;
+		String winStatus = request.getParameter("winStatus");
+		String winOrder = request.getParameter("winOrder");
 		JsonModel jm = new JsonModel();
-		AwardInfo ai = new AwardInfo();
+		
 		Integer userid = ((Users) session.getAttribute("users")).getUserid();
-		ai.setUserid(userid);
-		ai.setStatus(1);
-		ai.setPages(pages);
-		ai.setPagesize(pagesize);
-		ai.setStart(start);
+		
+		jm.setPages(pages);
+		jm.setPagesize(pagesize);
 		try {
-			List<AwardInfo> list = this.userSsqBiz.findAwardInfo(ai);
-			if(list!=null){
-				request.getSession().setAttribute("awardInfoList", list);
-				jm.setCode(1);
-				jm.setRows(list);
-				jm.setPages(pages);
-				jm.setPagesize(pagesize);
+			if(winStatus.equals("1") ){////////////已开奖
+				if(winOrder.equals("1")){///////////中奖
+					AwardInfo ai = new AwardInfo();
+					ai.setUserid(userid);
+					ai.setStatus(1);
+					ai.setPages(pages);
+					ai.setPagesize(pagesize);
+					ai.setStart(start);
+					List<AwardInfo> list = this.userSsqBiz.findAwardInfo(ai);
+					if(list!=null){
+						request.getSession().setAttribute("awardInfoList", list);
+						jm.setCode(1);
+						jm.setRows(list);
+					}
+					Integer count = this.userSsqBiz.findAwardInfoCount(ai);
+					if(count!=null){
+						jm.setTotal(count);
+					}
+				}else{//////////////////未中奖
+					NotAwardInfo nai = new NotAwardInfo();
+					nai.setUserid(userid);
+					nai.setStatus(1);
+					nai.setPages(pages);
+					nai.setPagesize(pagesize);
+					nai.setStart(start);
+					List<NotAwardInfo> list = this.userSsqBiz.findNotAwardInfo(nai);
+					if(list!=null){
+						request.getSession().setAttribute("awardInfoList", list);
+						jm.setCode(1);
+						jm.setRows(list);
+					}
+					Integer count = this.userSsqBiz.findNotAwardInfoCount(nai);
+					if(count!=null){
+						jm.setTotal(count);
+					}
+				}
+			}else{/////////////未开奖
+				BetSsq bs = new BetSsq();
+				bs.setUserid(userid);
+				bs.setStatus(0);
+				bs.setPages(pages);
+				bs.setPagesize(pagesize);
+				bs.setStart(start);
+				List<BetSsq> list = this.userSsqBiz.findWaitOpen(bs);
+				if(list!=null){
+					request.getSession().setAttribute("awardInfoList", list);
+					jm.setCode(1);
+					jm.setRows(list);
+				}
+				Integer count = this.userSsqBiz.findWaitOpenCount(bs);
+				if(count!=null){
+					jm.setTotal(count);
+				}
 			}
-			Integer count = this.userSsqBiz.findAwardInfoCount(ai);
-			if(count!=null){
-				jm.setTotal(count);
-			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			jm.setCode(0);
@@ -161,4 +215,5 @@ public class UserBetSsqController {
 		}
 		return jm;
 	}
+	
 }

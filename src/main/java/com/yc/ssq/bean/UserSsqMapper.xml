@@ -20,4 +20,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update userSsq set status = 1 where ssq_issue=#{ssq_issue}
 	</update>
 	
+	<select id="findAfterBuy" parameterType="UserSsq" resultType="BetSsq">
+		select usid,ssq.userid as userid,username,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum 
+			from
+			(
+			select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
+				(select usid,userid,orderid,ordertime,ssq_issue from userSsq where usid=#{usid}) a
+				inner join
+				(select usid,redball,blueball,sigprice,multinum from betSsq) b
+				on a.usid = b.usid
+			) ssq
+			inner join
+			(select userid,username from users) u
+			on ssq.userid = u.userid
+	</select>
+
 </mapper>

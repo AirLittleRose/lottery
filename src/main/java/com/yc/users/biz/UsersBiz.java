@@ -1,6 +1,10 @@
 package com.yc.users.biz;
 
+import com.yc.users.bean.Annos;
+import com.yc.users.bean.Manager;
+import com.yc.users.bean.News;
 import com.yc.users.bean.Users;
+import com.yc.web.model.JsonModel;
 
 public interface UsersBiz {
 	
@@ -44,5 +48,34 @@ public interface UsersBiz {
 	 * @return
 	 */
 	public boolean updateForPass(Users users);
+
+	/**
+	 * 管理员登录
+	 * @param manager
+	 * @return
+	 */
+	public Manager manaLogin(Manager manager);
+	
+	/**
+	 * 发布公告
+	 * @param annos
+	 */
+	public void saveAnno(Annos annos);
+	
+	/**
+	 * 查看公告
+	 * @return
+	 */
+	public JsonModel<Annos> searchAnnos();
+
+	/**
+	 * 查看公告详情
+	 * @param annos
+	 * @return
+	 */
+	public Annos isAnnosExist(Annos annos);
+
+	
+	public Annos isAnnosDetail(Annos annos);
 
 }	
