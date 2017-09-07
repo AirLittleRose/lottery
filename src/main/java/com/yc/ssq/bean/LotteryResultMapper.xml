@@ -25,4 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select ssq_issue,resulttime,redball,blueball from lotteryResult where ssq_issue=#{ssq_issue}	
 	</select>
 	
+	<select id="findLottery" resultType="LotteryResult">
+		select ssq_issue,resulttime,redball,blueball from lotteryResult order by ssq_issue desc limit 5	
+	</select>
+	
 </mapper>

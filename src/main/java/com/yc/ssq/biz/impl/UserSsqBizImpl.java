@@ -401,4 +401,11 @@ public class UserSsqBizImpl implements UserSsqBiz {
 		count = bets.getWaitcount();
 		return count;
 	}
+
+
+	@Override
+	public List<LotteryResult> findLottery() throws Exception {
+		 List<LotteryResult> list = this.baseDao.findAll(LotteryResult.class, "findLottery");
+		return list;
+	}
 }

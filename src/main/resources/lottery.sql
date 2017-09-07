@@ -332,6 +332,7 @@ create table lotteryResult(
     temp2 varchar(50),
     temp3 varchar(50)
 )
+select ssq_issue,resulttime,redball,blueball from lotteryResult order by ssq_issue desc limit 5	
 insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017102','2017-08-31','04 08 10 14 18 20','11')
 insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017103','2017-09-03','01 21 23 25 31 33','01')
 insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017104','2017-09-05','01 14 15 20 23 30','14')

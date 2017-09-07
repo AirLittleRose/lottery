@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yc.ssq.bean.AwardInfo;
 import com.yc.ssq.bean.BetSsq;
+import com.yc.ssq.bean.LotteryResult;
 import com.yc.ssq.bean.NotAwardInfo;
 import com.yc.ssq.bean.UserSsq;
 import com.yc.ssq.biz.UserSsqBiz;
@@ -214,6 +215,18 @@ public class UserBetSsqController {
 			jm.setMsg(e.getMessage());
 		}
 		return jm;
+	}
+	
+	public void findLottery(HttpServletRequest request,HttpSession session){
+		 try {
+			List<LotteryResult> list = this.userSsqBiz.findLottery();
+			if(list!=null){
+				request.getSession().setAttribute("LotteryResultList", list);
+				request.getSession().setAttribute("RecentLotteryResult", list.get(0));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

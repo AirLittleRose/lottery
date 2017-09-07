@@ -79,8 +79,8 @@ tr:hover {
 <div class="selectBox clearfix">
         
         <select class="text" name="winStatus" id="winStatus">
-        	 	<option value="0">未开奖</option>
-				<option value="1" selected="selected">已开奖</option>
+        	 	<option value="0" selected="selected">未开奖</option>
+				<option value="1">已开奖</option>
 		</select>
         	
         &nbsp;

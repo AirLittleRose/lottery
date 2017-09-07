@@ -134,15 +134,15 @@
 							<a href="ssq.jsp" style="margin:0" target="_blank">
 								<strong class="gameEn"> 双色球 </strong>
 							</a> 
-							第<strong class="c_ba2636"> 2017091 </strong>期 			
-								<em class="smallRedball">05</em>
-								<em class="smallRedball">07</em>
-								<em class="smallRedball">10</em>
-								<em class="smallRedball">23</em>
-								<em class="smallRedball">28</em>
-								<em class="smallRedball">29</em>
-								<em class="smallBlueball">03</em>&nbsp;
-							<span class="awardtime"> 08-06 (周日) 21:15</span>&nbsp;
+							第<strong class="c_ba2636"> ${RecentLotteryResult.ssq_issue } </strong>期 			
+								<em class="smallRedball">${r1 }</em>
+								<em class="smallRedball">${r2 }</em>
+								<em class="smallRedball">${r3 }</em>
+								<em class="smallRedball">${r4 }</em>
+								<em class="smallRedball">${r5 }</em>
+								<em class="smallRedball">${r6 }</em>
+								<em class="smallBlueball">${RecentLotteryResult.blueball }</em>&nbsp;
+							<span class="awardtime"> ${RecentLotteryResult.resulttime } 21:45</span>&nbsp;
 							<a target="_blank" href="#开奖详情(扩展)">详情</a>
 							<i>|</i>
 							<a target="_blank" href="#">走势</a>

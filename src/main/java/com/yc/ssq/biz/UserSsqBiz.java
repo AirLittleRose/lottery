@@ -83,5 +83,7 @@ public interface UserSsqBiz {
 	public List<NotAwardInfo> findNotAwardInfo(NotAwardInfo ai)throws Exception;
 	
 	public Integer findNotAwardInfoCount(NotAwardInfo ai)throws Exception;
+	
+	public List<LotteryResult> findLottery()throws Exception;
 
 }
