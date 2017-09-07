@@ -3,6 +3,7 @@ create database lottery
 use lottery
 
 select * from users;
+select * from game;
 select * from league;
 select * from team;
 select * from info;
@@ -67,7 +68,58 @@ create table game(
     away_id varchar(10),
     game_time datetime
 )
+select * from jczq;
+select * from jczq_order;
+-- '竞彩足球'--下注信息表
+	-- id
+    -- 单号id
+    -- 比赛id
+    -- 预测结果 0 1 2 -- 胜平负
+	-- 赔率
+    -- 倍数
+    -- 比赛结果 0 1 输赢
+create table jczq(
+	jid int primary key auto_increment,
+    order_id varchar(50),
+    game_id int,
+    predict int,
+    odds float(5,2),
+    times int,
+    result int
+)
 
+-- '竞彩足球'--订单信息
+	-- id
+    -- 用户id
+    -- 订单编号(UUID)
+    -- 过关类型 (2-N)
+    -- 总金额
+    -- 奖金
+    -- 最后开奖时间
+create table jczq_order(
+	joid int primary key auto_increment,
+    userid int,
+    order_id varchar(50),
+    guoguan_type int,
+    amount int,
+    bonus float(20,2),
+    last_time datetime,
+    buy_time datetime
+)
+
+-- 竞彩足球比赛结果
+	-- id
+    -- 比赛id
+    -- 主队得分
+    -- 客队得分
+    -- 结果 012 --> 胜平负
+create table jczq_result(
+	jrid int primary key auto_increment,
+    game_id int,
+    home_score int,
+    away_score int,
+    result int
+)
 -- 通过info的信息插入新的League
 insert into league(league_id,league_name,color)
 		(select distinct(lid) as league_id ,ln as league_name,cl as color from info
@@ -152,7 +204,7 @@ create table annos(
   adate date,  
   content varchar(4000),  
   auth varchar(100), 
-  temp1 varchar(50),
+  sign varchar(200),
   temp2 varchar(50)  
 );
 

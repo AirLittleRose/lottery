@@ -16,24 +16,48 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import com.yc.soccer.bean.Game;
 import com.yc.soccer.bean.Jczq;
 import com.yc.soccer.bean.Jczq_info;
 import com.yc.soccer.bean.Jczq_order;
+import com.yc.soccer.bean.League;
+import com.yc.soccer.bean.OrderDetail;
 import com.yc.soccer.biz.GameBiz;
 import com.yc.soccer.biz.Jczq_orderBiz;
+import com.yc.soccer.biz.LeagueBiz;
 import com.yc.users.bean.Users;
 import com.yc.web.model.JsonModel;
 
 
 @Controller
-public class GameController {
+public class JczqController {
 
 	@Resource(name = "gameBizImpl")
 	private GameBiz gameBiz;
 
 	@Resource(name = "jczq_orderBizImpl")
 	private Jczq_orderBiz jcza_orderBiz;
+	
+	@Resource(name="leagueBizImpl")
+	private LeagueBiz leagueBiz;
+	
+	/**
+	 * 查出所有的联赛
+	 * @return
+	 */
+	@RequestMapping("/find_all_league.action" )
+	public @ResponseBody JsonModel findAllLeague() {
+		List<League> list = leagueBiz.findAllLeague();
+		JsonModel jm = new JsonModel();
+		jm.setCode(0);
+		if(list != null) {
+			jm.setRows(list);
+			jm.setCode(1);
+		}
+		return jm;
+	}
+	
 	/**
 	 * 查询比赛信息
 	 * @param game
@@ -100,6 +124,35 @@ public class GameController {
 		}
 		return "jczq_order";
 	}
+	
+	/**
+	 * 查询用户的订单  详情
+	 * @param request
+	 * @param session
+	 */
+	@RequestMapping("findJczqOrder.action")
+	public @ResponseBody JsonModel findJczqOrder(HttpServletRequest request,HttpSession session) {
+		Integer pages = Integer.parseInt(  request.getParameter("pages").toString()  );
+		Integer pagesize = Integer.parseInt(  request.getParameter("pagesize")  );
+		Integer start = (pages-1)*pagesize;
+		JsonModel jm = new JsonModel();
+		jm.setCode(0);
+		Integer userid = ((Users) session.getAttribute("users")).getUserid();
+		Jczq_order jo = new Jczq_order();
+		jo.setPagesize(pagesize);
+		jo.setStart(start);
+		jo.setUserid(userid);
+		List<Jczq_order> orderList = jcza_orderBiz.findOrder(jo);
+		if(orderList != null) {
+			jm.setRows(orderList);
+			jm.setCode(1);
+		}
+		jm.setTotal(jcza_orderBiz.findOrderCount(jo));
+		return jm;
+	}
+	
+	
+	
 	
 	private String addDate(String date, int num) {
 		try {

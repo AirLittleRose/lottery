@@ -12,8 +12,8 @@ public interface GameBiz {
 	 */
 	List<Game> findGames(Game game);
 	
-	
-	int getGamesCount(Game game);
-	
+	/**
+	 * 保存比赛信息
+	 */
 	void savaGame();
 }

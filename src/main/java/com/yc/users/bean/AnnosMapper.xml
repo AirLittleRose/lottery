@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 添加公告-->
 	<insert id="saveAnnos" useGeneratedKeys="true" keyProperty="anid">
-		insert into annos(title,adate,content,auth)  values(#{title},#{adate},#{content},#{auth})
+		insert into annos(title,adate,content,auth,sign)  values(#{title},#{adate},#{content},#{auth},#{sign})
 	</insert>	 	
 	
 	<!-- 查出首页公告数据 -->
@@ -20,18 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 查看公告详情 -->
-	<select id="konwAnnos" parameterType="Annos" resultType="Annos">
-		select anid from annos where title=#{title}
-	</select>
+	<select id="konwAnnos"  parameterType="Annos" resultType="Annos">
+		select * from annos where sign=#{sign}
+	</select>	
 	
-	<select id="detailAnnos" parameterType="Annos" resultType="Annos">
-		select * from annos where anid=#{anid}
-	</select>
-	
-	<!-- 更新新闻表数据 -->
-	<update id="cleanAnnos">
-		truncate table annos
-	</update>
 	
 	
 </mapper>

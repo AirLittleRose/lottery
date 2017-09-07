@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yc.users.bean.Manager;
 import com.yc.users.bean.Users;
-import com.yc.users.biz.NewsBiz;
 import com.yc.users.biz.UsersBiz;
 import com.yc.utils.Encrypt;
 import com.yc.web.model.JsonModel;
@@ -33,6 +32,7 @@ public class UsersController {
 	private UsersBiz usersBiz;		
 	
 	//@Resource(name = "javaMailSenderImpl")
+	@Autowired
 	private JavaMailSenderImpl mailSender;		
 	
 	@RequestMapping("/users_login.action")
@@ -126,7 +126,8 @@ public class UsersController {
 		JsonModel jm = new JsonModel();				
 		users = usersBiz.forgetPassword(users);
 		if(users!=null){
-			session.setAttribute("users", users);			
+			session.setAttribute("users", users);	
+		
 			MimeMessage message = mailSender.createMimeMessage();
 			 try {
 				MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");		 
@@ -144,16 +145,16 @@ public class UsersController {
 								
 				Users us = (Users) session.getAttribute("users");
 				//设置发件人/收件人信息
-				helper.setFrom(mailSender.getUsername());
+				helper.setFrom((mailSender).getUsername());
 				helper.setTo(us.getEmail());		        
 				helper.setSubject("人人乐彩票提醒您:设置新密码!"); 
 				
 				String path = request.getContextPath();
 				String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-				String resetPassHref =  basePath+"user_reset_password.action?uid="+digitalSignature+"&username="+us.getUsername();
+				String resetPassHref =basePath+"user_reset_password.action?uid="+digitalSignature+"&username="+us.getUsername();
 				// true 表示启动HTML格式的邮件  
 				helper.setText("请勿回复本邮件.点击下面的链接,重设密码<br/><a href="+resetPassHref +" >点击我重新设置密码</a>" +
-	                    "<br/>注意:本邮件超过10分钟,链接将会失效，需要重新申请<br/>"+"<br/>链接无法打开,可将此地址复制到地址栏内尝试一次:<br/><a href="+resetPassHref +">"+resetPassHref
+	                    "<br/>注意:本邮件超过10分钟,链接将会失效，需要重新申请<br/>"+"<br/>链接无法打开,可将此地址复制到地址栏内尝试一次:<br/><a href="+resetPassHref+">"+resetPassHref
 						,true);  
 				mailSender.send(message);				
 				jm.setCode(1);

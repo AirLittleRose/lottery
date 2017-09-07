@@ -5,6 +5,24 @@
 
 <script>if(window.top != window.self)window.top.location.href = window.location.href;
 	
+	function earnVal(obj){		
+		$.ajax({
+			type:"POST",
+			data:{
+				sign:$(obj).text(),
+			},
+			url:"showAnnos.action",
+			dataType:"JSON",
+			success:function(data){
+				if(data.code== 1){					
+					location.href="http://localhost:8080/lottery/showAnnos.jsp";
+				}else{
+				}
+			}
+			
+		});
+		
+	}
 	
 
 </script>

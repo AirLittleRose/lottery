@@ -12,6 +12,7 @@ public class Annos implements Serializable{
 	  private Date    adate;
 	  private String  content;  
 	  private String  auth;
+	  private String sign;
 	  
 		public Integer getAnid() {
 			return anid;
@@ -42,13 +43,16 @@ public class Annos implements Serializable{
 		}
 		public void setAuth(String auth) {
 			this.auth = auth;
+		}		
+		public String getSign() {
+			return sign;
+		}
+		public void setSign(String sign) {
+			this.sign = sign;
 		}
 		@Override
 		public String toString() {
 			return "Annos [anid=" + anid + ", title=" + title + ", adate=" + adate + ", content=" + content + ", auth="
-					+ auth + "]";
-		} 
-	 
-		
-
+					+ auth + ", sign=" + sign + "]";
+		}
 }

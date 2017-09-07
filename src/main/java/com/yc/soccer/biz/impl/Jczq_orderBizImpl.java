@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yc.dao.BaseDao;
 import com.yc.soccer.bean.Jczq;
 import com.yc.soccer.bean.Jczq_order;
+import com.yc.soccer.bean.OrderDetail;
 import com.yc.soccer.biz.Jczq_orderBiz;
 
 @Service
@@ -58,6 +59,25 @@ public class Jczq_orderBizImpl implements Jczq_orderBiz {
 		for(String key : bonusPool.keySet()) {
 			
 		}
+
+	}
+
+	@Override
+	public List<OrderDetail> findOrderDetail(Jczq_order jo) {
+		List<OrderDetail> list = baseDao.findAll(jo, "selectOrderDetail");
+		return list;
+	}
+
+	@Override
+	public int findOrderCount(Jczq_order jo) {
+		
+		return (int)baseDao.getFunc(jo, "getOrderCount");
+	}
+
+	@Override
+	public List<Jczq_order> findOrder(Jczq_order jo) {
+		List<Jczq_order> list = this.baseDao.findAll(jo, "selectAllOrder");
+		return list;
 	}
 
 }
