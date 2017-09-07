@@ -18,7 +18,7 @@ public interface Jczq_orderBiz {
 	 */
 	void addOrder(Jczq_order jo,List<Jczq> jczqs);
 	
-	void calculateBonus();
+	void calculateBonus(Jczq_order jo);
 	
 	/**
 	 * 查看用户的订单详情
@@ -34,4 +34,6 @@ public interface Jczq_orderBiz {
 	 * 查看用户订单
 	 */
 	List<Jczq_order> findOrder(Jczq_order jo);
+	
+	List<OrderDetail> findDetailByOrderId(Jczq_order jo);
 }

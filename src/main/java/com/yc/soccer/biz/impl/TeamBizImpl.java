@@ -30,7 +30,7 @@ import com.yc.dao.BaseDao;
 import com.yc.dao.impl.BaseDaoMybatisImpl;
 import com.yc.soccer.bean.Team;
 import com.yc.soccer.biz.TeamBiz;
-import com.yc.soccer.jsonModel.TeamJson;
+
 
 @Service
 @Transactional

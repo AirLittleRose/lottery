@@ -19,23 +19,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		2.如果中奖数量大于订单个数,就开始算奖金
 	 -->
 	 <select id="selectWinInfo" resultType="Jczq">
-	    select d.order_id,odds,times from 
-			(select c.order_id from
-				(select a.order_id,guoguan_type,num from 
-					jczq_order a
-				left join
-					(select count(*) num,order_id from jczq where result = 1  order by order_id) b
-				on 
-					a.order_id = b.order_id 
-				)c
-			where
-				guoguan_type &lt;= num
-			)d
-		left join
-			(select * from jczq)e
-		on 
-			d.order_id = e.order_id and result = 1
-		order by order_id
+		 select a.order_id,odds,times,guoguan_type from 
+			 jczq a
+			join 
+		  
+		  (select b.order_id,guoguan_type from
+		    
+		    (select * from 
+		    
+		    (select order_id,count(*) num from jczq where result = 1 group by order_id)a
+		    
+		    where a.order_id in
+		    (select order_id from jczq_order where userid = #{userid}))b
+		    
+		  join
+				(select * from jczq_order)c
+		  on 
+			b.order_id = c.order_id and num	&gt;=c.guoguan_type and unix_timestamp(last_time)>=(unix_timestamp(date_format(now(),'%Y-%m-%d'))-24*60*60))d
+		   on  a.order_id = d.order_id
 	 </select>
 	 
 	 
@@ -95,7 +96,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	<!-- 保存奖金 -->
+	<update id="updateBonus" parameterType="Jczq_order">
+		update jczq_order set bonus = #{bonus} where order_id = #{order_id}
+	</update>
 	
-	
-	
+	<select id="findDetailByOrderId" parameterType="Jczq_order" resultType="OrderDetail">
+	    select a.game_id,league_name,home_name,away_name,predict,odds,times,result from
+	    (
+			select game_id,league_name,home_name,team_name as away_name from 
+			(
+				select game_id,league_name,team_name as home_name,away_id from 
+				(
+					select game_id,league_name,home_id,away_id from 
+					(
+						select game_id,league_id,home_id,away_id from game where game_id in
+						(
+							select game_id from jczq  
+						)
+					)a
+					left join
+						(select league_id,league_name from league)b
+					on 
+						a.league_id = b.league_id
+				)a
+				left join
+					(select team_id,team_name from team)b
+				on
+					team_id = home_id    
+			)a
+			left join
+				(select team_id,team_name from team)b
+			on
+				team_id = away_id
+		 )a
+		join
+			(select * from jczq where order_id = #{order_id})b
+	     on
+			a.game_id = b.game_id	
+	</select>
 </mapper>

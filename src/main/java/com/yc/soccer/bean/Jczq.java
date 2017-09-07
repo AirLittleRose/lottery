@@ -19,7 +19,7 @@ public class Jczq implements Serializable{
 	private Integer times;	//倍数
 	private Integer result;	//结果	0,1 -> 输/赢
 	
-
+	private Integer guoguan_type;
 	
 	public Jczq(Integer jid, String order_id, String game_id, Integer predict, float odds, Integer times,
 			Integer result) {
@@ -94,11 +94,18 @@ public class Jczq implements Serializable{
 		this.result = result;
 	}
 
+	public Integer getGuoguan_type() {
+		return guoguan_type;
+	}
+
+	public void setGuoguan_type(Integer guoguan_type) {
+		this.guoguan_type = guoguan_type;
+	}
+
 	@Override
 	public String toString() {
 		return "Jczq [jid=" + jid + ", order_id=" + order_id + ", game_id=" + game_id + ", predict=" + predict
-				+ ", odds=" + odds + ", times=" + times + ", result=" + result + "]";
+				+ ", odds=" + odds + ", times=" + times + ", result=" + result + ", guoguan_type=" + guoguan_type + "]";
 	}
-	
 	
 }

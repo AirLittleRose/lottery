@@ -32,9 +32,7 @@ import com.yc.dao.BaseDao;
 import com.yc.soccer.bean.Game;
 import com.yc.soccer.bean.Team;
 import com.yc.soccer.biz.GameBiz;
-import com.yc.soccer.jsonModel.MatchInfo;
-import com.yc.soccer.jsonModel.GameJson;
-import com.yc.soccer.jsonModel.TeamJson;
+
 
 @Service
 @Transactional
@@ -52,7 +50,11 @@ public class GameBizImpl implements GameBiz {
 
 	@Override
 	public void savaGame() {
-		baseDao.save(Game.class, "savaGame");	
+		try {
+			baseDao.save(new Game(), "savaGame");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 	}
 	
 

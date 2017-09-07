@@ -1,5 +1,6 @@
 package com.yc.web.controllers;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,12 +9,15 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
@@ -125,6 +129,14 @@ public class JczqController {
 		return "jczq_order";
 	}
 	
+	@RequestMapping("user/toCalculateBonus.action")
+	public void toCalculateBonus(HttpSession session) {
+		Jczq_order jo = new Jczq_order();
+		Integer userid = ((Users) session.getAttribute("users")).getUserid();
+		jo.setUserid(userid);
+		jcza_orderBiz.calculateBonus(jo);
+	}
+	
 	/**
 	 * 查询用户的订单  详情
 	 * @param request
@@ -151,8 +163,41 @@ public class JczqController {
 		return jm;
 	}
 	
+	/**
+	 * 显示竞彩足球订单详情
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("user/toJczqOrder.action")
+	public String toczqOrders(HttpServletRequest request,HttpSession session) {
+		return "jczq_orders";
+	}
 	
 	
+	@RequestMapping(value="user/findDetailByOrderId.action",method=RequestMethod.GET)
+	public void findDetailByOrderId(HttpServletRequest request, HttpServletResponse response, HttpSession session ,@RequestParam("order_id") String order_id) {
+		JsonModel jm = new JsonModel();
+		jm.setCode(0);
+		Jczq_order jo = new Jczq_order();
+		jo.setOrder_id(order_id);
+		List<OrderDetail> list = jcza_orderBiz.findDetailByOrderId(jo);
+		if(list != null) {
+			jm.setCode(1);
+			jm.setRows(list);
+		}
+		try {
+			session.setAttribute("order_id", order_id);
+			session.setAttribute("detail", jm);
+			request.getRequestDispatcher("../WEB-INF/pages/jczq_orderDetail.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//-----------------------------------------------------------------------
 	
 	private String addDate(String date, int num) {
 		try {

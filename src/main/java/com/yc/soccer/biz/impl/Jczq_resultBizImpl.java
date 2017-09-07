@@ -25,7 +25,11 @@ public class Jczq_resultBizImpl implements Jczq_resultBiz{
 	
 	@Override
 	public void addResult(List<Jczq_result> list) {
-		baseDao.save(Jczq_result.class, "addResult", list);
+		try {
+			baseDao.save(Jczq_result.class, "addResult", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

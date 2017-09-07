@@ -68,53 +68,15 @@
 		});
 
 	}
-	
-	//竞彩足球
-	function findJczqOrder(pages){
+
+	function toJczqOrder(){
 		$.ajax({
-			type:"POST",
-			url:"findJczqOrder.action",
-			data:"pages="+pages+"&pagesize=5",
-			dataType:"JSON",
-			success:function(data){
-				if(data.code== 1){
-					$("#awardInfoBody").html("");
-					
-					$("#headSize").html("");
-					$("#headSize").html("<col width='8%'><col width='15%'><col width='25%'><col width='20%'> <col width='20%'><col width='12%'>");
-					
-					$("#infoHead").html("");
-					var head = "<tr><th>彩种</th><th>购彩时间</th><th>订单号</th><th>过关方式</th><th>最后开奖时间</th><th>已获奖金(元)</th></tr>";
-					
-					$("#infoHead").html(head);
-					var str = ""
-					$(data.rows).each(
-							function(index,item){ 
-								str += "<tr><td>竞彩足球</td>"
-									+"<td>"+ item.buy_time.substring(0,19) +"</td>"
-									+"<td>"+ item.order_id +"</td>"
-									+"<td>"+ item.guoguan_type +"串1</td>"
-									+"<td>"+ addDate(item.last_time.substring(0,10),1) +"</td>"
-									+"<td>"+ item.bonus +"</td>";
-							});
-					$("#awardInfoBody").html(str);
-					$.createPageBar( data,"pagebardiv" );
-					
-				}else{
-					alert("查询失败！原因"+data.msg);
-				}
+			url : "user/toJczqOrder.action",
+			dateType : 'HTML',
+			success : function(data) {
+				$("#orderDataBox").html(data);
 			}
 		});
-
-	}
-	
-	function addDate(date,add){
-		var s = date;
-		s = s.replace(/-/g,"/");
-		var d = new Date(s);
-		d.setDate(d.getDate() + add);
-		var m = d.getMonth() + 1;
-		return d.getFullYear() + '-' + m + '-' + d.getDate();
 	}
 </script>
 
@@ -137,8 +99,8 @@ tr:hover {
        
       </div>
       <ul class="leftManu">
-        <li class="active"><a target="_self" href="myorder.html">我的订单</a><i>&gt;</i></li>  
-        <li class="active"><a target="_self" href="mylottery.html">个人信息</a><i>&gt;</i></li>        
+        <li class="active"><a target="_self" href="myorder.html">双色球订单</a><i>&gt;</i></li>  
+        <li class="active"><a target="_self" href="javascript:void(0)" onclick="toJczqOrder()">竞彩足球订单</a><i>&gt;</i></li>        
       </ul>
      
     </div>
@@ -146,74 +108,9 @@ tr:hover {
   <div class="rightModule">
     <ul class="redTab">
       <li class="active"><a target="_self" href="">投注记录</a></li>
-     
     </ul>
-    <div class="orderDataBox grayBorder">
-      <div class="selectBox clearfix">
-       <span class="mcSelectBox btnAuto"> 
-        	 <select class="text" name="lotteryType" id="lotteryType">
-        	 	<option value="0">全&nbsp;&nbsp;&nbsp;&nbsp;部</option>
-				<option value="1" selected="selected">双色球</option>
-				<option value="2">足&nbsp;&nbsp;&nbsp;&nbsp;彩</option>
-			</select>        
-        </span> 
-       
-        <span class="mcSelectBox">
-        	 <select class="text" name="issue" id="issue">
-        	 	<option value="0">全&nbsp;&nbsp;&nbsp;&nbsp;部</option>
-        	 	<c:forEach items="${ssqIssueList }" var="ssq">
-        	 		<option value="1">${ssq.ssq_issue }</option>
-        	 	</c:forEach>				
-			</select>
-        </span> 
-        <select class="text" name="winOrder" id="winOrder">
-        	 	<option value="0">未中奖订单</option>
-				<option value="1" selected="selected">中奖订单</option>
-		</select>
-       	
-        &nbsp;
-        <select class="text" name="winStatus" id="winStatus">
-        	 	<option value="0">未开奖</option>
-				<option value="1" selected="selected">已开奖</option>
-		</select>
-      </div>
-      <table class="tableData">
-        <colgroup id="headSize">
-        <col width="8%">
-        <col width="8%">
-        <col width="15%">
-        <col width="20%">
-        <col width="20%">
-        <col width="5%">
-        <col width="8%">
-        <col width="8%">
-        <col width="12%">
-        </colgroup>
-        <thead id="infoHead">
-        	<tr>
-	          	<th style="width:100px">彩种</th>
-	          	<th style="width:100px">期号</th>
-	            <th>购彩时间</th>
-	            <th>订单号</th>
-	            <th>订单信息</th>
-	            <th>倍数</th>
-	            <th>开奖状态</th>
-	            <th>中奖等级</th>
-	            <th>奖金(元)</th>
-	         </tr>
-        
-        </thead>
-        <tbody class="awardInfoBody" id="awardInfoBody">
-         
-        </tbody>
-      </table>
-      <div id="pagebardiv"></div>
-      
-      <!-- <div class="noData_order"> 
-      		<i class="ico_book"></i><strong>没有任何订单</strong>
-      		</div>
-       -->
-
+    <div class="orderDataBox grayBorder" id="orderDataBox">
+		
     </div>
     <section class="grayBorder mt10">
       <h2 class="tit">热门彩种</h2>
