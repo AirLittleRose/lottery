@@ -27,8 +27,8 @@ tr:hover {
 	<div style="margin-left: 350px;margin-top: 50px;margin-bottom: 20px;">
 		<p style="line-height:52px;font-family:华文新魏;font-size:40px;color: #ED2240;">购买成功！！！</p>
 		<p style="font-size:12px;">
-			<a href="ssq.jsp">继续购买</a>&emsp;&emsp;&emsp;
-			<a href="myorder.jsp">仅显示前五条 → 查看更多请点击</a>			
+			<a href="toBuySsq.action">继续购买</a>&emsp;&emsp;&emsp;
+			<a href="user/toMyorder.action">仅显示前五条 → 查看更多请点击</a>			
 		</p>
 		
 	</div>

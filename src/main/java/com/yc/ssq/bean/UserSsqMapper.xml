@@ -34,5 +34,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(select userid,username from users) u
 			on ssq.userid = u.userid
 	</select>
-
 </mapper>

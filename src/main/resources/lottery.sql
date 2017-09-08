@@ -3,6 +3,7 @@ create database lottery
 use lottery
 
 select * from users;
+select * from game;
 select * from league;
 select * from team;
 select * from info;
@@ -67,7 +68,58 @@ create table game(
     away_id varchar(10),
     game_time datetime
 )
+select * from jczq;
+select * from jczq_order;
+-- '竞彩足球'--下注信息表
+	-- id
+    -- 单号id
+    -- 比赛id
+    -- 预测结果 0 1 2 -- 胜平负
+	-- 赔率
+    -- 倍数
+    -- 比赛结果 0 1 输赢
+create table jczq(
+	jid int primary key auto_increment,
+    order_id varchar(50),
+    game_id int,
+    predict int,
+    odds float(5,2),
+    times int,
+    result int
+)
 
+-- '竞彩足球'--订单信息
+	-- id
+    -- 用户id
+    -- 订单编号(UUID)
+    -- 过关类型 (2-N)
+    -- 总金额
+    -- 奖金
+    -- 最后开奖时间
+create table jczq_order(
+	joid int primary key auto_increment,
+    userid int,
+    order_id varchar(50),
+    guoguan_type int,
+    amount int,
+    bonus float(20,2),
+    last_time datetime,
+    buy_time datetime
+)
+
+-- 竞彩足球比赛结果
+	-- id
+    -- 比赛id
+    -- 主队得分
+    -- 客队得分
+    -- 结果 012 --> 胜平负
+create table jczq_result(
+	jrid int primary key auto_increment,
+    game_id int,
+    home_score int,
+    away_score int,
+    result int
+)
 -- 通过info的信息插入新的League
 insert into league(league_id,league_name,color)
 		(select distinct(lid) as league_id ,ln as league_name,cl as color from info
@@ -126,7 +178,11 @@ create table manager(
 	pwd varchar(10)
 );
 select * from manager;
+<<<<<<< HEAD
 insert into manager(mname,pwd) values('a', 'a')
+=======
+insert into manager(mname,pwd) values('a','a')
+>>>>>>> branch 'master' of git@github.com:AirLittleRose/lottery.git
 --咨询表
 create table news(
 	newid int primary key auto_increment,
@@ -152,7 +208,7 @@ create table annos(
   adate date,  
   content varchar(4000),  
   auth varchar(100), 
-  temp1 varchar(50),
+  sign varchar(200),
   temp2 varchar(50)  
 );
 
@@ -187,7 +243,7 @@ select * from userSsq;
 update userSsq set status = 0 where ssq_issue='2017100';
 alter table userSsq alter column status set default 0;
 select distinct ssq_issue from userSsq order by ssq_issue desc;
-delete from userSsq;
+delete from userSsq where ssq_issue='2017099';
 delete from betSsq;
 
 alter table userSsq change column temp2 status int;
@@ -247,12 +303,21 @@ drop table userSsq;
 alter table betSsq modify column redball varchar(50) not null;
 delete from userSsq where usid=22
 
-	select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
-		(select usid,userid,orderid,ordertime,ssq_issue from userSsq) a
+	select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,redball,blueball,sigprice,multinum from
+		(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status is null) a
 		inner join
 		(select usid,redball,blueball,sigprice,multinum from betSsq) b
 		on a.usid = b.usid
-		where ssq_issue='2017102'
+		where userid=1
+		order by ssq_issue desc,ordertime desc
+		
+select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,redball,blueball,sigprice,multinum,
+				count(distinct(redball)) as waitcount from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=0) a
+			inner join
+			(select usid,redball,blueball,sigprice,multinum from betSsq) b
+			on a.usid = b.usid
+			where userid=2
 -----------------------------------------------------------------------------
 select ssq_issue,resulttime,redball,blueball from lotteryResult where ssq_issue='2017099';
 --双色球开奖结果	lotteryResult
@@ -271,28 +336,21 @@ create table lotteryResult(
     temp2 varchar(50),
     temp3 varchar(50)
 )
-
-insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017102','2017-08-31','04 08 10 14 18 20','11')
-delete from lotteryResult;
+select ssq_issue,resulttime,redball,blueball from lotteryResult order by ssq_issue desc limit 5	
+insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017102','2017-08-31','04 08 10 14 18 20','11');
+insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017103','2017-09-03','01 21 23 25 31 33','01');
+insert into lotteryResult(ssq_issue,resulttime,redball,blueball) values('2017104','2017-09-05','01 14 15 20 23 30','14');
+delete from lotteryResult where lrid=104;
 select * from lotteryResult;
 alter table lotteryResult modify column resulttime varchar(30) not null;
 alter table lotteryResult drop column validity
 -----------------------------------
-select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
-				multinum,status,grade,award
-from
-(select usid,redball,blueball,grade,award from awardInfo ) ai
-inner join
-(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
-	from
-	(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
-	inner join 
-	(select usid,multinum from betSsq) b
-	on a.usid=b.usid
-) ssq
-on ssq.usid = ai.usid
-where userid=2
-order by ssq_issue desc,grade asc
+select a.usid as usid,userid,orderid,ordertime,ssq_issue,redball,blueball,sigprice,multinum from
+			(select usid,userid,orderid,ordertime,ssq_issue from userSsq) a
+			inner join
+			(select usid,redball,blueball,sigprice,multinum from betSsq) b
+			on a.usid = b.usid
+			where ssq_issue='2017103'
 -------------------------------------
 --中奖信息		awardInfo
 	--aid
@@ -313,7 +371,9 @@ create table awardInfo(
     temp2 varchar(50),
     temp3 varchar(50)
 )
-
+insert into awardInfo(usid,redball,blueball,grade,award) values
+select * from awardInfo
+select * from notAwardInfo
 select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
 				multinum,status,grade,award,count(distinct(redball)) as awardInfocount
 		from
@@ -353,7 +413,36 @@ create table notAwardInfo(
 delete from notAwardInfo
 drop table notAwardInfo;
 
-
+select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status
+		from
+		(select usid,redball,blueball from notAwardInfo ) ai
+		inner join
+		(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+			from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
+			inner join 
+			(select usid,multinum from betSsq) b
+			on a.usid=b.usid
+		) ssq
+		on ssq.usid = ai.usid
+		where userid=2
+		order by ssq_issue desc
+		
+select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status,count(distinct(redball)) as awardInfocount
+		from
+		(select usid,redball,blueball from notAwardInfo ) ai
+		inner join
+		(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+			from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=1) a
+			inner join 
+			(select usid,multinum from betSsq) b
+			on a.usid=b.usid
+		) ssq
+		on ssq.usid = ai.usid
+		where userid=2		
 --彩票
 	--彩票id  用来在数据库中唯一标识
 	--彩票类型     1：双色球       2：足彩   (关联  双色球玩法表        足彩玩法表)

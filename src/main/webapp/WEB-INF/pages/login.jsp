@@ -11,6 +11,7 @@
 
 
 <script type="text/javascript">
+
 $(function(){
 	$("#dologin").click(function(){
 		$.ajax({
@@ -22,8 +23,9 @@ $(function(){
 				if(data.code== 1){
 					alert("登录成功！");
 					location.href="index.action";
-				}else{
-					alert("登录失败！原因"+data.msg);
+				}else if(data.code== 0){					
+					alert("登录失败!"+data.msg);					
+					location.reload(); 					
 				}
 			}
 		});
@@ -42,8 +44,7 @@ $(function(){
 				if(data.code== 1){
 					alert("邮件已发送！");					
 				}else{
-					alert("邮件发送失败！原因"+data.msg);
-					location.href="http://localhost:8080/lottery/toLogin.action";
+					alert("邮件发送失败！原因"+data.msg);					
 				}
 			}			
 		});	
@@ -59,7 +60,7 @@ $(function(){
 
 <div class="login">
 		<span>
-   		  <a href="main.action" class="close-login">
+   		  <a href="index.action" class="close-login">
          	<img class="close" src="images/close.png"/>
    		 </a>
     	</span>
@@ -86,12 +87,16 @@ $(function(){
             <a id="forgetpwd">忘记密码?&nbsp;&nbsp;</a>|
             <a id="toregister" href="toRegister.action">&nbsp;&nbsp;去注册</a>
           </div>
+                   
        </form>
 </div>
 <div class="login-bg"></div>
 
+<div id="fail"></div>
+
 <script>
 $('#drag').drag();
+
 
 function check(){
 	if($("#username").val()==""||$("#password").val()==""){

@@ -56,6 +56,7 @@
 				$("#welcome").html('hi~ 欢迎来到人人乐彩票！');
 				$("#loginRegister").html('');
 				$("#loginuser").html(data.obj.username);
+				$("#loginuser").attr('href','user/myOrder.action');
 				$("#logout").html('安全退出');				
 			}else{
 			
@@ -63,6 +64,9 @@
 		}
 	});
 
+	function showDiv(){
+		$(".lotteryListWraps").toggle();
+	}
 </script>
 
 </head>
@@ -88,7 +92,9 @@
 			</li>
 			<li>
 				<div class="mcDropMenuBox">
+
 					<a target="_top" user="y" class="topNavHolder" href="user/toMyorder.action" rel="nofollow">
+
 					我的彩票</a>
 					<b class="holderLine">|</b>
 					
@@ -126,7 +132,7 @@
 	<div id="topTab">
 		<ul id="funcTab">
 			<li id="lotteryListEntry" class="noSubList">
-				<a class="topNavHolder" hidefocus="true" rel="nofollow">选择彩种</a>
+				<a class="topNavHolder" hidefocus="true" rel="nofollow" id="selectLottery" onclick="showDiv()">选择彩种</a>
 			</li>
 			<li pid="home" class="wordsNum4">
 				<a href="main.jsp">首页</a>|</li>

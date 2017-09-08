@@ -5,6 +5,24 @@
 
 <script>if(window.top != window.self)window.top.location.href = window.location.href;
 	
+	function earnVal(obj){		
+		$.ajax({
+			type:"POST",
+			data:{
+				sign:$(obj).text(),
+			},
+			url:"showAnnos.action",
+			dataType:"JSON",
+			success:function(data){
+				if(data.code== 1){					
+					location.href="http://localhost:8080/lottery/showAnnos.jsp";
+				}else{
+				}
+			}
+			
+		});
+		
+	}
 	
 
 </script>
@@ -116,15 +134,15 @@
 							<a href="ssq.jsp" style="margin:0" target="_blank">
 								<strong class="gameEn"> 双色球 </strong>
 							</a> 
-							第<strong class="c_ba2636"> 2017091 </strong>期 			
-								<em class="smallRedball">05</em>
-								<em class="smallRedball">07</em>
-								<em class="smallRedball">10</em>
-								<em class="smallRedball">23</em>
-								<em class="smallRedball">28</em>
-								<em class="smallRedball">29</em>
-								<em class="smallBlueball">03</em>&nbsp;
-							<span class="awardtime"> 08-06 (周日) 21:15</span>&nbsp;
+							第<strong class="c_ba2636"> ${RecentLotteryResult.ssq_issue } </strong>期 			
+								<em class="smallRedball">${r1 }</em>
+								<em class="smallRedball">${r2 }</em>
+								<em class="smallRedball">${r3 }</em>
+								<em class="smallRedball">${r4 }</em>
+								<em class="smallRedball">${r5 }</em>
+								<em class="smallRedball">${r6 }</em>
+								<em class="smallBlueball">${RecentLotteryResult.blueball }</em>&nbsp;
+							<span class="awardtime"> ${RecentLotteryResult.resulttime } 21:45</span>&nbsp;
 							<a target="_blank" href="#开奖详情(扩展)">详情</a>
 							<i>|</i>
 							<a target="_blank" href="#">走势</a>
@@ -136,56 +154,15 @@
 				</div>
 				
 				
-				<div class="promotion_picture" id="cpIndexAdBox" style="overflow: hidden; width: 510px;">  图片轮换
-					<ul class="adList" style="width: 7650px; margin-left: -3570px;">
-						<li class="clone" style="float: left;">
-						<a href="#" ii="1" target="_blank">
-							<img src="images/1493982455065_1.jpg" alt="彩票" title="彩票">
+				<div class="promotion_picture" id="cpIndexAdBox" style="overflow: hidden; width: 510px;">
+					
+					<ul class="adList">
+						<li>
+						<a target="_blank" ii="1" href="index.action">
+						<img src="images/tplh1.jpg">
 						</a>
 						</li>
-						<li class="clone" style="float: left;">
-							<a href="#" ii="2" target="_blank">
-								<img src="images/1493982455065_1.jpg" alt="贵金属" title="贵金属">
-							</a>
-						</li>
-						<li class="clone" style="float: left;">
-							<a href="#" ii="3" target="_blank">
-								<img src="images/1493982455065_1.jpg" alt="网易考拉" title="网易考拉">
-							</a>
-						</li>
-						<li class="clone" style="float: left;">
-							<a href="#" ii="4" target="_blank">
-								<img src="images/1493982455065_1.jpg" alt="立马理财" title="立马理财">
-							</a>
-						</li>
-						<li class="clone" style="float: left;">
-							<a href="#" ii="5" target="_blank">
-								<img src="images/1493982455065_1.jpg" alt="新闻" title="新闻">
-							</a>
-						</li>
 					</ul>
-					<!-- 
-					#cpIndexAdBox .ctrol{
-						background: rgba(110, 110, 110, 0.3) none repeat scroll 0 0;
-						border-radius: 10px;
-						bottom: 5px;
-						display: block;
-						float: left;
-						height: 24px;
-						padding-left: 3px;
-						position: absolute;
-						right: 5px;
-						width: auto;
-						z-index: 2;
-					}
-					-->
-					<div class="ctrol">
-						<a class="" target="_blank" ii="1" title="彩票" href="#">1</a>
-						<a class="" target="_blank" ii="2" title="贵金属" href="#">2</a>
-						<a class="" target="_blank" ii="3" title="网易考拉" href="#">3</a>
-						<a class="active" target="_blank" ii="4" title="立马理财" href="#">4</a>
-						<a class="" target="_blank" ii="5" title="新闻" href="#">5</a>
-					</div>
 				</div>
 				<script>window.Core && window.Core.loadIndexAD && window.Core.loadIndexAD();</script>
 				
@@ -264,9 +241,7 @@
 											<div class="czTimes">
 												<p class="periods"><a href="ssq.jsp"><strong>双色球</strong>&nbsp;&nbsp;第<em>
 												2017092
-												</em>期</a> <span class="awardtoday"><i></i>今日开奖</span></p>
-												<p class="totalPool">奖池：<strong>795,913,308元</strong></p>
-												<p class="endtime"><span class="retime" rel="12,826,301"><em>03</em>小时<em>33</em>分<em>07</em>秒</span>后截止</p>
+												</em>期</a>
 											</div>
 										</div>
 										  
@@ -278,20 +253,20 @@
 												</div>
 												
 												<div class="inputArea">
-													<input class="redball" maxlength="2" max="33">
-													<input class="redball" maxlength="2" max="33">
-													<input class="redball" maxlength="2" max="33">
-													<input class="redball" maxlength="2" max="33">
-													<input class="redball" maxlength="2" max="33">
-													<input class="redball" maxlength="2" max="33">
-													<input class="blueball" maxlength="2" max="16">
+													<input class="redball" maxlength="2" max="33" value="03">
+													<input class="redball" maxlength="2" max="33" value="05">
+													<input class="redball" maxlength="2" max="33" value="22">
+													<input class="redball" maxlength="2" max="33" value="18">
+													<input class="redball" maxlength="2" max="33" value="06">
+													<input class="redball" maxlength="2" max="33" value="09">
+													<input class="blueball" maxlength="2" max="16" value="11">
 												</div>
 											</div>
 											<div class="btnBox2 clearfix">
 												<span class="submitbox">
 													<button class="btnSubmint" title="立即投注" type="submit"></button>
 												</span>
-												<span class="toolbox">
+												<!--  --><span class="toolbox">
 													<input class="btnRandom" value="换一注" type="button">								  
 												</span>
 											</div>

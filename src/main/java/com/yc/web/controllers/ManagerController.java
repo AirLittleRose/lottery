@@ -69,18 +69,20 @@ public class ManagerController {
 		}
 		
 		//
-		@RequestMapping(value="/showAnnos.action",method=RequestMethod.GET)
-		public void toAnnos(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-			String endtitle="<a target='view_window'></a>";
-			//获取这条公告的id,通过这个title			
+		@RequestMapping("/showAnnos.action")
+		public JsonModel toAnnos(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+			JsonModel jm = new JsonModel();			
+			String sign =request.getParameter("sign");			
 			Annos annos = new Annos();
-			annos.setTitle(endtitle);
+			annos.setSign(sign);
 			Annos as = usersBiz.isAnnosExist(annos);
-			Annos anno = usersBiz.isAnnosDetail(as);
-			
-			System.out.println(anno);
-			
-			request.getRequestDispatcher("/showAnnos.jsp").forward(request, response);
+			session.setAttribute("as", as);
+			if(as!=null){
+				jm.setCode(1);				
+			}else{
+				jm.setCode(0);
+			}	
+			return jm;
 		}
 		
 		//添加公告
@@ -95,10 +97,11 @@ public class ManagerController {
 				String auth=((Manager)request.getSession().getAttribute("manager")).getMname();			
 				Date adate = new java.sql.Date(new java.util.Date().getTime());
 								
-				annos.setTitle("<a target='view_window'>"+title+"</a>");
+				annos.setTitle("<a onclick='earnVal(this)'>"+title+"</a>");
 				annos.setContent(content);
 				annos.setAuth(auth);
 				annos.setAdate(adate);
+				annos.setSign(title);
 				
 				usersBiz.saveAnno(annos);				
 				jsonModel.setCode(1);

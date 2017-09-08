@@ -1,5 +1,6 @@
 package com.yc.ssq.biz.impl;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -25,6 +30,7 @@ import com.yc.ssq.biz.UserSsqBiz;
 import com.yc.ssq.jsonModel.Ssq;
 import com.yc.ssq.jsonModel.SsqJson;
 import com.yc.tasks.SsqTask;
+import com.yc.users.bean.News;
 import com.yc.utils.DateUtil;
 
 @Service(value="userSsqBizImpl")
@@ -83,7 +89,7 @@ public class UserSsqBizImpl implements UserSsqBiz {
 		}
 	}
 
-
+	
 	@Override
 	public List<BetSsq> findTest(Integer usid) throws Exception {
 		if(usid!=null){
@@ -119,13 +125,25 @@ public class UserSsqBizImpl implements UserSsqBiz {
 	@Override
 	//@Scheduled(cron = "0 50 21 ? * TUE,THU,SUN")
 	public void addLotteryResult() throws Exception {
-		System.out.println("定时器..............");
 		Object t = new LotteryResult();
 		this.baseDao.del(t , "deleteOldResult");
 		List<LotteryResult> lotteryResultList = this.testSsqTask();
 		if(lotteryResultList!=null){
 			this.baseDao.save(LotteryResult.class, "addLotteryResult", lotteryResultList);
 		}
+	}
+	
+	public void getLotteryData() throws IOException{
+//		Document doc = Jsoup.connect("http://cai.163.com/").get();
+//    	Elements ele1 = doc.getElementsByClass("awardDetail"); 
+//    	String ele2 = ele1.getElementsByClass("c_ba2636");
+//   	Elements ele3 = ele1.getElementsByClass("smallRedball");
+//    	Elements ele4 = ele1.getElementsByClass("smallBlueball");
+//    	System.out.println(ele1);
+//    	System.out.println(ele3);
+//    	System.out.println(ele4);
+//    	LotteryResult lr = new LotteryResult();
+//    	
 	}
 	
 	/**
@@ -165,7 +183,7 @@ public class UserSsqBizImpl implements UserSsqBiz {
 //		Integer issue = Integer.parseInt(us.getSsq_issue())-1;
 //		String ssq_issue =issue.toString();
 //		
-		String qh = "2017100";
+		String qh = "2017105";
 		LotteryResult lr = this.findLotteryResult(qh);
 		
 		List<BetSsq> list = this.findUserSsqBetBySsqIssue(qh);
@@ -293,9 +311,12 @@ public class UserSsqBizImpl implements UserSsqBiz {
 				notawardlist.add(nai);
 			}
 		}
-		this.baseDao.save(AwardInfo.class, "addAwardInfo", awardlist);
-		this.baseDao.save(NotAwardInfo.class, "addNotAwardInfo", notawardlist);
-		
+		if(notawardlist!=null && notawardlist.size()>0){
+			this.baseDao.save(NotAwardInfo.class, "addNotAwardInfo", notawardlist);
+		}
+		if(awardlist!=null && awardlist.size()>0 ){
+			this.baseDao.save(AwardInfo.class, "addAwardInfo", awardlist);
+		}
 		
 		Map<String, String> parameterMap = new HashMap<String, String>();
 		parameterMap.put("ssq_issue", qh);
@@ -344,5 +365,46 @@ public class UserSsqBizImpl implements UserSsqBiz {
 		awardInfo = (AwardInfo) this.baseDao.findOne(ai, "findAwardInfoCount");
 		count = awardInfo.getAwardInfocount();
 		return count;
+	}
+
+
+	@Override
+	public List<NotAwardInfo> findNotAwardInfo(NotAwardInfo ai) throws Exception {
+		List<NotAwardInfo> list = null;
+		list = this.baseDao.findAll(ai, "findNotAwardInfo");
+		return list;
+	}
+
+
+	@Override
+	public Integer findNotAwardInfoCount(NotAwardInfo ai) throws Exception {
+		Integer count = 0;
+		NotAwardInfo notAwardInfo = (NotAwardInfo) this.baseDao.findOne(ai, "findNotAwardInfoCount");
+		count = notAwardInfo.getAwardInfocount();
+		return count;
+	}
+
+
+	@Override
+	public List<BetSsq> findWaitOpen(BetSsq bs) throws Exception {
+		List<BetSsq> list = null;
+		list = this.baseDao.findAll(bs, "findWaitOpen");
+		return list;
+	}
+
+
+	@Override
+	public Integer findWaitOpenCount(BetSsq bs) throws Exception {
+		Integer count = 0;
+		BetSsq bets = (BetSsq) this.baseDao.findOne(bs, "findWaitOpenCount");
+		count = bets.getWaitcount();
+		return count;
+	}
+
+
+	@Override
+	public List<LotteryResult> findLottery() throws Exception {
+		 List<LotteryResult> list = this.baseDao.findAll(LotteryResult.class, "findLottery");
+		return list;
 	}
 }

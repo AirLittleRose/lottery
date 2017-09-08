@@ -75,7 +75,5 @@ public interface UsersBiz {
 	 */
 	public Annos isAnnosExist(Annos annos);
 
-	
-	public Annos isAnnosDetail(Annos annos);
 
 }	

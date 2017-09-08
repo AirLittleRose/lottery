@@ -9,46 +9,7 @@
 <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="js/login.js" type="text/javascript"></script>
 <script src="js/drag.js" type="text/javascript"></script>
-<style>
-.black_overlay{
- display: none;
- position: absolute;
- top: 0%;
- left: 0%;
- width: 100%;
- height: 100%;
- background-color: black;
- z-index:1001;
- -moz-opacity: 0.8;
- opacity:.80;
- filter: alpha(opacity=80);
-}
-.white_content {
- display: none;
- position: absolute;
- top: 10%;
- left: 10%;
- width: 80%;
- height: 80%;
- border: 16px solid lightblue;
- background-color: white;
- z-index:1002;
- overflow: auto;
- position:fixed; 
-}
-.white_content_small {
- display: none;
- position: absolute;
- top: 20%;
- left: 30%;
- width: 40%;
- height: 50%;
- border: 16px solid lightblue;
- background-color: white;
- z-index:1002;
- overflow: auto;
-}
-</style>
+
 
 <script type="text/javascript">
 //判断是否敲击了Enter键 
@@ -57,25 +18,7 @@ $(document).keyup(function(event){
       $("#dologin").trigger("click"); 
     } 
 });
-//弹出隐藏层
-function ShowDiv(show_div,bg_div){
- document.getElementById(show_div).style.display='block';
- document.getElementById(bg_div).style.display='block' ;
- var bgdiv = document.getElementById(bg_div);
- bgdiv.style.width = document.body.scrollWidth; 
- // bgdiv.style.height = $(document).height();
- $("#"+bg_div).height($(document).height());
- choice_type();
-};
 
-//关闭弹出层
-function CloseDiv(show_div,bg_div)
-{
- document.getElementById(show_div).style.display='none';
- document.getElementById(bg_div).style.display='none';
-
-
-};
 $(function(){
 	$("#dologin").click(function(){
 		$.ajax({
@@ -88,13 +31,18 @@ $(function(){
 					alert("登录成功！");					
 					//如果通过注册页面进入的登录页面,就跳到主页,剩下的都返回原来的网页
 					var fromurl = document.referrer;
+					var pass = document.referrer.toString();
+					var frompass = pass.indexOf("?");				
 					if(fromurl=="http://localhost:8080/lottery/toRegister.action"){
+						location.href="http://localhost:8080/lottery/index.action";
+					}else if(frompass=="56"){
 						location.href="http://localhost:8080/lottery/index.action";
 					}else{
 						history.go(-1);
 					}
 				}else{
-					ShowDiv('MyDiv','fade');
+					alert("登录失败！原因"+data.msg);
+					location.reload();
 				}
 			}
 		});
@@ -130,7 +78,7 @@ $(function(){
 
 <div class="login">
 		<span>
-   		  <a href="main.action" class="close-login">
+   		  <a href="index.action" class="close-login">
          	<img class="close" src="images/close.png"/>
    		 </a>
     	</span>
@@ -181,20 +129,6 @@ function check(){
 }
 
 </script>
-<!-- 弹出层背景层DIV -->
-<div id="fade" class="black_overlay"></div>
 
-<!-- 弹出层 -->
-<div id="MyDiv" class="white_content">
-    <div style="text-align: right; cursor: default; height: 40px;">
-        <span style="font-size: 16px;" onclick="CloseDiv('MyDiv','fade')">关闭</span>
-    </div>
-  	<div class="docBody clearfix from_bet" id="bonusCalc">
-	    <div class="resultBox">
-	       <font>登录失败!!!</font>
-	       <a href="login.jsp">确认</a>
-	    </div>
-	</div>
-</div>
 </body>
 </html>

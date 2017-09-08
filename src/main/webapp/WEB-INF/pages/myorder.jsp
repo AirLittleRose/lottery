@@ -8,66 +8,19 @@
 
 	
 	$(function(){
-		gopage(1);
+		findSsqOrder();
 	});
 	
-	function gopage( pages ){
-		var checkValue=$("#lotteryType").val();
-		$("#lotteryType").change(function(){
-			checkValue=$("#lotteryType").val();
-			if(checkValue=="1"){
-				findAwardInfo(pages);
-			}
-			if(checkValue == "2"){
-				findJczqOrder(pages);
-			}
-		}); 
-		if(checkValue=="1"){
-			findAwardInfo(pages);
-		}
-		if(checkValue=="2"){
-			findJczqOrder(pages)
-		}
-		
-	}
-	
-	function findAwardInfo(pages){
+	function findSsqOrder(){
 		$.ajax({
-			type:"POST",
-			url:"user/findAwardInfo.action",
-			data:"pages="+pages+"&pagesize=5",
-			dataType:"JSON",
-			success:function(data){
-				if(data.code== 1){
-					$("#awardInfoBody").html("");
-					$(data.rows).each(
-							function(index,item){  
-					//for(var i = 0;i<data.obj.length;i++){  var item=data.obj[i]; }
-						
-								var str = "  <tr ><td>双色球</td>"+
-									"<td>"+item.ssq_issue +"</td>"+
-									"<td>"+item.ordertime +"</td>"+
-									"<td>"+item.orderid +"</td>"+
-									"<td>"+item.redball +" | "+item.blueball +"</td>"+
-						          	"<td>"+item.multinum +"</td>";
-						        if(item.status==1){
-						        	str+="<td>已开奖</td>";
-						        }else{
-						        	str+="<td>未开奖</td>";
-						        }
-								str+="<td>"+item.grade +"等奖</td>"+
-									"<td>"+item.award +"</td></tr>";
-								$("#awardInfoBody").html($("#awardInfoBody").html()+str);
-							});
-					$.createPageBar( data,"pagebardiv" );
-					
-				}else{
-					alert("查询失败！原因"+data.msg);
-				}
+			url : "user/findSsqOrder.action",
+			dataType:"HTML",
+			success : function(data){
+				$("#orderDataBox").html(data);
 			}
 		});
-
 	}
+
 
 	function toJczqOrder(){
 		$.ajax({
@@ -99,7 +52,7 @@ tr:hover {
        
       </div>
       <ul class="leftManu">
-        <li class="active"><a target="_self" href="myorder.html">双色球订单</a><i>&gt;</i></li>  
+        <li class="active"><a target="_self" href="javascript:void(0)" onclick="findSsqOrder()">双色球订单</a><i>&gt;</i></li>  
         <li class="active"><a target="_self" href="javascript:void(0)" onclick="toJczqOrder()">竞彩足球订单</a><i>&gt;</i></li>        
       </ul>
      
@@ -110,8 +63,8 @@ tr:hover {
       <li class="active"><a target="_self" href="">投注记录</a></li>
     </ul>
     <div class="orderDataBox grayBorder" id="orderDataBox">
-		
     </div>
+    
     <section class="grayBorder mt10">
       <h2 class="tit">热门彩种</h2>
       <ul class="clearfix hotLott">

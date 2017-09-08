@@ -7,7 +7,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 加入带日志的 ehcache 缓存 -->
 <cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
+	<!-- 排序条件的拼接 -->
+	<sql id="orderSql">
+		<if test="orderby!=null and orderby!=''">
+			order by ${orderby}		
+			<if test="orderway!=null and orderway!=''">
+				${orderway}
+			</if>
+		</if>
+	</sql>
 	
+	<!-- 分页条件的拼接 -->
+	<sql id="pageSql">
+		<if test="start!=null">
+			limit ${start},${pagesize}
+		</if>
+	</sql>
 	<!-- 批量添加 -->
 	<insert id="addBetSsq" parameterType="BetSsq">
 		insert into betSsq(usid,sigprice,multinum,redball,blueball) values
@@ -40,6 +55,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(select usid,redball,blueball,sigprice,multinum from betSsq) b
 			on a.usid = b.usid
 			where ssq_issue=#{ssq_issue}	
+	</select>
+	
+	<select id="findWaitOpen" parameterType="BetSsq" resultType="BetSsq">
+		select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,redball,blueball,sigprice,multinum
+			  from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status is null) a
+			inner join
+			(select usid,redball,blueball,sigprice,multinum from betSsq) b
+			on a.usid = b.usid
+			where userid=#{userid}
+			order by ssq_issue desc,ordertime desc
+			<include refid="pageSql"/>
+	</select>
+	
+	<select id="findWaitOpenCount" parameterType="BetSsq" resultType="BetSsq">
+		select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,redball,blueball,sigprice,multinum,
+				count(distinct(redball)) as waitcount from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status is null) a
+			inner join
+			(select usid,redball,blueball,sigprice,multinum from betSsq) b
+			on a.usid = b.usid
+			where userid=#{userid}
 	</select>
 	
 </mapper>

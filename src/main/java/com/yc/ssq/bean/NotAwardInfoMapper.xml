@@ -8,6 +8,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 加入带日志的 ehcache 缓存 -->
 <cache type="org.mybatis.caches.ehcache.LoggingEhcache"></cache>
 	
+	<!-- 排序条件的拼接 -->
+	<sql id="orderSql">
+		<if test="orderby!=null and orderby!=''">
+			order by #{orderby}		
+			<if test="orderway!=null and orderway!=''">
+				#{orderway}
+			</if>
+		</if>
+	</sql>
+	
+	<!-- 分页条件的拼接 -->
+	<sql id="pageSql">
+		<if test="start!=null">
+			limit #{start},#{pagesize}
+		</if>
+	</sql>
+	<select id="findNotAwardInfo" parameterType="NotAwardInfo" resultType="NotAwardInfo">
+		select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status
+		from
+		(select usid,redball,blueball from notAwardInfo ) ai
+		inner join
+		(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+			from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=#{status}) a
+			inner join 
+			(select usid,multinum from betSsq) b
+			on a.usid=b.usid
+		) ssq
+		on ssq.usid = ai.usid
+		where userid=#{userid}
+		order by ssq_issue desc
+		
+		<include refid="pageSql"/>
+	</select>
+	
+	
+	<select id="findNotAwardInfoCount" parameterType="NotAwardInfo" resultType="NotAwardInfo">
+	select distinct ai.usid as usid,userid,ssq_issue,orderid,ordertime,redball,blueball,
+				multinum,status,count(distinct(redball)) as awardInfocount
+		from
+		(select usid,redball,blueball from notAwardInfo ) ai
+		inner join
+		(select a.usid as usid,userid,orderid,ordertime,ssq_issue,status,multinum
+			from
+			(select usid,userid,orderid,ordertime,ssq_issue,status from userSsq where status=#{status}) a
+			inner join 
+			(select usid,multinum from betSsq) b
+			on a.usid=b.usid
+		) ssq
+		on ssq.usid = ai.usid
+		where userid=#{userid}
+	
+	</select>
+	
 	<!-- 批量添加 -->
 	<insert id="addNotAwardInfo" parameterType="NotAwardInfo">
 		insert into notAwardInfo(usid,redball,blueball) values

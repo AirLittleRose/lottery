@@ -23,7 +23,6 @@
 				dataType:"json",  
 				success:function(data){
 					if(data.code==1){
-						alert(content);
 						alert('添加成功');
 					}else{
 						alert('添加失败,'+data.errorMsg);

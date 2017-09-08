@@ -74,15 +74,22 @@ public class Jczq_orderBizImpl implements Jczq_orderBiz {
 			
 			// 取出单个订单号的信息
 			for (String key : keySet) {
-				float totalMoney = 0L; //每单的奖金
-				List<Jczq> jczqss = infoMap.get(key);
+				//每单的奖金
+				float totalMoney = 0L; 
+				//每单中奖信息
+				List<Jczq> jczqss = infoMap.get(key);	
+				
 				// 组合
 				List<List<Jczq>> jList = com.toCombine(jczqss, jczqss.get(0).getGuoguan_type());
+				
 				// 每一注
-				for (List<Jczq> list : jList) {
-					float money = 0L;	//每注的奖金
-					float odds = 1L; //单注的总赔率	
-					int pel = list.get(0).getTimes(); //每注的倍数
+				for(List<Jczq> list : jList) {
+					//单注的奖金
+					float money = 0L;	
+					//单注的总赔率	
+					float odds = 1L; 
+					//单注的倍数
+					int pel = list.get(0).getTimes(); 
 					// 算奖金
 					for (Jczq j : list) {
 						odds *= j.getOdds();
